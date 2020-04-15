@@ -15,7 +15,7 @@ int main()
 
 	//Создаю текстуру кнопки "Start"
 	Texture starti;
-	starti.loadFromFile("C:\\Users\\Rysen\\Desktop\\KeyboardHokage\\images_menu\\start.png");
+	starti.loadFromFile("start.png");
 	//Спрайт кнопки "Start"
 	Sprite start(starti);
 	start.setPosition((width / 2) - 142, 100);
@@ -41,6 +41,7 @@ int main()
 			// Если мышь находится в прямоугольнике по координатам x-498, y-100, с размерами 284х54
 			if (IntRect((width / 2) - 142, 100, 284, 54).contains(Mouse::getPosition(window)))
 			{
+				std::cout << "Eeeee";
 				//Здесь будет игра
 			}
 		}
