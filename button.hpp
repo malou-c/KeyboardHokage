@@ -12,6 +12,8 @@ class ButtonForKB {
   sf::Text text;
   std::string path = "images/button.png";
   sf::String name;
+  int code[4];
+
   // конструкторы
   ButtonForKB(sf::String name_button);
   ButtonForKB();
