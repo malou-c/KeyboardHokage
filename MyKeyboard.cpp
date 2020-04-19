@@ -2,7 +2,6 @@
 //конструкторы
 MyKeyboard::MyKeyboard(int x, int y) {
   //используется для проверки нажатий
-
   wchar_t code_line1[13][4] = {
       {L'`', L'~', L'ё', L'Ё'}, {L'1', L'!', L'1', L'!'},
       {L'2', L'@', L'2', L'"'}, {L'3', L'#', L'3', L'№'},
@@ -16,7 +15,7 @@ MyKeyboard::MyKeyboard(int x, int y) {
       {L'q', L'Q', L'й', L'Й'}, {L'w', L'W', L'ц', L'Ц'},
       {L'e', L'E', L'у', L'У'}, {L'r', L'R', L'к', L'К'},
       {L't', L'T', L'е', L'Е'}, {L'y', L'Y', L'н', L'Н'},
-      {L'U', L'^', L'г', L'Г'}, {L'i', L'I', L'ш', L'Ш'},
+      {L'u', L'U', L'г', L'Г'}, {L'i', L'I', L'ш', L'Ш'},
       {L'o', L'O', L'щ', L'Щ'}, {L'p', L'P', L'з', L'З'},
       {L'[', L'[', L'х', L'Х'}, {L']', L']', L'ъ', L'Ъ'}};
   wchar_t code_line3[11][4] = {
@@ -86,6 +85,12 @@ MyKeyboard::MyKeyboard(int x, int y) {
       vec_buttons[i].code[k] = code_line4[j][k];
     }
   }
+  // SPACE
+  space.sprite.setPosition(x + 350, y + 280);
+  // BACKSPACE
+  backspace.sprite.setPosition(x + 1170, y);
+  // SHIFT
+  shift.sprite.setPosition(x - 10, y + 210);
 }
 //функции
 void MyKeyboard::DrawKB(sf::RenderWindow &window) {
@@ -114,41 +119,68 @@ int main() {
     sf::Keyboard::Key k;
 
     while (window.pollEvent(event)) {
-      // Close window: exit
-      if (event.type == sf::Event::Closed) window.close();
+      // проверяем тип события...
 
-      for (int i = 0; i < keyboard.vec_buttons.size(); i++) {
-        if (keyboard.vec_buttons[i].sprite.getColor() != sf::Color::White)
-          keyboard.vec_buttons[i].sprite.setColor(sf::Color::White);
-      }
+      switch (event.type) {
+        // закрытие окна
+        case sf::Event::Closed:
+          window.close();
+          break;
 
-      if (event.type == sf::Event::TextEntered) {
-        std::cout << "ASCII character typed: " << event.text.unicode
-                  << std::endl;
-        symbol = (int)event.text.unicode;
-        //меняем цвет
-
-        for (int i = 0; i < keyboard.vec_buttons.size(); i++) {
-          for (int j = 0; j < 4; j++) {
-            if ((int)keyboard.vec_buttons[i].code[j] == symbol) {
-              keyboard.vec_buttons[i].sprite.setColor(sf::Color(245, 0, 103));
-              break;
+        // нажатие клавиши
+        case sf::Event::TextEntered:
+          std::cout << "ASCII character typed: " << event.text.unicode
+                    << std::endl;
+          symbol = (int)event.text.unicode;
+          //меняем цвет
+          for (int i = 0; i < keyboard.vec_buttons.size(); i++) {
+            for (int j = 0; j < 4; j++) {
+              if ((int)keyboard.vec_buttons[i].code[j] == symbol) {
+                keyboard.vec_buttons[i].sprite.setColor(sf::Color(245, 0, 103));
+                break;
+              }
             }
           }
-        }
-      }
+          if (event.text.unicode == keyboard.space.code) {
+            keyboard.space.sprite.setColor(sf::Color(245, 0, 103));
+          } else if (event.text.unicode == keyboard.backspace.code) {
+            keyboard.backspace.sprite.setColor(sf::Color(245, 0, 103));
+          }
 
-      /*if (event.type == sf::Event::KeyPressed) {
-        std::cout << "hi " << val << std::endl;
-        val++;
-      }*/
+          break;
+        // мы не обрабатываем другие типы событий
+        default:
+          //меняем цвет  обратно
+          //у  кнопок
+          for (int i = 0; i < keyboard.vec_buttons.size(); i++) {
+            keyboard.vec_buttons[i].sprite.setColor(sf::Color::White);
+          }
+          keyboard.space.sprite.setColor(sf::Color::White);  // у  пробела
+          keyboard.backspace.sprite.setColor(sf::Color::White);  // у
+          // backspace
+
+          break;
+      }
+    }
+    //нажатие шифт
+    if (keyboard.shift.sprite.getColor() != sf::Color::White) {
+      keyboard.shift.sprite.setColor(sf::Color::White);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) ||
+        sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
+      keyboard.shift.sprite.setColor(sf::Color(245, 0, 103));
     }
 
     // Clear screen
     window.clear(sf::Color::White);
     keyboard.DrawKB(window);
+    // draw sys but
+    keyboard.space.DrawButton(window);
+    keyboard.backspace.DrawButton(window);
+    keyboard.shift.DrawButton(window);
 
     window.display();
   }
+
   return EXIT_SUCCESS;
 }
