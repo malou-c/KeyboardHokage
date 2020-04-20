@@ -18,7 +18,8 @@ class MyKeyboard {
   MyKeyboard(int x, int y);
 
   //функции
-  void DrawKB(sf::RenderWindow &window);
+  void DrawKB(sf::RenderWindow &window);  //рисуем клаватуру
+  void Update(sf::Event event);  // обновляем события (внутри цикла pollEvent)
 
   // get
   sf::Vector2i getPosition();
