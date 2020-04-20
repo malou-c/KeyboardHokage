@@ -1,2 +1,4 @@
 *.dat
 pusk
+Makefile
+.gitignore
