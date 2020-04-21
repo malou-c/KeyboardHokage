@@ -2,3 +2,5 @@
 pusk
 Makefile
 .gitignore
+Ninja
+*.o
