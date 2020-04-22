@@ -1,4 +1,4 @@
-#include "button.hpp"
+#include "hpp/button.hpp"
 
 // конструкторы
 ButtonForKB::ButtonForKB(){};

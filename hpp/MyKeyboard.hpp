@@ -3,8 +3,8 @@
 #include <iostream>
 #include <vector>
 
-#include "button.hpp"
-#include "sysbutton.hpp"
+#include "hpp/button.hpp"
+#include "hpp/sysbutton.hpp"
 class MyKeyboard {
  private:
   sf::Vector2i position;
