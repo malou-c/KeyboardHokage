@@ -27,7 +27,9 @@ void draw_board(sf::RenderWindow &window, int width = 1500, int high = 900)
 
     for (int i = 0; i < stats.size() || i < 50; i++ )//записываем информацию о превых 50
     {                                                //пользователях в строку
-        out_text += ((std::string)stats[i].name
+        out_text += (std::to_string((i + 1))
+                     + ')'
+                     + (std::string)stats[i].name
                      + ' ' 
                      + (std::to_string( stats[i].time ))
                      + "\n");
@@ -48,7 +50,7 @@ void draw_board(sf::RenderWindow &window, int width = 1500, int high = 900)
 
 
 //ДЛЯ ТЕСТОВ
-/* int main()
+int main()
 {
     sf::RenderWindow window(sf::VideoMode(1500, 900), "Test");
 
@@ -67,4 +69,4 @@ void draw_board(sf::RenderWindow &window, int width = 1500, int high = 900)
         draw_board(window);
         window.display();
     }
-}  */
+}  
