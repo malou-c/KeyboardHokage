@@ -16,6 +16,7 @@ class ClockFace {
   int seconds = 0;
   int minsum = 1;
   int minutes = 0;
+  int switcher = 0;
   Vector2i position;
   //конструкторы
   ClockFace();
@@ -24,4 +25,8 @@ class ClockFace {
   void update_clock();
   void DrawClock(RenderWindow &window);
   void setPosition(int x, int y);
+  void ClockReset();
+  void ClockStart();
+  void ClockStop();
+  void ClockContinue();
 };
