@@ -3,57 +3,123 @@
 #include <string>
 using namespace sf;
 
+class MenuButton
+{
+private:
+	std::string name;
+	sf::Text out_name;
+	int id;
+	int l_border; //Р»РµРІР°СЏ РїСЂР°РІР°СЏ РІРµСЂС…РЅСЏСЏ РЅРёР¶РЅСЏСЏ РіСЂР°РЅРёС†С‹
+	int r_border;
+	int u_border;
+	int d_border;
+	sf::Sprite background;
+
+public:
+	MenuButton(int x, int y, std::string button_name)
+	{
+		name = button_name;
+
+		sf::Font font;
+		font.loadFromFile("fonts/stdFont.ttf"); //С€СЂРёС„С‚
+		out_name.setFont(font);
+		out_name.setString(name);
+		out_name.setCharacterSize(16);
+		out_name.setColor(sf::Color::Red);
+		out_name.setPosition(10, 10);
+
+		sf::Image image;
+		image.loadFromFile("yo.jpg");
+
+		sf::Texture texture;
+		texture.loadFromImage(image); //Р·Р°РіСЂСѓР¶Р°РµРј С‚РµРєСЃС‚СѓСЂСѓ РґР»СЏ С„РѕРЅР°
+
+		background.setTexture(texture); //СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј С‚РµРєСЃС‚СѓСЂСѓ РґР»СЏ СЃРїСЂР°Р№С‚Р°
+		background.setPosition(x, y);	//РєРѕРѕСЂРґРёРЅР°С‚С‹ РґР»СЏ РѕС‚СЂРёСЃРѕРІРєРё РєРЅРѕРїРєРё
+		background.scale(0.5, 0.5);
+	}
+
+	int get_id() { return id; }; //РЈР·РЅР°С‚СЊ id РєРЅРѕРїРєРё
+	//sf::Sprite get_sprite(){ return background; };
+
+	void set_borders(int left_border, int right_border, //РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РіСЂР°РЅРёС†С‹ РєРЅРѕРїРєРё
+					 int up_border, int down_border)
+	{
+		l_border = left_border;
+		r_border = right_border;
+		u_border = up_border;
+		d_border = down_border;
+	}
+
+	int clicked(int x, int y) //РџСЂРѕРІРµСЂСЏРµС‚ Р±С‹Р»Р° Р»Рё РЅР°Р¶Р°С‚Р° РєРЅРѕРїРєР°
+	{
+		if (x >= l_border && x <= r_border &&
+			y >= u_border && y <= d_border)
+		{
+			return id;
+		}
+	}
+
+	void draw(sf::RenderWindow &window)
+	{
+		window.draw(out_name);
+		window.draw(background);
+	}
+};
+
 int main()
 {
-	String path; // путь к файлу
-	#ifdef WINDOWS // если ОС Windows
-	path = "images_menu\\start.png"; // такой путь
-	#else // если не Windows
-	path = "images_menu/start.png"; // такой
-	#endif
-	int height = 950, width = 1500; // высота и ширина окна
-	//Делаю сглаживание
+	String path;					 // пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
+#ifdef WINDOWS						 // пїЅпїЅпїЅпїЅ пїЅпїЅ Windows
+	path = "images_menu\\start.png"; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+#else								 // пїЅпїЅпїЅпїЅ пїЅпїЅ Windows
+	path = "images_menu/start.png"; // пїЅпїЅпїЅпїЅпїЅ
+#endif
+	int height = 950, width = 1500; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+	//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	//Инициализирую окно
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 	RenderWindow window(VideoMode(width, height), "KeybordNinja", Style::Default, settings);
 	window.clear(Color::White);
-	
 
-	//Создаю текстуру кнопки "Start"
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "Start"
 	Texture starti;
 	starti.loadFromFile(path);
-	//Спрайт кнопки "Start"
+	//пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ "Start"
 	Sprite start(starti);
 	start.setPosition((width / 2) - 142, 100);
 	window.draw(start);
 
-	//Пока окно открыто
+	/* MenuButton button(10, 10);
+	button.set_borders(50, 500, 0, 500);
+	window.draw(button.get_sprite()); */
+
+	MenuButton button(10, 10, "ABD");
+
+	//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	while (window.isOpen())
 	{
-		//Обработка событий
+		//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		Event event;
 		while (window.pollEvent(event))
 		{
-			//Если событие закрытия
+			//пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			if (event.type == Event::Closed)
-				//Закрыть окно
+				//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 				window.close();
 		}
 
-
-		// Если нажата левая кнопка мыши
+		// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
-			// Если мышь находится в прямоугольнике по координатам x-498, y-100, с размерами 284х54
+			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ x-498, y-100, пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 284пїЅ54
 			if (IntRect((width / 2) - 142, 100, 284, 54).contains(Mouse::getPosition(window)))
 			{
-				//Здесь будет игра!
+				//пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ!
 			}
 		}
-
-
-
+		button.draw(window);
 		window.display();
 	}
 
