@@ -61,7 +61,7 @@ void draw_board(sf::RenderWindow &window, std::vector<PersonStats> stats,
 
 
 //ДЛЯ ТЕСТОВ
-int main()
+/* int main()
 {
     sf::RenderWindow window(sf::VideoMode(1500, 900), "Test");
 
@@ -80,4 +80,4 @@ int main()
         draw_board(window);
         window.display();
     }
-}  
+}   */
