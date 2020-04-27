@@ -5,11 +5,22 @@
 #include "file.cpp"
 #include <iostream>
 
-void draw_board(sf::RenderWindow &window, int width = 1500, int high = 900)
-{//Рисует таблицу рекордов
+std::vector<PersonStats> load_board()
+{//Загружаем таблицу
+
     std::vector<PersonStats> stats;
     File file;
     stats = file.load();//Загружаем данные (имя время)
+    return stats;
+}
+
+void draw_board(sf::RenderWindow &window, std::vector<PersonStats> stats,
+                int width = 1500, int high = 900)
+{//Рисует таблицу рекордов
+/*  std::vector<PersonStats> stats;
+    File file;
+    stats = file.load();//Загружаем данные (имя время)
+ */
 
     sf::Image image;
     image.loadFromFile("ye.jpg");//Фон на котором будут отображаться данные
