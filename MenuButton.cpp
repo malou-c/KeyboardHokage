@@ -39,28 +39,32 @@ public:
         background.setTextureRect(sf::IntRect(0, 0, 100, 100)); //устанавливаем текстуру для спрайта
         background.setPosition(x, y);   //координаты для отрисовки кнопки
         //background.scale(0.5, 0.5);
+
+        set_borders();
     }
 
     int get_id() { return id; }; //Узнать id кнопки
     /* sf::Sprite get_sprite() { return background; }; */
 
-    void set_borders(int left_border, int right_border, //Установить границы кнопки
-                     int up_border, int down_border)
+    void set_borders()//Установить границы кнопки
     {
-        l_border = left_border;
-        r_border = right_border;
-        u_border = up_border;
-        d_border = down_border;
+        l_border = background.getLocalBounds().left;
+        r_border = background.getLocalBounds().width;
+        u_border = background.getLocalBounds().top;
+        d_border = background.getLocalBounds().height;
     }
 
-    int clicked(int x, int y) //Проверяет была ли нажата кнопка
+    int is_clicked(sf::RenderWindow &window) //Проверяет была ли нажата кнопка
     {
-        if (x >= l_border && x <= r_border &&
-            y >= u_border && y <= d_border)
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
+        &&  sf::IntRect((background).getLocalBounds()).contains(sf::Mouse::getPosition(window)))
         {
             return id;
+        } else
+        {
+            return 0;
         }
-        return 0;
+        
     }
 
     void draw(sf::RenderWindow &window)//рисует кнопку
@@ -92,6 +96,7 @@ int main()
 
         window.clear();
         button.draw(window);//////Вот это рисует
+        button.is_clicked(window);
         window.display();
     }
 }
