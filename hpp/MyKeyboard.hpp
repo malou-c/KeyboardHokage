@@ -3,8 +3,9 @@
 #include <iostream>
 #include <vector>
 
-#include "hpp/button.hpp"
-#include "hpp/sysbutton.hpp"
+#include "button.hpp"
+#include "screentxt.hpp"
+#include "sysbutton.hpp"
 class MyKeyboard {
  private:
   sf::Vector2i position;
@@ -19,7 +20,8 @@ class MyKeyboard {
 
   //функции
   void DrawKB(sf::RenderWindow &window);  //рисуем клаватуру
-  void Update(sf::Event event);  // обновляем события (внутри цикла pollEvent)
+  void Update(sf::Event event,
+              TextWindow &txwin);  // обновляем события (внутри цикла pollEvent)
 
   // get
   sf::Vector2i getPosition();
