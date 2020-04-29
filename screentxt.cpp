@@ -1,5 +1,6 @@
-#include "screentxt.hpp"
+#include "hpp/screentxt.hpp"
 
+#include "hpp/MyKeyboard.hpp"
 // constructors
 
 TextWindow::TextWindow() {
@@ -10,12 +11,61 @@ TextWindow::TextWindow() {
   setPosition(100, 100);
   //текст
   text_color = sf::Color::Black;
+  dubler_color = sf::Color::Black;
   font_size = 25;  // размер текста
   margin_y = 10;   // расстояние между строками
   start_str = 0;  // строка с которой начинается вывод
+  curr_sym = 0;  //текущий символ
 }
 
 //функции
+//обновляем текст дублера
+void TextWindow::add_sym_to_dubler(wchar_t sym) {
+  dubler_str.push_back(sym);
+  dubler.setString(dubler_str);
+}
+void TextWindow::pop_sym_to_dubler() {
+  dubler_str.pop_back();
+  dubler.setString(dubler_str);
+}
+void TextWindow::dubler_fill() {
+  dubler_str = text_str[start_str];
+  dubler_str.pop_back();  // убираю один символ
+  dubler.setString(dubler_str);
+  curr_sym = dubler_str.size();
+}
+void TextWindow::dubler_clean() {
+  curr_sym = 0;
+  dubler_str.clear();
+  dubler.setString("");
+}
+
+void TextWindow::checksym_dubler(int symbol) {
+  //отдельно если ввели backspace (8)
+  if (symbol == 8) {
+    //и  если текущий сивол не первый
+    if (curr_sym > 0) {
+      pop_sym_to_dubler();
+      curr_sym--;
+    }
+    //если это не первая строка
+    else if (start_str > 0) {
+      back_text_str();  // сдвиг текста в  окошке
+      dubler_fill();  // заполняем дублер всей строкой
+    }
+  }
+  //если текущий символ равен введеному
+  if (symbol == (int)text_str[start_str][curr_sym]) {
+    std::cout << "right" << text_str[start_str][curr_sym] << std::endl;
+    std::cout << "was: " << curr_sym << std::endl;
+    add_sym_to_dubler(text_str[start_str][curr_sym]);
+    curr_sym++;  //сдвигаем текущий символ
+  }
+  if (curr_sym == text_str[start_str].size()) {
+    dubler_clean();   // сбрасываем дублер
+    next_text_str();  // сдвиг текста в  окошке
+  }
+}
 //меняет характеристики текста для вывода
 void TextWindow::change_text_character() {
   sprite.setPosition(position.x, position.y);  // ставим окошко в  позицию
@@ -38,15 +88,25 @@ void TextWindow::change_text_character() {
                             getPosition().y + ((margin_y + font_size) * j));
     vec_text[j].setString(text_str[i]);
   }
+  //характериситики дублера
+  dubler.setFont(font);
+  dubler.setCharacterSize(font_size);
+  dubler.setFillColor(dubler_color);
+  dubler.setOutlineColor(Color::Green);
+  dubler.setOutlineThickness(1);
+  dubler.setStyle(Text::Underlined);
+  dubler.setPosition(vec_text[0].getPosition());
 }
 
 //рисуем текст внутри окна
 void TextWindow::DrawTextWindow(RenderWindow &window) {
   window.draw(sprite);  // фон
-
+                        //рисуем текст
   for (int i = 0; i < vec_text.size(); i++) {
     window.draw(vec_text[i]);
   }
+  //а тут дублер по верх текста
+  window.draw(dubler);
 }
 //считаем сколько строк поместится в окно
 void TextWindow::change_count_text_str() {
@@ -84,11 +144,10 @@ void TextWindow::add_word_in_text(std::vector<std::wstring> &text, Word word,
 // конвертирование файла в вектор с текстом
 std::vector<std::wstring> TextWindow::convert_file_to_text(
     std::string filename) {
-  Text text_help("S", font, font_size);
+  Text text_help("W", font, font_size);
   std::wstring str = readfile_to_wstr(filename);
   std::vector<std::wstring> text;
   Word word;
-
   text.resize(1);
   int j = 0;
 
@@ -96,19 +155,23 @@ std::vector<std::wstring> TextWindow::convert_file_to_text(
     if (str[i] != L' ') {
       word.add(str[i]);
     } else {
-      if ((word.get_len() + text[j].size()) * text_help.getLocalBounds().width <
+      text_help.setString(text[j] + word.get_word());
+      std::cout << "wtaf " << text_help.getLocalBounds().width << std::endl;
+
+      if (text_help.getLocalBounds().width <
           sprite.getLocalBounds().width - 30) {
         add_word_in_text(text, word, j);
         word.clean();
       } else {
+        text[j].pop_back();  // убираем пробел который  написался в конце
         j++;
         text.resize(j + 1);
         add_word_in_text(text, word, j);
-
         word.clean();
       }
     }
   }
+  text[text.size() - 1].pop_back();  //// убираем пробелс  последней строки
 
   return text;
 }
@@ -125,8 +188,10 @@ void TextWindow::setText(std::string filename) {
 // getters
 Vector2i TextWindow::getPosition() { return position; }
 
+//ДЛЯ ТЕСТОВ
 int main() {
-  TextWindow txwin;
+  MyKeyboard mykb(50, 500);
+  TextWindow txwin;                   //окно с  текстом
   txwin.setText("texts/text_1.txt");  // берем текст
   txwin.change_count_text_str();
   std::cout << txwin.count_text_string << std::endl;
@@ -144,17 +209,19 @@ int main() {
     Event event;
     while (window.pollEvent(event)) {
       if (event.type == Event::Closed) window.close();
+      mykb.Update(event, txwin);
     }
 
-    if (Keyboard::isKeyPressed(Keyboard::Q)) {
+    /*if (Keyboard::isKeyPressed(Keyboard::Q)) {
       txwin.next_text_str();
-    }
+    }*/
     int n = 0;
     // std::cin >> n;
     if (n == 1) {
       txwin.next_text_str();
     }
     txwin.DrawTextWindow(window);
+    mykb.DrawKB(window);
     window.display();
   }
 

@@ -1,4 +1,4 @@
-#include "word.hpp"
+#include "hpp/word.hpp"
 
 //геттеры
 int Word::get_len() { return len; }

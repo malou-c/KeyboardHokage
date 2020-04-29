@@ -1,4 +1,4 @@
-#include "filereader.hpp"
+#include "hpp/filereader.hpp"
 
 // берет из файла текст и  вставляет его в  строку wstring
 std::wstring readfile_to_wstr(std::string filename) {
@@ -10,7 +10,6 @@ std::wstring readfile_to_wstr(std::string filename) {
     file >> str;
     msg += str;
     msg += " ";
-
     if (file.eof()) break;
   }
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
