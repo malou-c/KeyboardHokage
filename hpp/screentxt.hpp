@@ -15,6 +15,7 @@ class TextWindow {
   int margin_y;
 
  public:
+  int curr_sym;   // текущий символ
   int start_str;  // с какой строчки идет отрисовка
   int count_text_string;  //скольок строк помещается в  окне
 
@@ -25,11 +26,22 @@ class TextWindow {
   std::vector<Text> vec_text;
   int font_size;
   Color text_color;
+  //текст дублер
+  std::wstring dubler_str;
+  Text dubler;
+  Color dubler_color;
 
   //конструкторы
   TextWindow();
 
   //функии
+  //функции связанные  с дублером
+  void add_sym_to_dubler(wchar_t sym);
+  void pop_sym_to_dubler();
+  void dubler_fill();
+  void checksym_dubler(int symbol);
+  void dubler_clean();
+
   std::vector<std::wstring> convert_file_to_text(std::string filename);
   void add_word_in_text(std::vector<std::wstring> &text, Word word, int j);
   void change_text_character();
