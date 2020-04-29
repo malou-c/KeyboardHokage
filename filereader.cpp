@@ -8,9 +8,10 @@ std::wstring readfile_to_wstr(std::string filename) {
 
   while (true) {
     file >> str;
-    if (file.eof()) break;
-    msg += " ";
     msg += str;
+    msg += " ";
+
+    if (file.eof()) break;
   }
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
   std::wstring wstr = converter.from_bytes(msg);
