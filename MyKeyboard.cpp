@@ -1,4 +1,5 @@
-#include "MyKeyboard.hpp"
+#include "hpp/MyKeyboard.hpp"
+
 //конструкторы
 MyKeyboard::MyKeyboard(int x, int y) {
   //используется для проверки нажатий
@@ -9,8 +10,7 @@ MyKeyboard::MyKeyboard(int x, int y) {
       {L'6', L'^', L'6', L':'}, {L'7', L'&', L'7', L'?'},
       {L'8', L'*', L'8', L'*'}, {L'9', L'(', L'9', L'('},
       {L'0', L')', L'0', L')'}, {L'-', L'_', L'-', L'_'},
-      {L'=', L'+', L'=', L'+'},
-  };
+      {L'=', L'+', L'=', L'+'}};
   wchar_t code_line2[12][4] = {
       {L'q', L'Q', L'й', L'Й'}, {L'w', L'W', L'ц', L'Ц'},
       {L'e', L'E', L'у', L'У'}, {L'r', L'R', L'к', L'К'},
@@ -109,13 +109,14 @@ sf::Vector2i MyKeyboard::getPosition() { return position; }
 // set
 void MyKeyboard::setPosition(int x, int y) {}
 
-void MyKeyboard::Update(sf::Event event) {
+void MyKeyboard::Update(sf::Event event, TextWindow &txwin) {
   int symbol;
   switch (event.type) {
     // нажатие клавиши
     case sf::Event::TextEntered:
       std::cout << "ASCII character typed: " << event.text.unicode << std::endl;
       symbol = (int)event.text.unicode;
+      txwin.checksym_dubler(symbol);
       //меняем цвет
       for (int i = 0; i < vec_buttons.size(); i++) {
         for (int j = 0; j < 4; j++) {
@@ -152,30 +153,4 @@ void MyKeyboard::Update(sf::Event event) {
 
       break;
   }
-}
-
-// тестовый мейн
-int main() {
-  // Create the main window
-  sf::RenderWindow window(sf::VideoMode(1560, 800), "keyboard mazafaka");
-
-  MyKeyboard keyboard(150, 400);  //  объект клавиатуры
-  sf::Event event;
-  sf::Keyboard::Key k;
-  while (window.isOpen()) {
-    // Process events
-    while (window.pollEvent(event)) {
-      if (event.type == sf::Event::Closed) {
-        window.close();
-      }
-      keyboard.Update(event);  // проверка событий клавиатуры
-    }
-
-    // Clear screen
-    window.clear(sf::Color::White);
-
-    keyboard.DrawKB(window);  // отрисовка клавиатуры
-    window.display();
-  }
-  return EXIT_SUCCESS;
 }
