@@ -1,14 +1,13 @@
 #include "hpp/screentxt.hpp"
 
-#include "hpp/MyKeyboard.hpp"
 // constructors
 
-TextWindow::TextWindow() {
+TextWindow::TextWindow(int x, int y) {
   //загружаем спрайт окошечка
   font.loadFromFile("fonts/3976.ttf");
   texture.loadFromFile("images/text_window.png");
   sprite.setTexture(texture);
-  setPosition(100, 100);
+  setPosition(x, y);
   //текст
   text_color = sf::Color::Black;
   dubler_color = sf::Color::Black;
@@ -187,43 +186,3 @@ void TextWindow::setText(std::string filename) {
 
 // getters
 Vector2i TextWindow::getPosition() { return position; }
-
-//ДЛЯ ТЕСТОВ
-int main() {
-  MyKeyboard mykb(50, 500);
-  TextWindow txwin;                   //окно с  текстом
-  txwin.setText("texts/text_1.txt");  // берем текст
-  txwin.change_count_text_str();
-  std::cout << txwin.count_text_string << std::endl;
-  txwin.change_text_character();  // вычисляем характеристики текста
-
-  //параметры окна
-  int height = 950, width = 1500;
-  ContextSettings settings;
-  settings.antialiasingLevel = 8;
-  RenderWindow window(VideoMode(width, height), "KeybordNinja", Style::Default,
-                      settings);
-
-  window.clear(Color::White);
-  while (window.isOpen()) {
-    Event event;
-    while (window.pollEvent(event)) {
-      if (event.type == Event::Closed) window.close();
-      mykb.Update(event, txwin);
-    }
-
-    /*if (Keyboard::isKeyPressed(Keyboard::Q)) {
-      txwin.next_text_str();
-    }*/
-    int n = 0;
-    // std::cin >> n;
-    if (n == 1) {
-      txwin.next_text_str();
-    }
-    txwin.DrawTextWindow(window);
-    mykb.DrawKB(window);
-    window.display();
-  }
-
-  return 0;
-}
