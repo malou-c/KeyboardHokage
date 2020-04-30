@@ -71,9 +71,6 @@ int main() {
         butRecord.draw(window);
         break;
       case 1:
-        // update
-        butPlay.is_clicked(window);
-        butRecord.is_clicked(window);
         mykb.Update(event, txwin);
         // draw
         clface.DrawClock(window);      //таймер
