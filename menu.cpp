@@ -8,10 +8,8 @@
 #include "hpp/screentxt.hpp"
 
 using namespace sf;
-
-int height = 950, width = 1500;  // высота и ширина окна
-
-int ID = 0;  // глобал  ID
+int ID = 0;                       // глобал  ID
+int height = 1000, width = 1900;  // высота и ширина окна
 
 int main() {
   String path;                      // путь к файлу
@@ -33,14 +31,18 @@ int main() {
   ClockFace clface(10, 10);  // инициализируем часы в  позиции x y
 
   //кнопки меню
-  MenuButton butPlay(200, 100, 1);
-  MenuButton butRecord(200, 100, 2);
+  MenuButton butBack(100, 600, 0);
+  MenuButton butPlay(100, 100, 1);
+  MenuButton butRecord(100, 200, 2);
 
   //клавиатура
   MyKeyboard mykb(150, 550);  // инициализируем клавиатру в позиции x y
 
   //окно с  текстом
-  TextWindow txwin(200, 100);  // инициализируем окно с текстом в позиции x y
+  TextWindow txwin(400, 200);         //окно с  текстом
+  txwin.setText("texts/text_1.txt");  // берем текст
+  txwin.change_count_text_str();
+  txwin.change_text_character();  // вычисляем характеристики текста
 
   //Пока окно открыто
   while (window.isOpen()) {
@@ -51,11 +53,15 @@ int main() {
       if (event.type == Event::Closed)
         //Закрыть окно
         window.close();
+      switch (ID) {
+        case 1:
+          mykb.Update(event, txwin);
+          break;
+
+        default:
+          break;
+      }
     }
-    // UPDATE
-    butPlay.is_clicked(window);
-    butRecord.is_clicked(window);
-    clface.update_clock();  // обновление таймера
 
     // чистим окно
     window.clear(Color::White);
@@ -71,22 +77,28 @@ int main() {
         butRecord.draw(window);
         break;
       case 1:
-        mykb.Update(event, txwin);
+        // update
+        butPlay.is_clicked(window);
+        butRecord.is_clicked(window);
+        butBack.is_clicked(window);
         // draw
+        // кнопка назад
+        butBack.draw(window);          // кнопка назад
         clface.DrawClock(window);      //таймер
         mykb.DrawKB(window);           // клавиатура
         txwin.DrawTextWindow(window);  // окно с  текстом
+        break;
+      case 2:
+        // update
+        butBack.is_clicked(window);
+        // draw
+        butBack.draw(window);  // кнопка назад
+
         break;
 
       default:
         break;
     }
-    //все что рисуем
-    window.clear(Color::White);  // чистим
-
-    //кнопки меню
-    butPlay.draw(window);
-    butRecord.draw(window);
 
     window.display();
   }

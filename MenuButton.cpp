@@ -7,7 +7,6 @@
 #include <string>
 
 extern int ID;  // глобал  ID
-
 MenuButton::MenuButton(int x, int y, std::string button_name, int id) {
   this->id = id;
   name = button_name;  //Имя кнопки
@@ -34,16 +33,12 @@ MenuButton::MenuButton(int x, int y, std::string button_name, int id) {
 MenuButton::MenuButton(int x, int y, int id) {
   this->id = id;
   image.loadFromFile("yo.jpg");
-
   texture.loadFromImage(image);  //загружаем текстуру для фона
 
   background.setTexture(texture);
   background.setTextureRect(
       sf::IntRect(0, 0, 100, 100));  //устанавливаем текстуру для спрайта
   background.setPosition(x, y);  //координаты для отрисовки кнопки
-  // background.scale(0.5, 0.5);
-
-  set_borders();
 }
 
 int MenuButton::get_id() { return id; };  //Узнать id кнопки
@@ -60,9 +55,9 @@ void MenuButton::is_clicked(
     sf::RenderWindow &window)  //Проверяет была ли нажата кнопка
 {
   if (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
-      sf::IntRect((background).getLocalBounds())
+      sf::IntRect((background).getGlobalBounds())
           .contains(sf::Mouse::getPosition(window))) {
-    ID = id;
+    ID = id;  // меняем  глобальный   ID
   }
 }
 

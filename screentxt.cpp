@@ -7,7 +7,7 @@ TextWindow::TextWindow(int x, int y) {
   font.loadFromFile("fonts/3976.ttf");
   texture.loadFromFile("images/text_window.png");
   sprite.setTexture(texture);
-  setPosition(x, y);
+  setPos(x, y);
   //текст
   text_color = sf::Color::Black;
   dubler_color = sf::Color::Black;
@@ -176,9 +176,10 @@ std::vector<std::wstring> TextWindow::convert_file_to_text(
 }
 
 // setters
-void TextWindow::setPosition(int x, int y) {
+void TextWindow::setPos(int x, int y) {
   position.x = x;
   position.y = y;
+  sprite.setPosition(x, y);
 }
 void TextWindow::setText(std::string filename) {
   text_str = convert_file_to_text(filename);
