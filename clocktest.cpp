@@ -5,9 +5,9 @@
 
 #include "clockface.hpp"
 using namespace sf;
-using namespace std;
 
-int main() {
+
+int ma() {
   String path;                      // ���� � �����
 #ifdef WINDOWS                      // ���� �� Windows
   path = "images_menu\\start.png";  // ����� ����
@@ -44,13 +44,18 @@ int main() {
     // runclock(window,time,seconds,minsum,minutes, msstorage, secstorage );
 
     if (Mouse::isButtonPressed(Mouse::Left)) {
-      if (IntRect((width / 2) - 142, 100, 284, 54)
-              .contains(Mouse::getPosition(window))) {
+      if (IntRect((width / 2) - 142, 100, 284, 54).contains(Mouse::getPosition(window))) 
+      {
+
+
       }
     }
+
+
     clface.DrawClock(window);
     window.display();
   }
 
   return 0;
 }
+
