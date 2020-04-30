@@ -3,8 +3,10 @@ OFILES = button.o clockface.o file.o filereader.o menu.o MenuButton.o MyKeyboard
 compileall:$(OFILES)
 
 tie:compileall
-	g++  menu.o -o KeyboardHokage -lsfml-graphics -lsfml-window -lsfml-system
-
+	g++  $(OFILES) -o KbHokage -lsfml-graphics -lsfml-window -lsfml-system
+launch:tie
+	./KbHokage
+	
 button.o: button.cpp
 	g++ -c button.cpp
 
