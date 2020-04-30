@@ -32,7 +32,7 @@ class TextWindow {
   Color dubler_color;
 
   //конструкторы
-  TextWindow();
+  TextWindow(int x, int y);
 
   //функии
   //функции связанные  с дублером

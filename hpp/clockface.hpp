@@ -19,7 +19,7 @@ class ClockFace {
   int switcher = 0;
   Vector2i position;
   //конструкторы
-  ClockFace();
+  ClockFace(int x, int y);
 
   //функции
   void update_clock();
