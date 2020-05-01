@@ -32,9 +32,9 @@ int main() {
   ClockFace clface(10, 10);  // инициализируем часы в  позиции x y
 
   //кнопки меню
-  MenuButton butBack(100, 600, 0);
-  MenuButton butPlay(100, 100, 1);
-  MenuButton butRecord(100, 200, 2);
+  MenuButton butBack(100, 600, 0),
+             butPlay(100, 100, 1),
+             butRecord(100, 200, 2);
 
   //клавиатура
   MyKeyboard mykb(150, 550);  // инициализируем клавиатру в позиции x y
