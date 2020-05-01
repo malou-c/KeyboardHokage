@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "file.cpp"
+#include "file.hpp"
 #include <iostream>
 
 std::vector<PersonStats> load_board()
