@@ -56,6 +56,7 @@ std::vector<PersonStats> File::load()
     {
 
         std::cout << "Файл не существует" << std::endl;
+        file.open(path, std::ios::binary);
     }
 
     while (file.read((char *)&buffer, sizeof(PersonStats)))

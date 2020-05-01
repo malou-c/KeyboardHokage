@@ -17,10 +17,10 @@ std::vector<PersonStats> load_board()
 void draw_board(sf::RenderWindow &window, std::vector<PersonStats> stats,
                 int width = 1500, int high = 900)
 {//Рисует таблицу рекордов
-/*  std::vector<PersonStats> stats;
+/*     std::vector<PersonStats> stats;
     File file;
-    stats = file.load();//Загружаем данные (имя время)
- */
+    stats = file.load();//Загружаем данные (имя время) */
+
 
     sf::Image image;
     image.loadFromFile("ye.jpg");//Фон на котором будут отображаться данные
@@ -36,7 +36,7 @@ void draw_board(sf::RenderWindow &window, std::vector<PersonStats> stats,
     sf::Text text;
     std::string out_text = "";
 
-    for (int i = 0; i < stats.size() || i < 50; i++ )//записываем информацию о превых 50
+    for (int i = 0; i < stats.size() && i < 50; i++ )//записываем информацию о превых 50
     {                                                //пользователях в строку
         out_text += (std::to_string((i + 1))
                      + ')'

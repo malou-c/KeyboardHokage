@@ -11,8 +11,8 @@
 using namespace sf;
 int ID = 0;                      // глобал  ID
 int height = 1000, width = 1900; // высота и ширина окна
-bool lidboard_is_load = false;
-std::vector<PersonStats> stats;
+bool lidboard_is_load = false;//загружена ли таблица рекордов
+std::vector<PersonStats> stats;//для хранения таблицы рекордов
 
 int main()
 {
@@ -87,6 +87,7 @@ int main()
             //кнопки меню
             butPlay.draw(window);
             butRecord.draw(window);
+            lidboard_is_load = false;
             break;
         case 1:
             // update
@@ -107,8 +108,9 @@ int main()
             // draw
             butBack.draw(window); // кнопка назад
             //Рисуем таблицу рекордов
-            if (lidboard_is_load == false) {
+            if (!lidboard_is_load) {
                 stats = load_board();
+                lidboard_is_load = true;
             }
             draw_board(window, stats);
             break;
