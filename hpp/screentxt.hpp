@@ -15,7 +15,8 @@ class TextWindow {
   int margin_y;
 
  public:
-  int curr_sym;   // текущий символ
+  bool isEndString = false;  // показывает кочился ли текст
+  int curr_sym;              // текущий символ
   int start_str;  // с какой строчки идет отрисовка
   int count_text_string;  //скольок строк помещается в  окне
 
@@ -51,7 +52,7 @@ class TextWindow {
 
   void DrawTextWindow(RenderWindow &window);
   // setters
-  void setPosition(int x, int y);
+  void setPos(int x, int y);
   void setText(std::string filename);
 
   // getters

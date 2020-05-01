@@ -77,6 +77,10 @@ void TextWindow::change_text_character() {
 
   std::cout << "razmer vec" << vec_text.size() << std::endl;
   std::cout << "razmer str" << text_str.size() << std::endl;
+
+  //если кончились строки
+  if (start_str == text_str.size()) isEndString = true;
+
   for (int i = start_str, j = 0; i < text_str.size(); i++, j++) {
     if (i - start_str >= count_text_string || i >= text_str.size())
       break;  // условия остановки
