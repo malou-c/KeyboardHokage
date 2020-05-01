@@ -6,10 +6,13 @@
 #include "hpp/MyKeyboard.hpp"
 #include "hpp/clockface.hpp"
 #include "hpp/screentxt.hpp"
+#include "hpp/ScoreBoard.hpp"
 
 using namespace sf;
 int ID = 0;                       // глобал  ID
 int height = 1000, width = 1900;  // высота и ширина окна
+bool lidboard_is_load = false;
+std::vector<PersonStats> stats;
 
 int main() {
   String path;                      // путь к файлу
@@ -18,7 +21,6 @@ int main() {
 #else                               // если не Windows
   path = "images_menu/start.png";  // такой
 #endif
-
   //Делаю сглаживание
   ContextSettings settings;
   settings.antialiasingLevel = 8;
@@ -32,9 +34,9 @@ int main() {
   ClockFace clface(10, 10);  // инициализируем часы в  позиции x y
 
   //кнопки меню
-  MenuButton butBack(100, 600, 0),
-             butPlay(100, 100, 1),
-             butRecord(100, 200, 2);
+  MenuButton butBack(100, 600, 0);
+  MenuButton butPlay(100, 100, 1);
+  MenuButton butRecord(100, 200, 2);
 
   //клавиатура
   MyKeyboard mykb(150, 550);  // инициализируем клавиатру в позиции x y
@@ -66,7 +68,6 @@ int main() {
           break;
       }
     }
-
     // чистим окно
     window.clear(Color::White);
 
@@ -98,7 +99,12 @@ int main() {
         butBack.is_clicked(window);
         // draw
         butBack.draw(window);  // кнопка назад
-
+        //Рисуем таблицу рекордов
+        if (lidboard_is_load == false)
+        {
+          stats = load_board();
+        }
+        draw_board(window, stats);
         break;
 
       default:
