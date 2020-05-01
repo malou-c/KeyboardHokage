@@ -17,6 +17,7 @@ class ClockFace {
   int minsum = 1;
   int minutes = 0;
   int switcher = 0;
+  bool isStart = false;
   Vector2i position;
   //конструкторы
   ClockFace(int x, int y);

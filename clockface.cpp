@@ -58,8 +58,8 @@ void ClockFace::ClockReset() {
 void ClockFace::ClockStart() {
   msstorage.restart();
   secstorage.restart();
-
   switcher = 1;
+  isStart = true;
 }
 
 void ClockFace::ClockStop() { switcher = 0; }
