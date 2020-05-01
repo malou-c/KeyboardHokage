@@ -35,7 +35,8 @@ int main()
     ClockFace clface(10, 10); // инициализируем часы в  позиции x y
 
     //кнопки меню
-    MenuButton butBack(100, 600, 0),
+    MenuButton butExit(width - 100, 0, -1),
+               butBack(100, 600, 0),
                butPlay(100, 100, 1),
                butRecord(100, 200, 2);
 
@@ -54,9 +55,10 @@ int main()
         Event event;
         while (window.pollEvent(event)) {
             //Если событие закрытия
-            if (event.type == Event::Closed)
-                //Закрыть окно
-                window.close();
+            if (event.type == sf::Event::Closed || //если окно закрыто или
+                (event.type == sf::Event::KeyPressed && //если нажат esc
+                 event.key.code == sf::Keyboard::Escape))
+                window.close(); //то закрыть окно
             switch (ID) {
             case 1:
                 mykb.Update(event, txwin);
@@ -73,6 +75,10 @@ int main()
         window.clear(Color::White);
 
         switch (ID) {
+        case -1:
+            //выходим из приложения
+            window.close();
+            break;
         case 0:
             // update
             butPlay.is_clicked(window);
@@ -110,7 +116,9 @@ int main()
         default:
             break;
         }
-
+        //Выход из приложения
+        butExit.is_clicked(window);
+        butExit.draw(window);
         window.display();
     }
 
