@@ -4,8 +4,12 @@ compileall:$(OFILES)
 
 tie:compileall
 	g++  $(OFILES) -o KbHokage -lsfml-graphics -lsfml-window -lsfml-system
+
 launch:tie
 	./KbHokage
+
+clean:
+	rm *.o
 	
 button.o: button.cpp
 	g++ -c button.cpp
