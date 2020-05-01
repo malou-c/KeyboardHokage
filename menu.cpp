@@ -26,6 +26,7 @@ int main() {
   RenderWindow window(VideoMode(width, height), "KeybordNinja", Style::Default,
                       settings);
   window.setVerticalSyncEnabled(true);  // вертикальная синхронизация
+  window.setFramerateLimit(60);
 
   //таймер
   ClockFace clface(10, 10);  // инициализируем часы в  позиции x y
@@ -41,7 +42,7 @@ int main() {
   //окно с  текстом
   TextWindow txwin(400, 200);         //окно с  текстом
   txwin.setText("texts/text_1.txt");  // берем текст
-  txwin.change_count_text_str();
+  txwin.change_count_text_str();  // вычисляем сколько строк поместится в  окно
   txwin.change_text_character();  // вычисляем характеристики текста
 
   //Пока окно открыто
@@ -56,6 +57,9 @@ int main() {
       switch (ID) {
         case 1:
           mykb.Update(event, txwin);
+          if (event.type == Event::TextEntered && !clface.isStart) {
+                        clface.ClockStart();
+          }
           break;
 
         default:
@@ -78,9 +82,10 @@ int main() {
         break;
       case 1:
         // update
-        butPlay.is_clicked(window);
-        butRecord.is_clicked(window);
         butBack.is_clicked(window);
+        clface.update_clock();
+        if (txwin.isEndString)
+          clface.ClockStop();  // если кончился текст в окне
         // draw
         // кнопка назад
         butBack.draw(window);          // кнопка назад
