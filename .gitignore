@@ -1,3 +1,7 @@
 *.exe
 *.o
 KbHokage
+.Makefile.swp
+.vscode/
+KeyboardHokage
+lider_board.dat
