@@ -10,7 +10,7 @@ ButtonForKB::ButtonForKB(sf::String name_button)
     sprite.setTexture(texture); // спрайт
     font.loadFromFile(FONT);    // шрифт
     text.setFont(font); // устанавливаем шрифт на текст
-    text.setColor(sf::Color::Black); // цвет текста
+    text.setFillColor(sf::Color::Black); // цвет текста
     text.setPosition(
             sprite.getPosition().x + 45,
             sprite.getPosition().y
@@ -25,7 +25,7 @@ void ButtonForKB::Create()
     sprite.setTexture(texture);
     font.loadFromFile(FONT);
     text.setFont(font);
-    text.setColor(sf::Color::Black);
+    text.setFillColor(sf::Color::Black);
     text.setPosition(sprite.getPosition().x + 45, sprite.getPosition().y + 20);
     text.setString(name);
 }

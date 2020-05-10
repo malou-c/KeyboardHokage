@@ -1,5 +1,3 @@
-#pragma once
-
 #include "MenuButton.hpp"
 
 #include <SFML/Graphics.hpp>
@@ -16,7 +14,7 @@ MenuButton::MenuButton(int x, int y, std::string button_name, int id)
     out_name.setString(name);
     out_name.setFont(font);
     out_name.setCharacterSize(16);
-    out_name.setColor(sf::Color::Red);
+    out_name.setFillColor(sf::Color::Red);
     out_name.setPosition(x + 10, y + 10);
 
     image.loadFromFile("yo.jpg");

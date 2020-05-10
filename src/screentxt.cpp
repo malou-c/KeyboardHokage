@@ -66,7 +66,7 @@ void TextWindow::checksym_dubler(int symbol)
         add_sym_to_dubler(text_str[start_str][curr_sym]);
         curr_sym++; //сдвигаем текущий символ
     }
-    if (curr_sym == text_str[start_str].size()) {
+    if (curr_sym == (int)text_str[start_str].size()) {
         dubler_clean();  // сбрасываем дублер
         next_text_str(); // сдвиг текста в  окошке
     }
@@ -76,7 +76,7 @@ void TextWindow::change_text_character()
 {
     sprite.setPosition(position.x, position.y); // ставим окошко в  позицию
     //стираем все  что было ДО в  векторе
-    for (int i = 0; i < vec_text.size(); i++) {
+    for (unsigned int i = 0; i < vec_text.size(); i++) {
         vec_text[i].setString("");
     }
     vec_text.resize(
@@ -86,11 +86,11 @@ void TextWindow::change_text_character()
     std::cout << "razmer str" << text_str.size() << std::endl;
 
     //если кончились строки
-    if (start_str == text_str.size())
+    if (start_str == (int)text_str.size())
         isEndString = true;
 
-    for (int i = start_str, j = 0; i < text_str.size(); i++, j++) {
-        if (i - start_str >= count_text_string || i >= text_str.size())
+    for (int i = start_str, j = 0; i < (int)text_str.size(); i++, j++) {
+        if (i - start_str >= count_text_string || i >= (int)text_str.size())
             break; // условия остановки
         vec_text[j].setFont(font);
         vec_text[j].setFillColor(Color::Black);
@@ -115,7 +115,7 @@ void TextWindow::DrawTextWindow(RenderWindow& window)
 {
     window.draw(sprite); // фон
                          //рисуем текст
-    for (int i = 0; i < vec_text.size(); i++) {
+    for (unsigned int i = 0; i < vec_text.size(); i++) {
         window.draw(vec_text[i]);
     }
     //а тут дублер по верх текста
@@ -126,7 +126,7 @@ void TextWindow::change_count_text_str()
 {
     std::cout << "text str size" << text_str.size() << std::endl;
     Text text_help("S", font, font_size);
-    for (int i = 1; i <= text_str.size(); i++) {
+    for (unsigned int i = 1; i <= text_str.size(); i++) {
         std::cout << (text_help.getLocalBounds().height + margin_y) * i
                   << std::endl;
         if ((text_help.getLocalBounds().height + margin_y) * (i + 1)
@@ -170,7 +170,7 @@ std::vector<std::wstring> TextWindow::convert_file_to_text(std::string filename)
     text.resize(1);
     int j = 0;
 
-    for (int i = 0; i < str.length(); i++) {
+    for (unsigned int i = 0; i < str.length(); i++) {
         if (str[i] != L' ') {
             word.add(str[i]);
         } else {
