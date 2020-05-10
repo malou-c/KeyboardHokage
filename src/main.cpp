@@ -2,17 +2,17 @@
 #include <iostream>
 #include <string>
 
-#include "hpp/MenuButton.hpp"
-#include "hpp/MyKeyboard.hpp"
-#include "hpp/ScoreBoard.hpp"
-#include "hpp/clockface.hpp"
-#include "hpp/screentxt.hpp"
+#include "MenuButton.hpp"
+#include "MyKeyboard.hpp"
+#include "ScoreBoard.hpp"
+#include "clockface.hpp"
+#include "screentxt.hpp"
 
 using namespace sf;
 int ID = 0;                      // глобал  ID
 int height = 1000, width = 1900; // высота и ширина окна
-bool lidboard_is_load = false;//загружена ли таблица рекордов
-std::vector<PersonStats> stats;//для хранения таблицы рекордов
+bool lidboard_is_load = false; //загружена ли таблица рекордов
+std::vector<PersonStats> stats; //для хранения таблицы рекордов
 
 int main()
 {
@@ -35,10 +35,8 @@ int main()
     ClockFace clface(10, 10); // инициализируем часы в  позиции x y
 
     //кнопки меню
-    MenuButton butExit(width - 100, 0, -1),
-               butBack(100, 600, 0),
-               butPlay(100, 100, 1),
-               butRecord(100, 200, 2);
+    MenuButton butExit(width - 100, 0, -1), butBack(100, 600, 0),
+            butPlay(100, 100, 1), butRecord(100, 200, 2);
 
     //клавиатура
     MyKeyboard mykb(150, 550); // инициализируем клавиатру в позиции x y
