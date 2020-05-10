@@ -6,6 +6,10 @@ std::wstring readfile_to_wstr(std::string filename)
     std::string str;
     std::string msg;
     std::fstream file(filename, std::ios::in | std::ios::out);
+    if (!file.is_open()) {
+        std::cout << "file ne open(((" << std::endl;
+        return L"error";
+    }
 
     while (true) {
         file >> str;

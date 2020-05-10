@@ -23,16 +23,15 @@ build/src/%.o: src/%.cpp
 T_EXEC = test.exe
 #меняет мейн на тестовый мейн
 T_SRC = $(SRC:src/main.cpp=test/main.cpp)
-TEST_SRC = 
+TEST_SRC = test/filereader_test.cpp
 TO_PATH = build/test/
-T_OBJ = $(TO_PATH)main.o
+T_OBJ = $(TO_PATH)main.o $(TO_PATH)filereader_test.o 
 
 test: $(T_SRC) $(TEST_SRC) $(T_EXEC)
 
-
-
-$(T_EXEC): $(T_OBJ)
-	$(CC) $(T_OBJ) -o $@
+$(T_EXEC): $(T_OBJ) $(OBJ)
+	$(CC) $(T_OBJ) $(OBJ:build/src/main.o=) -o $@ -lsfml-graphics -lsfml-window -lsfml-system
+	
 
 build/test/%.o: test/%.cpp	
 	$(CC) $(CFLAGS) $< -o $@
