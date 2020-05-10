@@ -1,7 +1,7 @@
 .PHONY: all clean install uninstall 
 
 CC = g++
-CFLAGS = -c -MP -MMD -Wall 
+CFLAGS = -c -MP -MMD -Wall -Werror
 SRC = src/main.cpp  src/button.cpp src/clockface.cpp src/file.cpp src/filereader.cpp src/MenuButton.cpp src/MyKeyboard.cpp src/screentxt.cpp src/sysbutton.cpp src/word.cpp
 OBJ_PATH = build/src/
 OBJ = $(OBJ_PATH)main.o $(OBJ_PATH)button.o $(OBJ_PATH)clockface.o $(OBJ_PATH)file.o $(OBJ_PATH)filereader.o $(OBJ_PATH)MenuButton.o $(OBJ_PATH)MyKeyboard.o $(OBJ_PATH)screentxt.o $(OBJ_PATH)sysbutton.o $(OBJ_PATH)word.o
