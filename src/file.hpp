@@ -1,30 +1,31 @@
 #pragma once
 
-#include <string.h>
 #include <fstream>
 #include <iostream>
+#include <string.h>
 #include <vector>
 
-class PersonStats
-{
+class PersonStats {
 public:
-  char name[50];
-  float time;
+    char name[50];
+    float time;
 };
 
-class File
-{
+class File {
 private:
-  std::string path = "lider_board.dat";
+    std::string path = "lider_board.dat";
 
 public:
-  void sort(); //Сортирует файл по убыванию времени
+    void sort(); //Сортирует файл по убыванию времени
 
-  void add(char name[50], float time); //Добавялет запись о пользователе в конец файала
+    void
+    add(char name[50],
+        float time); //Добавялет запись о пользователе в конец файала
 
-  std::vector<PersonStats> load(); //Загружает информацию о пользователях из файла
+    std::vector<PersonStats>
+    load(); //Загружает информацию о пользователях из файла
 
-  int find(char key[]); //Возвращает номер поизиции элемента в файле
+    int find(char key[]); //Возвращает номер поизиции элемента в файле
 
-  void show(); //Показывает содержимое файла
+    void show(); //Показывает содержимое файла
 };

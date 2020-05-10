@@ -3,21 +3,21 @@
 #include <iostream>
 
 class SysButtonForKB {
- public:
-  sf::Image img;
-  sf::Texture texture;
-  sf::Sprite sprite;
-  std::string path;
-  int code = -1;
+public:
+    sf::Image img;
+    sf::Texture texture;
+    sf::Sprite sprite;
+    std::string path;
+    int code = -1;
 
-  // конструкторы
-  SysButtonForKB(sf::String path);
-  SysButtonForKB(sf::String path, int code);
-  //функция-конструктор
+    // конструкторы
+    SysButtonForKB(sf::String path);
+    SysButtonForKB(sf::String path, int code);
+    //функция-конструктор
 
-  //функции
-  void DrawButton(sf::RenderWindow &window);
-  // get
+    //функции
+    void DrawButton(sf::RenderWindow& window);
+    // get
 
-  // set
+    // set
 };
