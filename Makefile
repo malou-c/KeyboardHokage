@@ -1,43 +1,43 @@
-OFILES = button.o clockface.o file.o filereader.o menu.o MenuButton.o MyKeyboard.o screentxt.o sysbutton.o word.o
+.PHONY: all clean install uninstall 
 
-compileall:$(OFILES)
+CC = g++
+CFLAGS = -c -MP -MMD -Wall 
+SRC = src/main.cpp  src/button.cpp src/clockface.cpp src/file.cpp src/filereader.cpp src/MenuButton.cpp src/MyKeyboard.cpp src/screentxt.cpp src/sysbutton.cpp src/word.cpp
+OBJ_PATH = build/src/
+OBJ = $(OBJ_PATH)main.o $(OBJ_PATH)button.o $(OBJ_PATH)clockface.o $(OBJ_PATH)file.o $(OBJ_PATH)filereader.o $(OBJ_PATH)MenuButton.o $(OBJ_PATH)MyKeyboard.o $(OBJ_PATH)screentxt.o $(OBJ_PATH)sysbutton.o $(OBJ_PATH)word.o
+EXEC = sp.exe
 
-tie:compileall
-	g++  $(OFILES) -o KbHokage -lsfml-graphics -lsfml-window -lsfml-system
+all: $(SRC) $(EXEC) 
 
-launch:tie
-	./KbHokage
+$(EXEC): $(OBJ)
+	$(CC) $(OBJ) -o $@ -lsfml-graphics -lsfml-window -lsfml-system
 
-clean:
-	rm *.o
+build/src/%.o: src/%.cpp	
+	$(CC) $(CFLAGS) $< -o $@
 	
-button.o: button.cpp
-	g++ -c button.cpp
+-include build/src/*.d
 
-clockface.o: clockface.cpp
-	g++ -c clockface.cpp
 
-file.o: file.cpp
-	g++ -c file.cpp
 
-filereader.o: filereader.cpp
-	g++ -c filereader.cpp
+#tests
+T_EXEC = test.exe
+#меняет мейн на тестовый мейн
+T_SRC = $(SRC:src/main.cpp=test/main.cpp)
+TEST_SRC = 
+TO_PATH = build/test/
+T_OBJ = $(TO_PATH)main.o
 
-menu.o: menu.cpp
-	g++ -c menu.cpp
+test: $(T_SRC) $(TEST_SRC) $(T_EXEC)
 
-MenuButton.o: MenuButton.cpp
-	g++ -c MenuButton.cpp
 
-MyKeyboard.o: MyKeyboard.cpp
-	g++ -c MyKeyboard.cpp
 
-screentxt.o: screentxt.cpp
-	g++ -c screentxt.cpp
+$(T_EXEC): $(T_OBJ)
+	$(CC) $(T_OBJ) -o $@
 
-sysbutton.o: sysbutton.cpp
-	g++ -c sysbutton.cpp
+build/test/%.o: test/%.cpp	
+	$(CC) $(CFLAGS) $< -o $@
 
-word.o: word.cpp
-	g++ -c word.cpp
+-include build/test/*.d
 
+clean:  
+	rm -rf build/src/*.o build/src/*.d build/test/*.o build/test/*.d
