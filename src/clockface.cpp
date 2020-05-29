@@ -2,7 +2,7 @@
 //конструктор
 ClockFace::ClockFace(int x, int y)
 {
-    font.loadFromFile("fonts/CyrilicOld.ttf");
+    font.loadFromFile("../fonts/CyrilicOld.ttf");
     text.setFont(font);
     text.setCharacterSize(25);
     text.setFillColor(Color::Black);

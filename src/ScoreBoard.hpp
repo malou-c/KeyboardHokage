@@ -47,7 +47,7 @@ void draw_board(
     }
 
     sf::Font font;
-    font.loadFromFile("fonts/stdFont.ttf"); //шрифт
+    font.loadFromFile("../fonts/stdFont.ttf"); //шрифт
     text.setFont(font);
     text.setString(out_text);
     text.setCharacterSize(16);

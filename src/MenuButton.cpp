@@ -10,14 +10,14 @@ MenuButton::MenuButton(int x, int y, std::string button_name, int id)
     this->id = id;
     name = button_name; //Имя кнопки
 
-    font.loadFromFile("fonts/stdFont.ttf"); //шрифт
+    font.loadFromFile("../fonts/stdFont.ttf"); //шрифт
     out_name.setString(name);
     out_name.setFont(font);
     out_name.setCharacterSize(16);
     out_name.setFillColor(sf::Color::Red);
     out_name.setPosition(x + 10, y + 10);
 
-    image.loadFromFile("yo.jpg");
+    image.loadFromFile("../images/yo.jpg");
 
     texture.loadFromImage(image); //загружаем текстуру для фона
 
@@ -32,7 +32,7 @@ MenuButton::MenuButton(int x, int y, std::string button_name, int id)
 MenuButton::MenuButton(int x, int y, int id)
 {
     this->id = id;
-    image.loadFromFile("yo.jpg");
+    image.loadFromFile("../images/yo.jpg");
     texture.loadFromImage(image); //загружаем текстуру для фона
 
     background.setTexture(texture);

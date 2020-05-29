@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#define FONT "fonts/stdFont.ttf"
+#define FONT "../fonts/stdFont.ttf"
 
 class ButtonForKB {
 public:
@@ -10,7 +10,7 @@ public:
     sf::Sprite sprite;
     sf::Font font;
     sf::Text text;
-    std::string path = "images/button.png";
+    std::string path = "../images/button.png";
     sf::String name;
     int code[4];
 
