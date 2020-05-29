@@ -42,6 +42,7 @@ void File::add(char name[50],
     file.open(path, std::ios::binary | std::ios::app); //открываем файл и записываем
     file.write((char *)&person, sizeof(PersonStats));  //информацию в конец файла
     file.close();
+    sort();
 }
 
 std::vector<PersonStats> File::load()
