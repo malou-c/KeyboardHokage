@@ -42,8 +42,8 @@ int main()
     MyKeyboard mykb(150, 550); // инициализируем клавиатру в позиции x y
 
     //окно с  текстом
-    TextWindow txwin(400, 200);        //окно с  текстом
-    txwin.setText("texts/text_1.txt"); // берем текст
+    TextWindow txwin(400, 200);           //окно с  текстом
+    txwin.setText("../texts/text_1.txt"); // берем текст
     txwin.change_count_text_str(); // вычисляем сколько строк поместится в  окно
     txwin.change_text_character(); // вычисляем характеристики текста
 
