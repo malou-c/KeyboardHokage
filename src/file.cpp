@@ -1,16 +1,13 @@
-#include "hpp/file.hpp"
+#include "file.hpp"
 
 void File::sort()
 { //Сортирует файл по убыванию времени
     std::vector<PersonStats> user;
     user = load();
 
-    for (unsigned int i = 0; i < user.size(); i++)
-    {
-        for (unsigned int j = 0; j < user.size() - i - 1; j++)
-        {
-            if (user[j].time < user[j + 1].time)
-            {
+    for (unsigned int i = 0; i < user.size(); i++) {
+        for (unsigned int j = 0; j < user.size() - i - 1; j++) {
+            if (user[j].time < user[j + 1].time) {
                 std::swap(user[j], user[j + 1]);
             }
         }
@@ -20,16 +17,14 @@ void File::sort()
 
     file.open(path, std::ios::trunc);
 
-    for (unsigned int i = 0; i < user.size(); i++)
-    {
-        file.write((char *)&user[i], sizeof(PersonStats));
+    for (unsigned int i = 0; i < user.size(); i++) {
+        file.write((char*)&user[i], sizeof(PersonStats));
     }
 
     file.close();
 }
 
-void File::add(char name[50],
-               float time)
+void File::add(char name[50], float time)
 { //Добавялет запись о пользователе в конец файала
     PersonStats person;
 
@@ -39,8 +34,10 @@ void File::add(char name[50],
     person.time = time;
 
     std::ofstream file;
-    file.open(path, std::ios::binary | std::ios::app); //открываем файл и записываем
-    file.write((char *)&person, sizeof(PersonStats));  //информацию в конец файла
+    file.open(
+            path,
+            std::ios::binary | std::ios::app); //открываем файл и записываем
+    file.write((char*)&person, sizeof(PersonStats)); //информацию в конец файла
     file.close();
     sort();
 }
@@ -53,15 +50,12 @@ std::vector<PersonStats> File::load()
 
     file.open(path, std::ios::binary);
 
-    if (!file.is_open())
-    {
-
+    if (!file.is_open()) {
         std::cout << "Файл не существует" << std::endl;
         file.open(path, std::ios::binary);
     }
 
-    while (file.read((char *)&buffer, sizeof(PersonStats)))
-    {
+    while (file.read((char*)&buffer, sizeof(PersonStats))) {
         users_stat.push_back(buffer);
     }
 
@@ -78,20 +72,15 @@ int File::find(char key[])
     int right = users.size();
     int midd;
 
-    while (left <= right)
-    {
+    while (left <= right) {
         midd = (left + right) / 2;
 
-        if ((std::string)users[midd].name == (std::string)key)
-        {
+        if ((std::string)users[midd].name == (std::string)key) {
             return midd;
         }
-        if ((std::string)users[midd].name < (std::string)key)
-        {
+        if ((std::string)users[midd].name < (std::string)key) {
             left = midd + 1;
-        }
-        else
-        {
+        } else {
             right = midd - 1;
         }
     }
@@ -105,8 +94,7 @@ void File::show()
     std::vector<PersonStats> user;
     user = load();
 
-    for (unsigned int i = 0; i < user.size(); i++)
-    {
+    for (unsigned int i = 0; i < user.size(); i++) {
         std::cout << user[i].name << " " << user[i].time << std::endl;
     }
 }
