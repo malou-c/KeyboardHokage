@@ -9,3 +9,6 @@ build/src/*.d
 build/test/*.o
 build/test/*.d
 /*.vscode
+build/*.o
+build/*.d
+*.exe
