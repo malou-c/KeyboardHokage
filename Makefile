@@ -1,21 +1,46 @@
 .PHONY: all clean install uninstall 
 
-CC = g++
-CFLAGS = -c -MP -MMD -Wall -Werror
-SRC = src/main.cpp  src/button.cpp src/clockface.cpp src/file.cpp src/filereader.cpp src/MenuButton.cpp src/MyKeyboard.cpp src/screentxt.cpp src/sysbutton.cpp src/word.cpp
-OBJ_PATH = build/src/
-OBJ = $(OBJ_PATH)main.o $(OBJ_PATH)button.o $(OBJ_PATH)clockface.o $(OBJ_PATH)file.o $(OBJ_PATH)filereader.o $(OBJ_PATH)MenuButton.o $(OBJ_PATH)MyKeyboard.o $(OBJ_PATH)screentxt.o $(OBJ_PATH)sysbutton.o $(OBJ_PATH)word.o
-EXEC = sp.exe
 
-all: $(SRC) $(EXEC) 
+#CC = g++
+#CFLAGS = -c -MP -MMD -Wall -Werror
+#SRC = src/main.cpp  src/button.cpp src/clockface.cpp src/file.cpp src/filereader.cpp src/MenuButton.cpp src/MyKeyboard.cpp src/screentxt.cpp src/sysbutton.cpp src/word.cpp
+#OBJ_PATH = build/src/
+#OBJ = $(OBJ_PATH)main.o $(OBJ_PATH)button.o $(OBJ_PATH)clockface.o $(OBJ_PATH)file.o $(OBJ_PATH)filereader.o $(OBJ_PATH)MenuButton.o $(OBJ_PATH)MyKeyboard.o $(OBJ_PATH)screentxt.o $(OBJ_PATH)sysbutton.o $(OBJ_PATH)word.o
+#EXEC = sp.exe
 
-$(EXEC): $(OBJ)
-	$(CC) $(OBJ) -o $@ -lsfml-graphics -lsfml-window -lsfml-system
+CC = g++ -std=c++11
+CFLAGS = -Wall -Werror -MP -MMD -c
+SFMLFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
+PROG = KBHokage.exe
+DIR = build
+DIR2 = bin
+FILESCPP = $(wildcard src/*.cpp)
+OBJECTS = $(subst .cpp,.o,$(FILESCPP))
 
-build/src/%.o: src/%.cpp	
+all: $(FILESCPP) $(PROG)
+
+
+$(PROG): $(subst src/,build/,$(OBJECTS))
+	$(CC) $(subst src/,build/,$^) -o bin/$@ $(SFMLFLAGS)
+
+build/%.o: src/%.cpp
 	$(CC) $(CFLAGS) $< -o $@
-	
--include build/src/*.d
+
+-include build/*.d
+
+
+
+
+
+#all: $(SRC) $(EXEC) 
+#
+#$(EXEC): $(OBJ)
+#	$(CC) $(OBJ) -o $@ -lsfml-graphics -lsfml-window -lsfml-system
+#
+#build/src/%.o: src/%.cpp	
+#	$(CC) $(CFLAGS) $< -o $@
+#	
+#-include build/src/*.d
 
 
 
