@@ -5,8 +5,8 @@
 TextWindow::TextWindow(int x, int y)
 {
     //загружаем спрайт окошечка
-    font.loadFromFile("fonts/3976.ttf");
-    texture.loadFromFile("images/text_window.png");
+    font.loadFromFile("../fonts/3976.ttf");
+    texture.loadFromFile("../images/text_window.png");
     sprite.setTexture(texture);
     setPos(x, y);
     //текст
