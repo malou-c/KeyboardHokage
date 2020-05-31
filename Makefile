@@ -1,5 +1,21 @@
 .PHONY: all clean install uninstall 
 
+<<<<<<< HEAD
+||||||| merged common ancestors
+CC = g++
+CFLAGS = -c -MP -MMD -Wall -Werror
+SRC = src/main.cpp  src/button.cpp src/clockface.cpp src/file.cpp src/filereader.cpp src/MenuButton.cpp src/MyKeyboard.cpp src/screentxt.cpp src/sysbutton.cpp src/word.cpp
+OBJ_PATH = build/src/
+OBJ = $(OBJ_PATH)main.o $(OBJ_PATH)button.o $(OBJ_PATH)clockface.o $(OBJ_PATH)file.o $(OBJ_PATH)filereader.o $(OBJ_PATH)MenuButton.o $(OBJ_PATH)MyKeyboard.o $(OBJ_PATH)screentxt.o $(OBJ_PATH)sysbutton.o $(OBJ_PATH)word.o
+EXEC = sp.exe
+=======
+CC = g++
+CFLAGS = -c -MP -MMD -Wall -Werror
+SRC = src/main.cpp  src/button.cpp src/clockface.cpp src/file.cpp src/filereader.cpp src/MenuButton.cpp src/MyKeyboard.cpp src/screentxt.cpp src/sysbutton.cpp src/word.cpp src/text_dubler.cpp
+OBJ_PATH = build/src/
+OBJ = $(OBJ_PATH)main.o $(OBJ_PATH)button.o $(OBJ_PATH)clockface.o $(OBJ_PATH)file.o $(OBJ_PATH)filereader.o $(OBJ_PATH)MenuButton.o $(OBJ_PATH)MyKeyboard.o $(OBJ_PATH)screentxt.o $(OBJ_PATH)sysbutton.o $(OBJ_PATH)word.o $(OBJ_PATH)text_dubler.o
+EXEC = sp.exe
+>>>>>>> Dubler
 
 #CC = g++
 #CFLAGS = -c -MP -MMD -Wall -Werror

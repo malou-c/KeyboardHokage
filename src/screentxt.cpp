@@ -1,9 +1,13 @@
 #include "screentxt.hpp"
-
 // constructors
 
-TextWindow::TextWindow(int x, int y)
+TextWindow::TextWindow(int x, int y, TextDubler& txtdubler)
 {
+    //текстовый дублер
+    txtDubler = &txtdubler;
+    std::cout << &txtdubler << std::endl;
+    std::cout << &txtDubler << std::endl;
+
     //загружаем спрайт окошечка
     font.loadFromFile("../fonts/3976.ttf");
     texture.loadFromFile("../images/text_window.png");
@@ -19,6 +23,37 @@ TextWindow::TextWindow(int x, int y)
 }
 
 //функции
+wchar_t TextWindow::fount_sym_forTxtDub()
+{
+    int num_str = start_str;
+    int num_curr_sym = curr_sym;
+    // +1 потому что нужен следующий
+    int move_sym = (txtDubler->setVecSize() - (txtDubler->countWrong())) + 1;
+    std::cout << "how many wrong" << txtDubler->countWrong() << std::endl;
+    if (move_sym > num_curr_sym) {
+        move_sym -= (num_curr_sym + 1); //отнимаем от движения <- все символы с
+                                        //текущей строки
+        num_str--; //берем строку выше
+        //текущий символ после сдвига <-
+        num_curr_sym = (text_str[num_str].size() - 1) - move_sym;
+        if (num_str < 0) {
+            return L'*';
+        }
+        std::cout << "222num str " << num_str << std::endl;
+        std::cout << "move_sym str " << move_sym << std::endl;
+        std::cout << "num_curr_sym " << num_curr_sym << std::endl;
+        std::cout << "curr_sym " << curr_sym << std::endl;
+        return text_str[num_str][num_curr_sym];
+    }
+    //сдвиг <-
+    num_curr_sym -= move_sym;
+    std::cout << "num str " << num_str << std::endl;
+    std::cout << "move_sym str " << move_sym << std::endl;
+    std::cout << "num_curr_sym " << num_curr_sym << std::endl;
+    std::cout << "curr_sym " << curr_sym << std::endl;
+    return text_str[num_str][num_curr_sym];
+}
+
 //обновляем текст дублера
 void TextWindow::add_sym_to_dubler(wchar_t sym)
 {
@@ -48,24 +83,42 @@ void TextWindow::checksym_dubler(int symbol)
 {
     //отдельно если ввели backspace (8)
     if (symbol == 8) {
-        //и  если текущий сивол не первый
-        if (curr_sym > 0) {
-            pop_sym_to_dubler();
-            curr_sym--;
+        //находим букву для ТЕКСТОВОГО дублера
+        wchar_t sym = fount_sym_forTxtDub();
+        //если в  текстовом дублере есть wrong sym
+        if (!txtDubler->isWrong()) {
+            //и  если текущий сивол не первый
+            if (curr_sym > 0) {
+                pop_sym_to_dubler();
+                curr_sym--;
+            }
+            //если это не первая строка
+            else if (start_str > 0) {
+                back_text_str(); // сдвиг текста в  окошке
+                dubler_fill(); // заполняем дублер всей строкой
+            }
         }
-        //если это не первая строка
-        else if (start_str > 0) {
-            back_text_str(); // сдвиг текста в  окошке
-            dubler_fill(); // заполняем дублер всей строкой
-        }
+        //из текстового дублера в любом случае удаляем букву
+        txtDubler->delsym(sym);
+
     }
-    //если текущий символ равен введеному
-    if (symbol == (int)text_str[start_str][curr_sym]) {
+    //если текущий символ равен введеному и не было неверных
+    else if (
+            symbol == (int)text_str[start_str][curr_sym]
+            && !txtDubler->isWrong()) {
         std::cout << "right" << text_str[start_str][curr_sym] << std::endl;
         std::cout << "was: " << curr_sym << std::endl;
         add_sym_to_dubler(text_str[start_str][curr_sym]);
         curr_sym++; //сдвигаем текущий символ
+        //запись в дублер
+        txtDubler->addsymCorrect(text_str[start_str][curr_sym - 1]);
+        // cps +1 для текущей секунды
+        txtDubler->cps_plus();
+    } else {
+        //запись в дублер
+        txtDubler->addsymWrong((wchar_t)symbol);
     }
+
     if (curr_sym == (int)text_str[start_str].size()) {
         dubler_clean();  // сбрасываем дублер
         next_text_str(); // сдвиг текста в  окошке
@@ -118,7 +171,7 @@ void TextWindow::DrawTextWindow(RenderWindow& window)
     for (unsigned int i = 0; i < vec_text.size(); i++) {
         window.draw(vec_text[i]);
     }
-    //а тут дублер по верх текста
+    //а тут дублер поверх текста
     window.draw(dubler);
 }
 //считаем сколько строк поместится в окно
@@ -170,7 +223,7 @@ std::vector<std::wstring> TextWindow::convert_file_to_text(std::string filename)
     text.resize(1);
     int j = 0;
 
-    for (unsigned int i = 0; i < str.length(); i++) {
+    for (size_t i = 0; i < str.length(); i++) {
         if (str[i] != L' ') {
             word.add(str[i]);
         } else {

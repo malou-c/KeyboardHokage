@@ -1,8 +1,17 @@
 #include "clockface.hpp"
 //конструктор
-ClockFace::ClockFace(int x, int y)
+ClockFace::ClockFace(int x, int y, TextDubler& txtdubler)
 {
+<<<<<<< HEAD
     font.loadFromFile("../fonts/CyrilicOld.ttf");
+||||||| merged common ancestors
+    font.loadFromFile("fonts/CyrilicOld.ttf");
+=======
+    //текстовый дублер
+    txtDubler = &txtdubler;
+
+    font.loadFromFile("fonts/CyrilicOld.ttf");
+>>>>>>> Dubler
     text.setFont(font);
     text.setCharacterSize(25);
     text.setFillColor(Color::Black);
@@ -14,6 +23,16 @@ ClockFace::ClockFace(int x, int y)
 void ClockFace::update_clock()
 {
     if (switcher == true) {
+        // for cps
+        if (time200ms < 200) {
+            time200ms = (CPSmsstorage.getElapsedTime().asMilliseconds());
+        } else {
+            txtDubler->cps_nextsec();
+            time200ms = 0;
+            CPSmsstorage.restart();
+        }
+
+        // timer
         if (time < 1000) {
             time = (msstorage.getElapsedTime().asMilliseconds());
         } else {

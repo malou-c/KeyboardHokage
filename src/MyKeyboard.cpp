@@ -142,6 +142,8 @@ sf::Vector2i MyKeyboard::getPosition()
 // set
 void MyKeyboard::setPosition(int x, int y)
 {
+    position.x = x;
+    position.y = y;
 }
 
 void MyKeyboard::Update(sf::Event event, TextWindow& txwin)
@@ -153,8 +155,8 @@ void MyKeyboard::Update(sf::Event event, TextWindow& txwin)
         std::cout << "ASCII character typed: " << event.text.unicode
                   << std::endl;
         symbol = (int)event.text.unicode;
-        txwin.checksym_dubler(symbol);
-        //меняем цвет
+        txwin.checksym_dubler(symbol); //символ который нажали проверяем в окне
+        //меняем цвет клавиши
         for (unsigned int i = 0; i < vec_buttons.size(); i++) {
             for (int j = 0; j < 4; j++) {
                 if ((int)vec_buttons[i].code[j] == symbol) {

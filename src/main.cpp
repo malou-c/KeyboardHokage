@@ -7,6 +7,7 @@
 #include "ScoreBoard.hpp"
 #include "clockface.hpp"
 #include "screentxt.hpp"
+#include "text_dubler.hpp"
 
 using namespace sf;
 int ID = 0;                      // глобал  ID
@@ -31,21 +32,32 @@ int main()
     window.setVerticalSyncEnabled(true); // вертикальная синхронизация
     window.setFramerateLimit(60);
 
-    //таймер
-    ClockFace clface(10, 10); // инициализируем часы в  позиции x y
-
     //кнопки меню
     MenuButton butExit(width - 100, 0, -1), butBack(100, 600, 0),
             butPlay(100, 100, 1), butRecord(100, 200, 2);
 
     //клавиатура
-    MyKeyboard mykb(150, 550); // инициализируем клавиатру в позиции x y
+    MyKeyboard mykb(270, 600); // инициализируем клавиатру в позиции x y
+
+    //текстовый дублер
+    TextDubler txtdubler(700, 430);
 
     //окно с  текстом
+<<<<<<< HEAD
     TextWindow txwin(400, 200);           //окно с  текстом
     txwin.setText("../texts/text_1.txt"); // берем текст
+||||||| merged common ancestors
+    TextWindow txwin(400, 200);        //окно с  текстом
+    txwin.setText("texts/text_1.txt"); // берем текст
+=======
+    TextWindow txwin(330, 150, txtdubler); //окно с  текстом
+    txwin.setText("texts/text_1.txt");     // берем текст
+>>>>>>> Dubler
     txwin.change_count_text_str(); // вычисляем сколько строк поместится в  окно
     txwin.change_text_character(); // вычисляем характеристики текста
+
+    //таймер
+    ClockFace clface(10, 10, txtdubler); // инициализируем часы в  позиции x y
 
     //Пока окно открыто
     while (window.isOpen()) {
@@ -59,7 +71,11 @@ int main()
                 window.close(); //то закрыть окно
             switch (ID) {
             case 1:
-                mykb.Update(event, txwin);
+                //клавиатура обновляется только если текст не кончился
+                if (!txwin.isEndString) {
+                    mykb.Update(event, txwin);
+                }
+
                 if (event.type == Event::TextEntered && !clface.isStart) {
                     clface.ClockStart();
                 }
@@ -91,14 +107,16 @@ int main()
             // update
             butBack.is_clicked(window);
             clface.update_clock();
-            if (txwin.isEndString)
+            if (txwin.isEndString) {
                 clface.ClockStop(); // если кончился текст в окне
+            }
+
             // draw
-            // кнопка назад
             butBack.draw(window);         // кнопка назад
             clface.DrawClock(window);     //таймер
             mykb.DrawKB(window);          // клавиатура
             txwin.DrawTextWindow(window); // окно с  текстом
+            txtdubler.draw(window);
             break;
         case 2:
             // update
