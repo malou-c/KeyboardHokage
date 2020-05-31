@@ -43,16 +43,8 @@ int main()
     TextDubler txtdubler(700, 430);
 
     //окно с  текстом
-<<<<<<< HEAD
-    TextWindow txwin(400, 200);           //окно с  текстом
-    txwin.setText("../texts/text_1.txt"); // берем текст
-||||||| merged common ancestors
-    TextWindow txwin(400, 200);        //окно с  текстом
-    txwin.setText("texts/text_1.txt"); // берем текст
-=======
-    TextWindow txwin(330, 150, txtdubler); //окно с  текстом
+    TextWindow txwin(400, 200, txtdubler); //окно с  текстом
     txwin.setText("texts/text_1.txt");     // берем текст
->>>>>>> Dubler
     txwin.change_count_text_str(); // вычисляем сколько строк поместится в  окно
     txwin.change_text_character(); // вычисляем характеристики текста
 

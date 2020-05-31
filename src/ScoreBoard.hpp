@@ -47,7 +47,10 @@ void draw_board(
     }
 
     sf::Font font;
-    font.loadFromFile("../fonts/stdFont.ttf"); //шрифт
+    if (font.loadFromFile("fonts/stdFont.ttf")) {
+        std::cout << "AAAAAAAA HELP" << std::endl;
+        std::cout << "AAAAAAAA HELP" << std::endl;
+    } //шрифт
     text.setFont(font);
     text.setString(out_text);
     text.setCharacterSize(16);

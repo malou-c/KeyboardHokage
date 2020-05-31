@@ -2,16 +2,13 @@
 //конструктор
 ClockFace::ClockFace(int x, int y, TextDubler& txtdubler)
 {
-<<<<<<< HEAD
-    font.loadFromFile("../fonts/CyrilicOld.ttf");
-||||||| merged common ancestors
-    font.loadFromFile("fonts/CyrilicOld.ttf");
-=======
+    if (!font.loadFromFile("fonts/CyrilicOld.ttf")) {
+        std::cout << "AAAAAAAA HELP" << std::endl;
+    }
     //текстовый дублер
     txtDubler = &txtdubler;
 
     font.loadFromFile("fonts/CyrilicOld.ttf");
->>>>>>> Dubler
     text.setFont(font);
     text.setCharacterSize(25);
     text.setFillColor(Color::Black);

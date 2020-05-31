@@ -12,9 +12,9 @@ private:
 
 public:
     std::vector<ButtonForKB> vec_buttons;
-    SysButtonForKB space{"../images/space.png", 32};
-    SysButtonForKB backspace{"../images/backspace.png", 8};
-    SysButtonForKB shift{"../images/shift.png"};
+    SysButtonForKB space{"images/space.png", 32};
+    SysButtonForKB backspace{"images/backspace.png", 8};
+    SysButtonForKB shift{"images/shift.png"};
     //конструкторы
     MyKeyboard(int x, int y);
 

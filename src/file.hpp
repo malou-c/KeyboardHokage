@@ -13,7 +13,7 @@ public:
 
 class File {
 private:
-    std::string path = "lider_board.dat";
+    std::string path = "data/lider_board.dat";
 
 public:
     void sort(); //Сортирует файл по убыванию времени
