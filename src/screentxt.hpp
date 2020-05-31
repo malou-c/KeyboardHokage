@@ -1,9 +1,9 @@
 #pragma once
+#include "filereader.hpp"
+#include "text_dubler.hpp"
+#include "word.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
-#include "filereader.hpp"
-#include "word.hpp"
 using namespace sf;
 
 class TextWindow {
@@ -15,6 +15,7 @@ private:
     int margin_y;
 
 public:
+    TextDubler* txtDubler;
     bool isEndString = false; // показывает кочился ли текст
     int curr_sym;             // текущий символ
     int start_str; // с какой строчки идет отрисовка
@@ -33,10 +34,14 @@ public:
     Color dubler_color;
 
     //конструкторы
-    TextWindow(int x, int y);
+    TextWindow(int x, int y, TextDubler&);
 
     //функии
-    //функции связанные  с дублером
+
+    //функции для окошка текстового дублера
+    wchar_t fount_sym_forTxtDub();
+
+    //функции связанные  с дублером (наложенный текст)
     void add_sym_to_dubler(wchar_t sym);
     void pop_sym_to_dubler();
     void dubler_fill();
