@@ -1,4 +1,6 @@
 #pragma once
+#include "text_dubler.hpp"
+
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <sstream>
@@ -8,6 +10,11 @@ using namespace sf;
 
 class ClockFace {
 public:
+    //для cps
+    TextDubler* txtDubler; // ссылка на текстовый дублер
+    int time200ms = 0;
+    Clock CPSmsstorage;
+
     Font font;
     Text text;
     Clock msstorage;
@@ -20,7 +27,7 @@ public:
     bool isStart = false;
     Vector2i position;
     //конструкторы
-    ClockFace(int x, int y);
+    ClockFace(int x, int y, TextDubler& txtdubler);
 
     //функции
     void update_clock();
