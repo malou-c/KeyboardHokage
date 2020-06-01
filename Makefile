@@ -13,10 +13,10 @@ all: $(FILESCPP) $(PROG)
 
 
 $(PROG): $(subst src/,build/,$(OBJECTS))
-	$(CC) $(subst src/,build/,$^) -o bin/$@ $(SFMLFLAGS)
+	$(CC) $(subst src/,build/,$^) -o bin/$@ -Llib $(SFMLFLAGS)
 
 build/%.o: src/%.cpp
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -Isrc/include -o $@
 
 -include build/*.d
 
