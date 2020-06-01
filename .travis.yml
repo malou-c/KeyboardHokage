@@ -1,6 +1,13 @@
-language: C++
+language: cpp
+
+before_install:
+  - eval "${MATRIX_EVAL}"
 
 dist: xenial
 
 script:
   - git ls-files src/ | xargs clang-format -i && git diff --exit-code
+  - make
+
+compiler:
+  -g++
