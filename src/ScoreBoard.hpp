@@ -17,8 +17,7 @@ std::vector<PersonStats> load_board()
 void draw_board(
         sf::RenderWindow& window,
         std::vector<PersonStats> stats,
-        int width = 1500,
-        int high = 900)
+        int width = 1500)
 { //Рисует таблицу рекордов
     /*     std::vector<PersonStats> stats;
         File file;
