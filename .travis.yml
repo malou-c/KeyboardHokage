@@ -15,10 +15,6 @@ matrix:
 before_install:
     - eval "${MATRIX_EVAL}"
 
-
-before_install:
-  - eval "${MATRIX_EVAL}"
-
 dist: xenial
 
 script:
