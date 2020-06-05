@@ -1,47 +1,44 @@
 #include "HelpButton.h"
 
-HelpButton::HelpButton(){};
-
 void HelpButton::HelpButtonCreate(int x, int y)
 {
-#ifdef WINDOWS                       // если ОС Windows
-    h_path = "helpimages\\help.png"; // такой путь
-#else                                // если не Windows
-    h_path = "helpimages/help.png"; // такой
+#ifdef WINDOWS                       // пїЅпїЅпїЅпїЅ пїЅпїЅ Windows
+    h_path = "helpimages\\help.png"; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+#else                                // пїЅпїЅпїЅпїЅ пїЅпїЅ Windows
+    h_path = "helpimages/help.png";  // пїЅпїЅпїЅпїЅпїЅ
 #endif
     hp.loadFromFile(h_path);
     help_texture.loadFromImage(hp);
     help_sprite.setTexture(help_texture);
-    
+
     help_sprite.setPosition(x, y);
 }
 
-void HelpButton::DrawHelpButton(sf::RenderWindow  &window)
+void HelpButton::DrawHelpButton(sf::RenderWindow& window)
 {
     window.draw(help_sprite);
 }
 
 void HelpButton::MoveLeftCreate(int x, int y)
 {
-#ifdef WINDOWS                       // если ОС Windows
-    l_path = "helpimages\\left.png"; // такой путь
-#else                                // если не Windows
-    l_path = "helpimages/left.png"; // такой
+#ifdef WINDOWS                       // пїЅпїЅпїЅпїЅ пїЅпїЅ Windows
+    l_path = "helpimages\\left.png"; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+#else                                // пїЅпїЅпїЅпїЅ пїЅпїЅ Windows
+    l_path = "helpimages/left.png";  // пїЅпїЅпїЅпїЅпїЅ
 #endif
     left.loadFromFile(l_path);
     left_tr.loadFromImage(left);
     left_triangle.setTexture(left_tr);
 
     left_triangle.setPosition(x, y);
-
 }
 
 void HelpButton::MoveRightCreate(int x, int y)
 {
-#ifdef WINDOWS                       // если ОС Windows
-    r_path = "helpimages\\right.png"; // такой путь
-#else                                // если не Windows
-    r_path = "helpimages/right.png"; // такой
+#ifdef WINDOWS                        // пїЅпїЅпїЅпїЅ пїЅпїЅ Windows
+    r_path = "helpimages\\right.png"; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+#else                                 // пїЅпїЅпїЅпїЅ пїЅпїЅ Windows
+    r_path = "helpimages/right.png"; // пїЅпїЅпїЅпїЅпїЅ
 #endif
     right.loadFromFile(r_path);
     right_tr.loadFromImage(right);
@@ -50,7 +47,7 @@ void HelpButton::MoveRightCreate(int x, int y)
     right_triangle.setPosition(x, y);
 }
 
-void HelpButton::DrawMoves(sf::RenderWindow &window)
+void HelpButton::DrawMoves(sf::RenderWindow& window)
 {
     window.draw(left_triangle);
     window.draw(right_triangle);
@@ -88,7 +85,6 @@ void HelpButton::SdCreate(int x, int y)
     sd5.loadFromImage(s5);
     sld5.setTexture(sd5);
 
-
     sld1.setPosition(x, y);
     sld2.setPosition(x, y);
     sld3.setPosition(x, y);
@@ -96,13 +92,13 @@ void HelpButton::SdCreate(int x, int y)
     sld5.setPosition(x, y);
 }
 
-void HelpButton::HelpUpdate(sf::RenderWindow &window)
+void HelpButton::HelpUpdate(sf::RenderWindow& window)
 {
     switch (page_switch) {
     case 0:
         window.draw(sld1);
         break;
-    
+
     case 1:
         window.draw(sld2);
         break;
@@ -118,9 +114,7 @@ void HelpButton::HelpUpdate(sf::RenderWindow &window)
         window.draw(sld5);
         break;
 
-     default:
-      break;
-    
-    
+    default:
+        break;
     }
 }
