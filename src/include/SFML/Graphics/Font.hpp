@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2018 Laurent Gomila (laurent@sfml-dev.org)
+// Copyright (C) 2007-2019 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -57,7 +57,7 @@ public:
     ////////////////////////////////////////////////////////////
     struct Info
     {
-        std::string family; ///< The font family
+        std::string family; //!< The font family
     };
 
 public:
@@ -166,6 +166,10 @@ public:
     /// might be available. If the glyph is not available at the
     /// requested size, an empty glyph is returned.
     ///
+    /// You may want to use \ref hasGlyph to determine if the
+    /// glyph exists before requesting it. If the glyph does not
+    /// exist, a font specific default is returned.
+    ///
     /// Be aware that using a negative value for the outline
     /// thickness will cause distorted rendering.
     ///
@@ -178,6 +182,24 @@ public:
     ///
     ////////////////////////////////////////////////////////////
     const Glyph& getGlyph(Uint32 codePoint, unsigned int characterSize, bool bold, float outlineThickness = 0) const;
+
+    ////////////////////////////////////////////////////////////
+    /// \brief Determine if this font has a glyph representing the requested code point
+    ///
+    /// Most fonts only include a very limited selection of glyphs from
+    /// specific Unicode subsets, like Latin, Cyrillic, or Asian characters.
+    ///
+    /// While code points without representation will return a font specific
+    /// default character, it might be useful to verify whether specific
+    /// code points are included to determine whether a font is suited
+    /// to display text in a specific language.
+    ///
+    /// \param codePoint Unicode code point to check
+    ///
+    /// \return True if the codepoint has a glyph representation, false otherwise
+    ///
+    ////////////////////////////////////////////////////////////
+    bool hasGlyph(Uint32 codePoint) const;
 
     ////////////////////////////////////////////////////////////
     /// \brief Get the kerning offset of two glyphs
@@ -273,15 +295,15 @@ private:
     {
         Row(unsigned int rowTop, unsigned int rowHeight) : width(0), top(rowTop), height(rowHeight) {}
 
-        unsigned int width;  ///< Current width of the row
-        unsigned int top;    ///< Y position of the row into the texture
-        unsigned int height; ///< Height of the row
+        unsigned int width;  //!< Current width of the row
+        unsigned int top;    //!< Y position of the row into the texture
+        unsigned int height; //!< Height of the row
     };
 
     ////////////////////////////////////////////////////////////
     // Types
     ////////////////////////////////////////////////////////////
-    typedef std::map<Uint64, Glyph> GlyphTable; ///< Table mapping a codepoint to its glyph
+    typedef std::map<Uint64, Glyph> GlyphTable; //!< Table mapping a codepoint to its glyph
 
     ////////////////////////////////////////////////////////////
     /// \brief Structure defining a page of glyphs
@@ -291,10 +313,10 @@ private:
     {
         Page();
 
-        GlyphTable       glyphs;  ///< Table mapping code points to their corresponding glyph
-        Texture          texture; ///< Texture containing the pixels of the glyphs
-        unsigned int     nextRow; ///< Y position of the next new row in the texture
-        std::vector<Row> rows;    ///< List containing the position of all the existing rows
+        GlyphTable       glyphs;  //!< Table mapping code points to their corresponding glyph
+        Texture          texture; //!< Texture containing the pixels of the glyphs
+        unsigned int     nextRow; //!< Y position of the next new row in the texture
+        std::vector<Row> rows;    //!< List containing the position of all the existing rows
     };
 
     ////////////////////////////////////////////////////////////
@@ -341,21 +363,21 @@ private:
     ////////////////////////////////////////////////////////////
     // Types
     ////////////////////////////////////////////////////////////
-    typedef std::map<unsigned int, Page> PageTable; ///< Table mapping a character size to its page (texture)
+    typedef std::map<unsigned int, Page> PageTable; //!< Table mapping a character size to its page (texture)
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    void*                      m_library;     ///< Pointer to the internal library interface (it is typeless to avoid exposing implementation details)
-    void*                      m_face;        ///< Pointer to the internal font face (it is typeless to avoid exposing implementation details)
-    void*                      m_streamRec;   ///< Pointer to the stream rec instance (it is typeless to avoid exposing implementation details)
-    void*                      m_stroker;     ///< Pointer to the stroker (it is typeless to avoid exposing implementation details)
-    int*                       m_refCount;    ///< Reference counter used by implicit sharing
-    Info                       m_info;        ///< Information about the font
-    mutable PageTable          m_pages;       ///< Table containing the glyphs pages by character size
-    mutable std::vector<Uint8> m_pixelBuffer; ///< Pixel buffer holding a glyph's pixels before being written to the texture
+    void*                      m_library;     //!< Pointer to the internal library interface (it is typeless to avoid exposing implementation details)
+    void*                      m_face;        //!< Pointer to the internal font face (it is typeless to avoid exposing implementation details)
+    void*                      m_streamRec;   //!< Pointer to the stream rec instance (it is typeless to avoid exposing implementation details)
+    void*                      m_stroker;     //!< Pointer to the stroker (it is typeless to avoid exposing implementation details)
+    int*                       m_refCount;    //!< Reference counter used by implicit sharing
+    Info                       m_info;        //!< Information about the font
+    mutable PageTable          m_pages;       //!< Table containing the glyphs pages by character size
+    mutable std::vector<Uint8> m_pixelBuffer; //!< Pixel buffer holding a glyph's pixels before being written to the texture
     #ifdef SFML_SYSTEM_ANDROID
-    void*                      m_stream; ///< Asset file streamer (if loaded from file)
+    void*                      m_stream; //!< Asset file streamer (if loaded from file)
     #endif
 };
 

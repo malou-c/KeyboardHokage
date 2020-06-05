@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2018 Laurent Gomila (laurent@sfml-dev.org)
+// Copyright (C) 2007-2019 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -195,24 +195,24 @@ public:
     ////////////////////////////////////////////////////////////
     Uint64 read(Int16* samples, Uint64 maxCount);
 
-private:
-
     ////////////////////////////////////////////////////////////
     /// \brief Close the current file
     ///
     ////////////////////////////////////////////////////////////
     void close();
 
+private:
+
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    SoundFileReader* m_reader;       ///< Reader that handles I/O on the file's format
-    InputStream*     m_stream;       ///< Input stream used to access the file's data
-    bool             m_streamOwned;  ///< Is the stream internal or external?
-    Uint64           m_sampleOffset; ///< Sample Read Position
-    Uint64           m_sampleCount;  ///< Total number of samples in the file
-    unsigned int     m_channelCount; ///< Number of channels of the sound
-    unsigned int     m_sampleRate;   ///< Number of samples per second
+    SoundFileReader* m_reader;       //!< Reader that handles I/O on the file's format
+    InputStream*     m_stream;       //!< Input stream used to access the file's data
+    bool             m_streamOwned;  //!< Is the stream internal or external?
+    Uint64           m_sampleOffset; //!< Sample Read Position
+    Uint64           m_sampleCount;  //!< Total number of samples in the file
+    unsigned int     m_channelCount; //!< Number of channels of the sound
+    unsigned int     m_sampleRate;   //!< Number of samples per second
 };
 
 } // namespace sf
