@@ -2,6 +2,16 @@
 
 void File::sort()
 { //Сортирует файл по убыванию времени
+    std::vector<PersonStats> user;
+    user = load();
+
+    for (unsigned int i = 0; i < user.size(); i++) {
+        for (unsigned int j = 0; j < user.size() - i - 1; j++) {
+            if (user[j].time < user[j + 1].time) {
+                std::swap(user[j], user[j + 1]);
+            }
+        }
+    }
 
     std::ofstream file;
 
