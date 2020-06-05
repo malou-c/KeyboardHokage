@@ -10,8 +10,10 @@ FILESCPP = $(wildcard src/*.cpp)
 OBJECTS = $(subst .cpp,.o,$(FILESCPP))
 
 all: $(FILESCPP) $(PROG)
-	export LD_LIBRARY_PATH=lib
 
+
+run:
+	export LD_LIBRARY_PATH=lib && ./bin/kbh.exe
 
 $(PROG): $(subst src/,build/,$(OBJECTS))
 	$(CC) $(subst src/,build/,$^) -o bin/$@ -Llib $(SFMLFLAGS)
