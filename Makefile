@@ -10,6 +10,7 @@ FILESCPP = $(wildcard src/*.cpp)
 OBJECTS = $(subst .cpp,.o,$(FILESCPP))
 
 all: $(FILESCPP) $(PROG)
+	export LD_LIBRARY_PATH=lib
 
 
 $(PROG): $(subst src/,build/,$(OBJECTS))
