@@ -1,6 +1,6 @@
 .PHONY: all clean install uninstall 
 
-CC = g++ 
+CC = g++ -std=c++11
 CFLAGS = -Wall -Werror -Wextra -MP -MMD -c
 SFMLFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 PROG = kbh.exe
