@@ -22,4 +22,4 @@ script:
   - make
 
 compiler:
-  -g++
+  -g++-9
