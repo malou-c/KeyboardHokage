@@ -17,7 +17,7 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install libc6
 
-dist: xenial
+dist: bionic
 
 script:
   - git ls-files src/ | xargs clang-format -i && git diff --exit-code
