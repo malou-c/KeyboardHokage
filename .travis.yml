@@ -22,10 +22,4 @@ script:
   - make
 
 compiler:
-<<<<<<< HEAD
-  -g++
-||||||| merged common ancestors
-  -g++
-=======
   -g++-9
->>>>>>> HotFixTravis
