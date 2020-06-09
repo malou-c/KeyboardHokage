@@ -24,14 +24,21 @@ void File::sort()
     file.close();
 }
 
-void File::add(char name[50], float time)
+void File::add(
+        char user_name_in[50],
+        char text_name_in[50],
+        float time_in,
+        float cps_in)
 { //Добавялет запись о пользователе в конец файала
     PersonStats person;
 
-    for (int i = 0; i < 50; i++)
-        person.user_name[i] = name[i];
+    for (int i = 0; i < 50; i++) {
+        person.user_name[i] = user_name_in[i];
+        person.text_name[i] = text_name_in[i];
+    }
 
-    person.time = time;
+    person.time = time_in;
+    person.cps = cps_in;
 
     std::ofstream file;
     file.open(
