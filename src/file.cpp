@@ -24,14 +24,21 @@ void File::sort()
     file.close();
 }
 
-void File::add(char name[50], float time)
+void File::add(
+        char user_name_in[50],
+        char text_name_in[50],
+        float time_in,
+        float cps_in)
 { //Добавялет запись о пользователе в конец файала
     PersonStats person;
 
-    for (int i = 0; i < 50; i++)
-        person.name[i] = name[i];
+    for (int i = 0; i < 50; i++) {
+        person.user_name[i] = user_name_in[i];
+        person.text_name[i] = text_name_in[i];
+    }
 
-    person.time = time;
+    person.time = time_in;
+    person.cps = cps_in;
 
     std::ofstream file;
     file.open(
@@ -75,10 +82,10 @@ int File::find(char key[])
     while (left <= right) {
         midd = (left + right) / 2;
 
-        if ((std::string)users[midd].name == (std::string)key) {
+        if ((std::string)users[midd].user_name == (std::string)key) {
             return midd;
         }
-        if ((std::string)users[midd].name < (std::string)key) {
+        if ((std::string)users[midd].user_name < (std::string)key) {
             left = midd + 1;
         } else {
             right = midd - 1;
@@ -95,6 +102,6 @@ void File::show()
     user = load();
 
     for (unsigned int i = 0; i < user.size(); i++) {
-        std::cout << user[i].name << " " << user[i].time << std::endl;
+        std::cout << user[i].user_name << " " << user[i].time << std::endl;
     }
 }
