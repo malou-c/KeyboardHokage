@@ -7,8 +7,10 @@
 
 class PersonStats {
 public:
-    char name[50];
+    char user_name[50];
+    char text_name[50];
     float time;
+    float cps;
 };
 
 class File {

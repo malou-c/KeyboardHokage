@@ -41,8 +41,9 @@ void draw_board(
          i++) //записываем информацию о превых 50
     {         //пользователях в строку
         out_text
-                += (std::to_string((i + 1)) + ')' + (std::string)stats[i].name
-                    + ' ' + (std::to_string(stats[i].time)) + "\n");
+                += (std::to_string((i + 1)) + ')'
+                    + (std::string)stats[i].user_name + ' '
+                    + (std::to_string(stats[i].time)) + "\n");
     }
 
     sf::Font font;

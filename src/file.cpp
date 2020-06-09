@@ -29,7 +29,7 @@ void File::add(char name[50], float time)
     PersonStats person;
 
     for (int i = 0; i < 50; i++)
-        person.name[i] = name[i];
+        person.user_name[i] = name[i];
 
     person.time = time;
 
@@ -75,10 +75,10 @@ int File::find(char key[])
     while (left <= right) {
         midd = (left + right) / 2;
 
-        if ((std::string)users[midd].name == (std::string)key) {
+        if ((std::string)users[midd].user_name == (std::string)key) {
             return midd;
         }
-        if ((std::string)users[midd].name < (std::string)key) {
+        if ((std::string)users[midd].user_name < (std::string)key) {
             left = midd + 1;
         } else {
             right = midd - 1;
@@ -95,6 +95,6 @@ void File::show()
     user = load();
 
     for (unsigned int i = 0; i < user.size(); i++) {
-        std::cout << user[i].name << " " << user[i].time << std::endl;
+        std::cout << user[i].user_name << " " << user[i].time << std::endl;
     }
 }
