@@ -44,3 +44,7 @@ build/test/%.o: test/%.cpp
 
 clean:  
 	rm -rf build/*.o build/*.d
+
+
+test2: $(subst src/,build/,$(OBJECTS))
+	g++-9 -std=c++11 -Wall -Werror test/main.cpp -o bin/kbh-test
