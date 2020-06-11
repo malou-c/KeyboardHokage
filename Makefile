@@ -15,32 +15,38 @@ all: $(FILESCPP) $(PROG)
 run:
 	export LD_LIBRARY_PATH=lib && ./bin/kbh.exe
 
-$(PROG): $(subst src/,build/,$(OBJECTS))
-	$(CC) $(subst src/,build/,$^) -o bin/$@ -Llib $(SFMLFLAGS)
+$(PROG): $(subst src/,build/src/,$(OBJECTS))
+	$(CC) $^ -o bin/$@ -Llib $(SFMLFLAGS)
 
-build/%.o: src/%.cpp
+build/src/%.o: src/%.cpp
 	$(CC) $(CFLAGS) $< -Isrc/include -o $@
 
 -include build/*.d
 
 #tests
 T_EXEC = test.exe
-#меняет мейн на тестовый мейн
-T_SRC = $(SRC:src/main.cpp=test/main.cpp)
-TEST_SRC = test/filereader_test.cpp
-TO_PATH = build/test/
-T_OBJ = $(TO_PATH)main.o $(TO_PATH)filereader_test.o 
+FILECPP_WITHOUT_MAIN = $(FILESCPP:src/main.cpp=)
+TESTCPP = $(wildcard test/*.cpp)
+T_OBJECTS = $(subst .cpp,.o,$(FILECPP_WITHOUT_MAIN))
+TESTOBJ = $(subst .cpp,.o,$(TESTCPP))
 
-test: $(T_SRC) $(TEST_SRC) $(T_EXEC)
 
-$(T_EXEC): $(T_OBJ) $(OBJ)
-	$(CC) $(T_OBJ) $(OBJ:build/src/main.o=) -o $@ -lsfml-graphics -lsfml-window -lsfml-system
+test: $(FILECPP_WITHOUT_MAIN) $(TESTCPP) $(T_EXEC)
+
+$(T_EXEC): $(subst src/,build/test/,$(T_OBJECTS)) $(subst test/,build/test/,$(TESTOBJ))
+	$(CC) $(subst src/,build/test/,$(T_OBJECTS)) $(subst test/,build/test/,$(TESTOBJ)) -o bin/$@ -Llib $(SFMLFLAGS)
 	
+build/test/%.o: src/%.cpp 	
+	$(CC) $(CFLAGS) $< -Isrc/include -o $@
 
 build/test/%.o: test/%.cpp	
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -Isrc/include -o $@
+
 
 -include build/test/*.d
 
+checktest:
+	export LD_LIBRARY_PATH=lib && ./bin/test.exe
+
 clean:  
-	rm -rf build/*.o build/*.d
+	rm -rf build/*.o build/*.d build/test/*.o build/test/*.d  build/src/*.o build/src/*.d 
