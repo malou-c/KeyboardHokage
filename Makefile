@@ -21,7 +21,7 @@ $(PROG): $(subst src/,build/src/,$(OBJECTS))
 build/src/%.o: src/%.cpp
 	$(CC) $(CFLAGS) $< -Isrc/include -o $@
 
--include build/*.d
+-include build/src/*.d
 
 #tests
 T_EXEC = test.exe
