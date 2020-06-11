@@ -1,5 +1,7 @@
-#include "../src/filereader.hpp"
-#include "testparty/catch.hpp"
+#pragma once
+
+#include "../src/filereader.cpp"
+
 #include <fstream>
 
 using namespace std;
