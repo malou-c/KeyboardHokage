@@ -13,6 +13,7 @@ void cleanfile(string path)
     file.clear();
     file.close();
 }
+
 template <class T>
 void writefile(T msg, string path)
 {
