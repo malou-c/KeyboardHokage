@@ -28,7 +28,8 @@ void File::add(
         char user_name_in[50],
         char text_name_in[50],
         float time_in,
-        float cps_in)
+        float cps_in,
+        std::string path)
 { //Добавялет запись о пользователе в конец файала
     PersonStats person;
 
