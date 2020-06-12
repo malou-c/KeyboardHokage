@@ -24,7 +24,10 @@ public:
     add(char user_name_in[50],
         char text_name_in[50],
         float time_in,
-        float cps_in); //Добавялет запись о пользователе в конец файала
+        float cps_in,
+        std::string path
+        = "data/lider_board.dat"); //Добавялет запись о пользователе в
+                                   //конец файала
 
     std::vector<PersonStats>
     load(); //Загружает информацию о пользователях из файла
