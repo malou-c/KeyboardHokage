@@ -50,7 +50,7 @@ void File::add(
     sort();
 }
 
-std::vector<PersonStats> File::load()
+std::vector<PersonStats> File::load(std::string path)
 { //Загружает информацию о пользователях из файла
     std::vector<PersonStats> users_stat;
     PersonStats buffer;

@@ -30,7 +30,8 @@ public:
                                    //конец файала
 
     std::vector<PersonStats>
-    load(); //Загружает информацию о пользователях из файла
+    load(std::string path = "data/lider_board.dat"); //Загружает информацию о
+                                                     //пользователях из файла
 
     int find(char key[]); //Возвращает номер поизиции элемента в файле
 
