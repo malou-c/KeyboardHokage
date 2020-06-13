@@ -8,6 +8,7 @@
 #include "clockface.hpp"
 #include "screentxt.hpp"
 #include "text_dubler.hpp"
+#include "HelpButton.h"
 
 using namespace sf;
 int ID = 0;                      // глобал  ID
@@ -34,7 +35,7 @@ int main()
 
     //кнопки меню
     MenuButton butExit(width - 100, 0, -1), butBack(100, 600, 0),
-            butPlay(100, 100, 1), butRecord(100, 200, 2);
+            butPlay(100, 100, 1), butRecord(100, 200, 2), butHelp(100, 300, 3) ;
 
     //клавиатура
     MyKeyboard mykb(270, 600); // инициализируем клавиатру в позиции x y
@@ -50,6 +51,8 @@ int main()
 
     //таймер
     ClockFace clface(10, 10, txtdubler); // инициализируем часы в  позиции x y
+
+    HelpButton help(200, 100);
 
     //Пока окно открыто
     while (window.isOpen()) {
@@ -89,10 +92,12 @@ int main()
             // update
             butPlay.is_clicked(window);
             butRecord.is_clicked(window);
+            butHelp.is_clicked(window);
             // draw
             //кнопки меню
             butPlay.draw(window);
             butRecord.draw(window);
+            butHelp.draw(window);
             lidboard_is_load = false;
             break;
         case 1:
@@ -121,6 +126,17 @@ int main()
                 lidboard_is_load = true;
             }
             draw_board(window, stats);
+            break;
+        case 3:
+            //
+            butBack.is_clicked(window);
+
+            help.MoveLeft(window);
+            help.MoveRight(window);
+
+            butBack.draw(window);
+            help.DrawSd(window);
+            help.DrawMoves(window);
             break;
 
         default:
