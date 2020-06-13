@@ -1,11 +1,19 @@
 #include "HelpButton.h"
 
+HelpButton::HelpButton(int x, int y)
+{
+    
+    MoveLeftCreate(x-100, y + 325);
+    MoveRightCreate(x + 1600,  y + 325);
+    SdCreate(x, y);
+}
+
 void HelpButton::HelpButtonCreate(int x, int y)
 {
-#ifdef WINDOWS                       // ���� �� Windows
-    h_path = "helpimages\\help.png"; // ����� ����
-#else                                // ���� �� Windows
-    h_path = "helpimages/help.png";  // �����
+#ifdef WINDOWS                       
+    h_path = "helpimages\\help.png"; 
+#else                                
+    h_path = "helpimages/help.png";  
 #endif
     hp.loadFromFile(h_path);
     help_texture.loadFromImage(hp);
@@ -21,10 +29,10 @@ void HelpButton::DrawHelpButton(sf::RenderWindow& window)
 
 void HelpButton::MoveLeftCreate(int x, int y)
 {
-#ifdef WINDOWS                       // ���� �� Windows
-    l_path = "helpimages\\left.png"; // ����� ����
-#else                                // ���� �� Windows
-    l_path = "helpimages/left.png";  // �����
+#ifdef WINDOWS                       
+    l_path = "helpimages\\left.jpg"; 
+#else                                
+    l_path = "helpimages/left.jpg";  
 #endif
     left.loadFromFile(l_path);
     left_tr.loadFromImage(left);
@@ -35,10 +43,10 @@ void HelpButton::MoveLeftCreate(int x, int y)
 
 void HelpButton::MoveRightCreate(int x, int y)
 {
-#ifdef WINDOWS                        // ���� �� Windows
-    r_path = "helpimages\\right.png"; // ����� ����
-#else                                 // ���� �� Windows
-    r_path = "helpimages/right.png"; // �����
+#ifdef WINDOWS                        
+    r_path = "helpimages\\right.jpg"; 
+#else                                 
+    r_path = "helpimages/right.jpg"; 
 #endif
     right.loadFromFile(r_path);
     right_tr.loadFromImage(right);
@@ -53,14 +61,30 @@ void HelpButton::DrawMoves(sf::RenderWindow& window)
     window.draw(right_triangle);
 }
 
-void HelpButton::MoveRight()
+void HelpButton::MoveRight(sf::RenderWindow &window)
 {
-    page_switch++;
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
+        && sf::IntRect(1800, 425, 50, 50)
+                   .contains(sf::Mouse::getPosition(window))) {
+        if (page_switch != 4) {
+                Sleep(500);
+            page_switch++;
+        }
+    }
+   
 }
 
-void HelpButton::MoveLeft()
+void HelpButton::MoveLeft(sf::RenderWindow& window)
 {
-    page_switch--;
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
+        && sf::IntRect(100, 425, 50, 50)
+                   .contains(sf::Mouse::getPosition(window))) {
+        if (page_switch != 0) {
+                Sleep(500);
+            page_switch--;
+        }
+    }
+    
 }
 
 void HelpButton::SdCreate(int x, int y)
@@ -92,7 +116,7 @@ void HelpButton::SdCreate(int x, int y)
     sld5.setPosition(x, y);
 }
 
-void HelpButton::HelpUpdate(sf::RenderWindow& window)
+void HelpButton::DrawSd(sf::RenderWindow& window)
 {
     switch (page_switch) {
     case 0:
