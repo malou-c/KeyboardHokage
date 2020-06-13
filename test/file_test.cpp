@@ -7,8 +7,8 @@
 
 TEST_CASE("File::add")
 {
-    PersonStats person[3], person_loaded[3]; // объекты класса для вгрузки и
-                                             // выгрузки информации из файла
+    // объекты класса для вгрузки и выгрузки информации из файла
+    PersonStats person[3], person_loaded[3];
     std::ifstream file_data;
     std::string path = "scoreboard_test.dat";
     File file;
