@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 
+#include "Folder.hpp"
 #include "MenuButton.hpp"
 #include "MyKeyboard.hpp"
 #include "ScoreBoard.hpp"
