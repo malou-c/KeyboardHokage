@@ -28,7 +28,8 @@ void File::add(
         char user_name_in[50],
         char text_name_in[50],
         float time_in,
-        float cps_in)
+        float cps_in,
+        std::string path)
 { //Добавялет запись о пользователе в конец файала
     PersonStats person;
 
@@ -49,7 +50,7 @@ void File::add(
     sort();
 }
 
-std::vector<PersonStats> File::load()
+std::vector<PersonStats> File::load(std::string path)
 { //Загружает информацию о пользователях из файла
     std::vector<PersonStats> users_stat;
     PersonStats buffer;
