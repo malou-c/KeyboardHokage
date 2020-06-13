@@ -1,6 +1,5 @@
-#pragma once
-
-#include "../src/file.cpp"
+#include "../src/file.hpp"
+#include "testparty/catch.hpp"
 
 #include <fstream>
 #include <string>
