@@ -1,6 +1,5 @@
-#pragma once
-
-#include "../src/filereader.cpp"
+#include "../src/filereader.hpp"
+#include "testparty/catch.hpp"
 
 #include <fstream>
 
