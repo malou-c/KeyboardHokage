@@ -8,7 +8,7 @@
 #include "clockface.hpp"
 #include "screentxt.hpp"
 #include "text_dubler.hpp"
-#include "HelpButton.h"
+#include "HelpButton.hpp"
 
 using namespace sf;
 int ID = 0;                      // глобал  ID
@@ -29,7 +29,7 @@ int main()
     settings.antialiasingLevel = 8;
     //Инициализирую окно
     RenderWindow window(
-            VideoMode(width, height), "KeybordNinja", Style::Default, settings);
+            VideoMode(width, height), "KeyboardNinja", Style::Default, settings);
     window.setVerticalSyncEnabled(true); // вертикальная синхронизация
     window.setFramerateLimit(60);
 
@@ -131,8 +131,8 @@ int main()
             //
             butBack.is_clicked(window);
 
-            help.MoveLeft(window);
-            help.MoveRight(window);
+            help.MoveLeftButton(window);
+            help.MoveRightButton(window);
 
             butBack.draw(window);
             help.DrawSd(window);
