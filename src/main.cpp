@@ -5,6 +5,7 @@
 #include "Folder.hpp"
 #include "MenuButton.hpp"
 #include "MyKeyboard.hpp"
+#include "PersonStats.hpp"
 #include "ScoreBoard.hpp"
 #include "clockface.hpp"
 #include "screentxt.hpp"
@@ -51,6 +52,7 @@ int main()
 
     //таймер
     ClockFace clface(10, 10, txtdubler); // инициализируем часы в  позиции x y
+    PersonStats test;
 
     //Пока окно открыто
     while (window.isOpen()) {
@@ -129,6 +131,9 @@ int main()
         }
         //Выход из приложения
         butExit.is_clicked(window);
+
+        test.window_for_name_input(window, event);
+
         butExit.draw(window);
         window.display();
     }
