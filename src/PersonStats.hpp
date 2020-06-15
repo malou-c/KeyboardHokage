@@ -26,14 +26,14 @@ public:
         //Если мышк внутри кнопки и была отпущена левая кнопка
         if (sf::IntRect(background.getLocalBounds())
                     .contains(sf::Mouse::getPosition(window))
-            && event.type == event.MouseButtonReleased
+            && event.type == event.MouseButtonPressed
             && event.mouseButton.button == sf::Mouse::Left) {
-            if (background.getFillColor() == sf::Color::Green) {
+            if (background.getFillColor() != sf::Color::Blue) {
                 background.setFillColor(sf::Color::Blue);
-            } else {
-                background.setFillColor(sf::Color::Green);
             }
-        };
+        } else if (event.type == event.MouseButtonReleased) {
+            background.setFillColor(sf::Color::Green);
+        }
 
         window.draw(background);
     };
