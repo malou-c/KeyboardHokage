@@ -75,7 +75,7 @@ void HelpButton::MoveRight()
   
 void HelpButton::MoveRightButton(sf::RenderWindow& window, sf::Event& event)
 {
-    if ((event.type == sf::Event::KeyReleased)
+    if ((event.type == sf::Event::MouseButtonReleased)
         && (event.key.code == sf::Mouse::Left)
         && sf::IntRect(1800, 425, 50, 50)
                    .contains(sf::Mouse::getPosition(window)))
@@ -93,7 +93,7 @@ void HelpButton::MoveRightButton(sf::RenderWindow& window, sf::Event& event)
 
 void HelpButton::MoveLeftButton(sf::RenderWindow& window, sf::Event& event)
 {
-    if ((event.type == sf::Event::KeyReleased)
+    if ((event.type == sf::Event::MouseButtonReleased)
         && (event.key.code == sf::Mouse::Left)
         && sf::IntRect(100, 425, 50, 50)
                    .contains(sf::Mouse::getPosition(window)))
