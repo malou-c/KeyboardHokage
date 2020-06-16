@@ -29,8 +29,8 @@ public:
     void DrawMoves(sf::RenderWindow& window);
     void MoveRight();
     void MoveLeft();
-    void MoveRightButton(sf::RenderWindow& window, sf::Event& event);
-    void MoveLeftButton(sf::RenderWindow& window, sf::Event& event);
+    void MoveRightButton(sf::RenderWindow& window);
+    void MoveLeftButton(sf::RenderWindow& window);
     void DrawSd(sf::RenderWindow& window);
     void SdCreate(int x, int y);
 };

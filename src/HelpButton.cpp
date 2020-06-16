@@ -70,7 +70,7 @@ void HelpButton::MoveRight()
     page_switch++;
 }
 
-void HelpButton::MoveRightButton(sf::RenderWindow& window, sf::Event& event)
+void HelpButton::MoveRightButton(sf::RenderWindow& window)
 {
     /*if ((event.type == sf::Event::MouseButtonReleased)
         && (event.mouseButton.button == sf::Mouse::Left)
@@ -97,7 +97,7 @@ void HelpButton::MoveRightButton(sf::RenderWindow& window, sf::Event& event)
     }
 }
 
-void HelpButton::MoveLeftButton(sf::RenderWindow& window, sf::Event& event)
+void HelpButton::MoveLeftButton(sf::RenderWindow& window)
 {
     /* if ((event.type == sf::Event::MouseButtonReleased)
          && (event.mouseButton.button == sf::Mouse::Left)
