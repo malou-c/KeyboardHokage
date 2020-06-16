@@ -14,7 +14,6 @@ TEST_CASE("HelpButton")
             page_switch_test++;
             help.MoveRight();
             CHECK(page_switch_test == help.page_switch);
-           
         }
     }
 
@@ -29,5 +28,3 @@ TEST_CASE("HelpButton")
         }
     }
 }
-
-
