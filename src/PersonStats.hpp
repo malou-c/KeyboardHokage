@@ -9,10 +9,13 @@ private:
     sf::RectangleShape background;
 
 public:
-    char user_name[50];
-    char text_name[50];
+    char user_name[50]; //имя пользователя
+    char text_name[50]; //название текста
     float time;
-    float cps;
+    float cps; // clicks per second
+
+    bool pressed, released; //необходимы для корректной смены цвета при нажатии
+                            //на интерфейс ввода имени
 
     PersonStats()
     {
@@ -23,18 +26,33 @@ public:
 
     void window_for_name_input(sf::RenderWindow& window, sf::Event event)
     {
-        //Если мышк внутри кнопки и была отпущена левая кнопка
+        //////Смена цвета при нажатии на интерфейс ввода ///////////////////////
         if (sf::IntRect(background.getLocalBounds())
                     .contains(sf::Mouse::getPosition(window))
             && event.type == event.MouseButtonPressed
             && event.mouseButton.button == sf::Mouse::Left) {
-            if (background.getFillColor() != sf::Color::Blue) {
-                background.setFillColor(sf::Color::Blue);
-            }
-        } else if (event.type == event.MouseButtonReleased) {
-            background.setFillColor(sf::Color::Green);
+            this->pressed = true;
         }
 
+        if (this->pressed
+            && sf::IntRect(background.getLocalBounds())
+                       .contains(sf::Mouse::getPosition(window))
+            && event.type == event.MouseButtonReleased
+            && event.mouseButton.button == sf::Mouse::Left) {
+            this->released = true;
+            this->pressed = false;
+        }
+
+        if (released) {
+            if (background.getFillColor() == sf::Color::Green) {
+                background.setFillColor(sf::Color::Blue);
+            } else {
+                background.setFillColor(sf::Color::Green);
+            }
+        }
+
+        this->released = false;
+        ////////////////////////////////////////////////////////////////////////
         window.draw(background);
     };
 };
