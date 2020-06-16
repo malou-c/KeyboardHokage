@@ -2,13 +2,13 @@
 #include <iostream>
 #include <string>
 
+#include "HelpButton.hpp"
 #include "MenuButton.hpp"
 #include "MyKeyboard.hpp"
 #include "ScoreBoard.hpp"
 #include "clockface.hpp"
 #include "screentxt.hpp"
 #include "text_dubler.hpp"
-#include "HelpButton.hpp"
 
 using namespace sf;
 int ID = 0;                      // глобал  ID
@@ -29,13 +29,16 @@ int main()
     settings.antialiasingLevel = 8;
     //Инициализирую окно
     RenderWindow window(
-            VideoMode(width, height), "KeyboardNinja", Style::Default, settings);
+            VideoMode(width, height),
+            "KeyboardNinja",
+            Style::Default,
+            settings);
     window.setVerticalSyncEnabled(true); // вертикальная синхронизация
     window.setFramerateLimit(60);
 
     //кнопки меню
     MenuButton butExit(width - 100, 0, -1), butBack(100, 600, 0),
-            butPlay(100, 100, 1), butRecord(100, 200, 2), butHelp(100, 300, 3) ;
+            butPlay(100, 100, 1), butRecord(100, 200, 2), butHelp(100, 300, 3);
 
     //клавиатура
     MyKeyboard mykb(270, 600); // инициализируем клавиатру в позиции x y
