@@ -134,8 +134,8 @@ int main()
             //
             butBack.is_clicked(window);
 
-            help.MoveLeftButton(window, event);
-            help.MoveRightButton(window, event);
+            help.MoveLeftButton(window);
+            help.MoveRightButton(window);
 
             butBack.draw(window);
             help.DrawSd(window);
