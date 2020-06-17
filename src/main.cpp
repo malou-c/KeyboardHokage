@@ -3,6 +3,7 @@
 #include <string>
 
 #include "HelpButton.hpp"
+#include "Folder.hpp"
 #include "MenuButton.hpp"
 #include "MyKeyboard.hpp"
 #include "ScoreBoard.hpp"

@@ -12,3 +12,5 @@ build/test/*.d
 build/*.o
 build/*.d
 *.exe
+bin/kbh-test
+*.dat

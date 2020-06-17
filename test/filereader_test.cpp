@@ -1,5 +1,6 @@
 #include "../src/filereader.hpp"
 #include "testparty/catch.hpp"
+
 #include <fstream>
 
 using namespace std;
@@ -13,6 +14,7 @@ void cleanfile(string path)
     file.clear();
     file.close();
 }
+
 template <class T>
 void writefile(T msg, string path)
 {
