@@ -1,17 +1,20 @@
 #pragma once
 
 #include <filesystem>
-#include <iostream> //DELETE BEFORE PUSH
+#include <fstream>
 #include <string>
 #include <vector>
 
 class Folder {
 private:
-    std::string path;
+    std::string path, CC_filename_path;
+    size_t char_amout;
 
 public:
     Folder(std::string path);
+    size_t CountChar(std::string filename, size_t& size);
 
-    //возвращает имена фалов в дирректории без названия самой дирректории
+    //возвращает имена фалов в дирректории без названия самой
+    //дирректории
     std::vector<std::string> contains();
 };
