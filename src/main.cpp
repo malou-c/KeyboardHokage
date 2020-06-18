@@ -79,6 +79,7 @@ int main()
             default:
                 break;
             }
+            test.window_for_name_input(window, event);
         }
         // чистим окно
         window.clear(Color::White);
@@ -131,8 +132,7 @@ int main()
         }
         //Выход из приложения
         butExit.is_clicked(window);
-
-        test.window_for_name_input(window, event);
+        test.draw(window);
 
         butExit.draw(window);
         window.display();

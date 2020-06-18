@@ -28,12 +28,12 @@ public:
         background.setPosition(0, 0);
         background.setFillColor(sf::Color::Blue);
 
-        this->font.loadFromFile("fonts/stdFont.ttf");
+        font.loadFromFile("fonts/stdFont.ttf");
 
-        this->text.setPosition(5, 10);
-        this->text.setFont(this->font);
-        this->text.setCharacterSize(18);
-        this->text.setFillColor(sf::Color::Black);
+        text.setPosition(5, 10);
+        text.setFont(font);
+        text.setCharacterSize(18);
+        text.setFillColor(sf::Color::Black);
     };
 
     void window_for_name_input(sf::RenderWindow& window, sf::Event event)
@@ -43,16 +43,16 @@ public:
                     .contains(sf::Mouse::getPosition(window))
             && event.type == event.MouseButtonPressed
             && event.mouseButton.button == sf::Mouse::Left) {
-            this->pressed = true;
+            pressed = true;
         }
 
-        if (this->pressed
+        if (pressed
             && sf::IntRect(background.getLocalBounds())
                        .contains(sf::Mouse::getPosition(window))
             && event.type == event.MouseButtonReleased
             && event.mouseButton.button == sf::Mouse::Left) {
-            this->released = true;
-            this->pressed = false;
+            released = true;
+            pressed = false;
         }
 
         if (released) {
@@ -63,7 +63,7 @@ public:
             }
         }
 
-        this->released = false;
+        released = false;
         ////////////////////////////////////////////////////////////////////////
 
         if (background.getFillColor() == sf::Color::Blue
@@ -82,10 +82,13 @@ public:
                 break;
             }
 
-            this->text.setString(this->temp_name);
+            text.setString(temp_name);
         }
+    }
 
+    void draw(sf::RenderWindow& window)
+    {
         window.draw(background);
-        window.draw(this->text);
-    };
+        window.draw(text);
+    }
 };

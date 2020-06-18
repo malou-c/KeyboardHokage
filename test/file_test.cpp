@@ -1,8 +1,8 @@
 #include "../src/file.hpp"
 #include "testparty/catch.hpp"
 
+#include <cstring>
 #include <fstream>
-#include <string>
 #include <vector>
 
 TEST_CASE("File::add")
