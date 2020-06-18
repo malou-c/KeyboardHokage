@@ -2,8 +2,8 @@
 #include <iostream>
 #include <string>
 
-#include "HelpButton.hpp"
 #include "Folder.hpp"
+#include "HelpButton.hpp"
 #include "MenuButton.hpp"
 #include "MyKeyboard.hpp"
 #include "ScoreBoard.hpp"
