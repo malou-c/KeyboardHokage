@@ -1,10 +1,9 @@
 #include "../src/HelpButton.hpp"
 #include "testparty/catch.hpp"
 
-HelpButton help;
-
 TEST_CASE("HelpButton")
 {
+    HelpButton help;
     SECTION("MoveRight")
     {
         help.page_switch = 0;
@@ -16,7 +15,7 @@ TEST_CASE("HelpButton")
         }
     }
 
-    SECTION("MoveRight")
+    SECTION("MoveLeft")
     {
         help.page_switch = 5;
         int page_switch_test = 5;
