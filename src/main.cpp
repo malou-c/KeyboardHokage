@@ -9,6 +9,7 @@
 #include "clockface.hpp"
 #include "screentxt.hpp"
 #include "text_dubler.hpp"
+#include "text_selection.hpp"
 
 using namespace sf;
 int ID = 0;                      // глобал  ID
@@ -52,6 +53,9 @@ int main()
     //таймер
     ClockFace clface(10, 10, txtdubler); // инициализируем часы в  позиции x y
 
+    //страничка с выбором текста перед игрой
+    TextSelection txtselect(0, 0);
+
     //Пока окно открыто
     while (window.isOpen()) {
         //Обработка событий
@@ -91,6 +95,7 @@ int main()
             butPlay.is_clicked(window);
             butRecord.is_clicked(window);
             // draw
+            txtselect.draw(window);
             //кнопки меню
             butPlay.draw(window);
             butRecord.draw(window);
