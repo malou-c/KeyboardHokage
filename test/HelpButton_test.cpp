@@ -1,8 +1,7 @@
 #include "../src/HelpButton.hpp"
 #include "testparty/catch.hpp"
-#include <iostream>
 
-HelpButton help(100, 100);
+HelpButton help;
 
 TEST_CASE("HelpButton")
 {

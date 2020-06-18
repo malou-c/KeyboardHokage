@@ -19,9 +19,11 @@ public:
     std::vector<sf::Image> Images;
     std::vector<sf::Texture> Textures;
     std::vector<sf::Sprite> Sprites;
+    //конструкторы
+    HelpButton(){};
     HelpButton(int x, int y);
 
-    //�������
+    //функции
     void HelpButtonCreate(int x, int y);
     void DrawHelpButton(sf::RenderWindow& window);
     void MoveLeftCreate(int x, int y);
