@@ -2,7 +2,7 @@
 #include "testparty/catch.hpp"
 #include <iostream>
 
-HelpButton help;
+HelpButton help(100, 100);
 
 TEST_CASE("HelpButton")
 {
@@ -19,7 +19,7 @@ TEST_CASE("HelpButton")
 
     SECTION("MoveRight")
     {
-        help.page_switch = 0;
+        help.page_switch = 5;
         int page_switch_test = 5;
         for (int i = 5; i > 0; i--) {
             page_switch_test--;

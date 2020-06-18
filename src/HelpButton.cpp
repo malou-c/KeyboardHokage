@@ -72,26 +72,11 @@ void HelpButton::MoveRight()
 
 void HelpButton::MoveRightButton(sf::RenderWindow& window)
 {
-    /*if ((event.type == sf::Event::MouseButtonReleased)
-        && (event.mouseButton.button == sf::Mouse::Left)
-        && sf::IntRect(1800, 425, 50, 50)
-                   .contains(sf::Mouse::getPosition(window)))*/
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
         && sf::IntRect(1800, 425, 50, 50)
-                   .contains(sf::Mouse::getPosition(window)))
-
-    /*if ((sf::Mouse::isButtonPressed(sf::Mouse::Left))
-        && (event.type == event.MouseButtonReleased)
-        && (event.mouseButton.button == sf::Mouse::Left)
-        && sf::IntRect(1800, 425, 50,
-       50).contains(sf::Mouse::getPosition(window)))*/
-    {
+                   .contains(sf::Mouse::getPosition(window))) {
         if (page_switch != 4) {
-            //#ifdef WINDOWS
-            // Sleep(500);
-            //#else
             sleep(1);
-            //#endif
             MoveRight();
         }
     }
@@ -99,19 +84,11 @@ void HelpButton::MoveRightButton(sf::RenderWindow& window)
 
 void HelpButton::MoveLeftButton(sf::RenderWindow& window)
 {
-    /* if ((event.type == sf::Event::MouseButtonReleased)
-         && (event.mouseButton.button == sf::Mouse::Left)
-         && sf::IntRect(100, 425, 50, 50)
-                    .contains(sf::Mouse::getPosition(window)))*/
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
         && sf::IntRect(100, 425, 50, 50)
                    .contains(sf::Mouse::getPosition(window))) {
         if (page_switch != 0) {
-            //#ifdef WINDOWS
-            // Sleep(500);
-            //#else
             sleep(1);
-            //#endif
             MoveLeft();
         }
     }
@@ -122,23 +99,23 @@ void HelpButton::SdCreate(int x, int y)
     Images.resize(5);
     Textures.resize(5);
     Sprites.resize(5);
-    Images[0].loadFromFile("helpimages\\sd1.jpg");
+    Images[0].loadFromFile("helpimages/sd1.jpg");
     Textures[0].loadFromImage(Images[0]);
     Sprites[0].setTexture(Textures[0]);
 
-    Images[1].loadFromFile("helpimages\\sd2.jpg");
+    Images[1].loadFromFile("helpimages/sd2.jpg");
     Textures[1].loadFromImage(Images[1]);
     Sprites[1].setTexture(Textures[1]);
 
-    Images[2].loadFromFile("helpimages\\sd3.jpg");
+    Images[2].loadFromFile("helpimages/sd3.jpg");
     Textures[2].loadFromImage(Images[2]);
     Sprites[2].setTexture(Textures[2]);
 
-    Images[3].loadFromFile("helpimages\\sd4.jpg");
+    Images[3].loadFromFile("helpimages/sd4.jpg");
     Textures[3].loadFromImage(Images[3]);
     Sprites[3].setTexture(Textures[3]);
 
-    Images[4].loadFromFile("helpimages\\sd5.jpg");
+    Images[4].loadFromFile("helpimages/sd5.jpg");
     Textures[4].loadFromImage(Images[4]);
     Sprites[4].setTexture(Textures[4]);
 
