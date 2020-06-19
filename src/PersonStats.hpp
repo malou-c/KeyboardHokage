@@ -61,6 +61,7 @@ public:
             }
 
             text.setString(temp_name);
+            strcpy(user_name, temp_name.c_str());
         }
     }
 
