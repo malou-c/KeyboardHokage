@@ -44,6 +44,6 @@ TEST_CASE("CountChar")
         size_t char_amount;
         std::string cc_name = "сс_test_file.txt";
         foldcc.CountChar(cc_name, char_amount);
-        CHECK(char_amount - 1 != 0);
+        CHECK(char_amount != 0);
     }
 }
