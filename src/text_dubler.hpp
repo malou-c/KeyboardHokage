@@ -35,6 +35,8 @@ public:
     void cps_plus();
     void cps_nextsec();
     void cps_update();
+    // clear
+    void clear();
     // setts
     size_t setVecSize();
 

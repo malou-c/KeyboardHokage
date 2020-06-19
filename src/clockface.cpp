@@ -88,6 +88,7 @@ void ClockFace::ClockStart()
 void ClockFace::ClockStop()
 {
     switcher = 0;
+    isStart = false;
 }
 void ClockFace::ClockContinue()
 {

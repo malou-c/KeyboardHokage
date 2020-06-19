@@ -127,7 +127,17 @@ void TextDubler::cps_update()
     stream_cps << sum;
     cps_text.setString(stream_cps.str());
 }
-
+// clear
+void TextDubler::clear()
+{
+    for (size_t i = 0; i < vec_txt.size(); i++) {
+        vec_txt[i].setString(L"*");
+    }
+    for (size_t i = 0; i < time_size - 1; i++) {
+        vec_time[i] = 0;
+    }
+    cps_text.setString("0");
+}
 // draw
 void TextDubler::draw(RenderWindow& window)
 {

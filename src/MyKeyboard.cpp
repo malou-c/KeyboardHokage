@@ -155,7 +155,12 @@ void MyKeyboard::Update(sf::Event event, TextWindow& txwin)
         std::cout << "ASCII character typed: " << event.text.unicode
                   << std::endl;
         symbol = (int)event.text.unicode;
-        txwin.checksym_dubler(symbol); //символ который нажали проверяем в окне
+        //если строка не кончилась
+        if (!txwin.isEndString) {
+            //символ который нажали проверяем в окне
+            txwin.checksym_dubler(symbol);
+        }
+
         //меняем цвет клавиши
         for (unsigned int i = 0; i < vec_buttons.size(); i++) {
             for (int j = 0; j < 4; j++) {

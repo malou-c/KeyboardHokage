@@ -1,4 +1,5 @@
 #pragma once
+#include "clockface.hpp"
 #include "filereader.hpp"
 #include "text_dubler.hpp"
 #include "word.hpp"
@@ -15,6 +16,7 @@ private:
     int margin_y;
 
 public:
+    bool is_not_reset = true;
     TextDubler* txtDubler;
     bool isEndString = false; // показывает кочился ли текст
     int curr_sym;             // текущий символ
@@ -37,7 +39,7 @@ public:
     TextWindow(int x, int y, TextDubler&);
 
     //функии
-
+    void game_reset(ClockFace& clock);
     //функции для окошка текстового дублера
     wchar_t fount_sym_forTxtDub();
 
