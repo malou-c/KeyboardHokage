@@ -17,16 +17,11 @@ public:
     sf::Font font;
     sf::Text text;
 
-    bool pressed = false, //необходимы для корректной смены цвета при нажатии
-            released = true; //на интерфейс ввода имени
-
-    bool key_releasd;
-
     PersonStats()
     {
         background.setSize(sf::Vector2f(150.f, 30.f));
         background.setPosition(0, 0);
-        background.setFillColor(sf::Color::Blue);
+        background.setFillColor(sf::Color::Green);
 
         font.loadFromFile("fonts/stdFont.ttf");
 
@@ -38,33 +33,16 @@ public:
 
     void window_for_name_input(sf::RenderWindow& window, sf::Event event)
     {
-        //////Смена цвета при нажатии на интерфейс ввода ///////////////////////
         if (sf::IntRect(background.getLocalBounds())
                     .contains(sf::Mouse::getPosition(window))
-            && event.type == event.MouseButtonPressed
-            && event.mouseButton.button == sf::Mouse::Left) {
-            pressed = true;
-        }
-
-        if (pressed
-            && sf::IntRect(background.getLocalBounds())
-                       .contains(sf::Mouse::getPosition(window))
             && event.type == event.MouseButtonReleased
             && event.mouseButton.button == sf::Mouse::Left) {
-            released = true;
-            pressed = false;
-        }
-
-        if (released) {
             if (background.getFillColor() == sf::Color::Blue) {
                 background.setFillColor(sf::Color::Green);
             } else {
                 background.setFillColor(sf::Color::Blue);
             }
         }
-
-        released = false;
-        ////////////////////////////////////////////////////////////////////////
 
         if (background.getFillColor() == sf::Color::Blue
             && event.type == sf::Event::TextEntered
