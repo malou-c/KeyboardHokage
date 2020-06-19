@@ -36,7 +36,8 @@ int main()
 
     //кнопки меню
     MenuButton butExit(width - 100, 0, -1), butBack(100, 600, 0),
-            butPlay(100, 100, 1), butRecord(100, 200, 2);
+            butPlay(100, 100, 1), butRecord(100, 200, 2),
+            butSelectText(100, 400, 4);
 
     //клавиатура
     MyKeyboard mykb(270, 600); // инициализируем клавиатру в позиции x y
@@ -54,7 +55,7 @@ int main()
     ClockFace clface(10, 10, txtdubler); // инициализируем часы в  позиции x y
 
     //страничка с выбором текста перед игрой
-    TextSelection txtselect(0, 0);
+    TextSelection txtselect(300, 30);
 
     //Пока окно открыто
     while (window.isOpen()) {
@@ -67,15 +68,19 @@ int main()
                  event.key.code == sf::Keyboard::Escape))
                 window.close(); //то закрыть окно
             switch (ID) {
+            case 0:
+                break;
             case 1:
                 //клавиатура обновляется только если текст не кончился
-                if (!txwin.isEndString) {
-                    mykb.Update(event, txwin);
-                }
-
+                mykb.Update(event, txwin);
                 if (event.type == Event::TextEntered && !clface.isStart) {
                     clface.ClockStart();
                 }
+                break;
+            case 4:
+                //кнопки << >>
+                txtselect.but_update(event, window);
+                txtselect.update_sections(txwin, event, window);
                 break;
 
             default:
@@ -91,23 +96,35 @@ int main()
             window.close();
             break;
         case 0:
+            //даем добро на рестарт так как мы вышли в меню
+            if (!txwin.is_not_reset) {
+                txwin.is_not_reset = true;
+            }
             // update
-            butPlay.is_clicked(window);
+            butSelectText.is_clicked(window);
             butRecord.is_clicked(window);
             // draw
-            txtselect.draw(window);
             //кнопки меню
-            butPlay.draw(window);
+            butSelectText.draw(window);
             butRecord.draw(window);
             lidboard_is_load = false;
+
             break;
         case 1:
+            //рестартаем текст и таймер
+            if (txwin.is_not_reset) {
+                txwin.game_reset(clface);
+                txwin.is_not_reset = false;
+            }
+            // если кончился текст в окне
+            if (txwin.isEndString && clface.isStart) {
+                clface.ClockStop();
+                txtdubler.clear();
+            }
+
             // update
             butBack.is_clicked(window);
             clface.update_clock();
-            if (txwin.isEndString) {
-                clface.ClockStop(); // если кончился текст в окне
-            }
 
             // draw
             butBack.draw(window);         // кнопка назад
@@ -127,6 +144,16 @@ int main()
                 lidboard_is_load = true;
             }
             draw_board(window, stats);
+            break;
+        case 4:
+            // update
+            butPlay.is_clicked(window);
+            butBack.is_clicked(window);
+            // draw
+            txtselect.draw(window);
+            //кнопки
+            butPlay.draw(window);
+            butBack.draw(window);
             break;
 
         default:
