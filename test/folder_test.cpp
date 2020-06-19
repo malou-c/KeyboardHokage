@@ -41,7 +41,6 @@ TEST_CASE("CountChar")
     Folder foldcc;
     SECTION("Not Empty")
     {
-        Folder Folder();
         size_t char_amount;
         std::string cc_name = "сс_test_file.txt";
         foldcc.CountChar(cc_name, char_amount);
