@@ -5,13 +5,7 @@
 #include <string.h>
 #include <vector>
 
-class PersonStats {
-public:
-    char user_name[50];
-    char text_name[50];
-    float time;
-    float cps;
-};
+#include "PersonStats.hpp"
 
 class File {
 private:
