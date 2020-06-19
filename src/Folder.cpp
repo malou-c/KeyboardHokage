@@ -18,7 +18,7 @@ std::vector<std::string> Folder::contains()
     return list;
 };
 
-size_t Folder::CountChar(std::string filename, size_t& char_amount)
+void Folder::CountChar(std::string filename, size_t& char_amount)
 {
     std::ifstream CC_file(filename.c_str());
     for (char_amout = 0; !CC_file.eof(); char_amout++) {

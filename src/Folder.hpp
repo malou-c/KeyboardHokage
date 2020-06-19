@@ -7,13 +7,12 @@
 
 class Folder {
 private:
-    std::string path, CC_filename_path;
-    size_t char_amout;
+    std::string path;
 
 public:
     Folder();
     Folder(std::string path);
-    size_t CountChar(std::string filename, size_t& size);
+    void CountChar(std::string filename, size_t& size);
 
     //возвращает имена фалов в дирректории без названия самой
     //дирректории
