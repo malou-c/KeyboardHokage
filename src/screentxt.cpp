@@ -5,8 +5,6 @@ TextWindow::TextWindow(int x, int y, TextDubler& txtdubler)
 {
     //текстовый дублер
     txtDubler = &txtdubler;
-    std::cout << &txtdubler << std::endl;
-    std::cout << &txtDubler << std::endl;
 
     //загружаем спрайт окошечка
     font.loadFromFile("fonts/3976.ttf");
@@ -23,6 +21,18 @@ TextWindow::TextWindow(int x, int y, TextDubler& txtdubler)
 }
 
 //функции
+
+void TextWindow::game_reset(ClockFace& clock)
+{
+    start_str = 0; // строка с которой начинается вывод
+    curr_sym = 0;   //текущий символ
+    dubler_clean(); //  чистим наложенный текст
+    clock.ClockStop();
+    clock.ClockReset();
+    //дубер вводимых символов
+    txtDubler->clear();
+}
+
 wchar_t TextWindow::fount_sym_forTxtDub()
 {
     int num_str = start_str;
