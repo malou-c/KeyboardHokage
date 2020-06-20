@@ -76,7 +76,6 @@ void HelpButton::MoveRightButton(sf::RenderWindow& window)
         && sf::IntRect(1800, 425, 50, 50)
                    .contains(sf::Mouse::getPosition(window))) {
         if (page_switch != 4) {
-            sleep(1);
             MoveRight();
         }
     }
@@ -88,7 +87,6 @@ void HelpButton::MoveLeftButton(sf::RenderWindow& window)
         && sf::IntRect(100, 425, 50, 50)
                    .contains(sf::Mouse::getPosition(window))) {
         if (page_switch != 0) {
-            sleep(1);
             MoveLeft();
         }
     }

@@ -3,12 +3,6 @@
 #include <iostream>
 #include <vector>
 
-//#ifdef WINDOWS
-//#include <Windows.h>
-//#else
-#include <unistd.h>
-//#endif
-
 class HelpButton {
 public:
     int page_switch = 0;
