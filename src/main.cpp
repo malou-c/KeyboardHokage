@@ -3,6 +3,7 @@
 #include <string>
 
 #include "Folder.hpp"
+#include "HelpButton.hpp"
 #include "MenuButton.hpp"
 #include "MyKeyboard.hpp"
 #include "NameInput.hpp"
@@ -32,13 +33,16 @@ int main()
     settings.antialiasingLevel = 8;
     //Инициализирую окно
     RenderWindow window(
-            VideoMode(width, height), "KeybordNinja", Style::Default, settings);
+            VideoMode(width, height),
+            "KeyboardNinja",
+            Style::Default,
+            settings);
     window.setVerticalSyncEnabled(true); // вертикальная синхронизация
     window.setFramerateLimit(60);
 
     //кнопки меню
     MenuButton butExit(width - 100, 0, -1), butBack(100, 600, 0),
-            butPlay(100, 100, 1), butRecord(100, 200, 2),
+            butPlay(100, 100, 1), butRecord(100, 200, 2), butHelp(100, 300, 3),
             butSelectText(100, 400, 4);
 
     //клавиатура
@@ -60,6 +64,8 @@ int main()
 
     //страничка с выбором текста перед игрой
     TextSelection txtselect(300, 30);
+
+    HelpButton help(200, 100);
 
     //Пока окно открыто
     while (window.isOpen()) {
@@ -109,10 +115,12 @@ int main()
             // update
             butSelectText.is_clicked(window);
             butRecord.is_clicked(window);
+            butHelp.is_clicked(window);
             // draw
             //кнопки меню
             butSelectText.draw(window);
             butRecord.draw(window);
+            butHelp.draw(window);
             lidboard_is_load = false;
 
             break;
@@ -150,6 +158,17 @@ int main()
                 lidboard_is_load = true;
             }
             draw_board(window, stats);
+            break;
+        case 3:
+            //
+            butBack.is_clicked(window);
+
+            help.MoveLeftButton(window);
+            help.MoveRightButton(window);
+
+            butBack.draw(window);
+            help.DrawSd(window);
+            help.DrawMoves(window);
             break;
         case 4:
             // update
