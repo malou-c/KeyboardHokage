@@ -14,7 +14,7 @@ public:
     std::vector<sf::Texture> Textures;
     std::vector<sf::Sprite> Sprites;
     //конструкторы
-    HelpButton(){};
+    HelpButton();
     HelpButton(int x, int y);
 
     //функции

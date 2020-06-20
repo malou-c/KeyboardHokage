@@ -1,5 +1,7 @@
 #include "HelpButton.hpp"
 
+HelpButton::HelpButton(){};
+
 HelpButton::HelpButton(int x, int y)
 {
     MoveLeftCreate(x - 100, y + 325);
