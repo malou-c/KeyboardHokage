@@ -1,29 +1,12 @@
 #include "HelpButton.hpp"
 
+HelpButton::HelpButton(){};
+
 HelpButton::HelpButton(int x, int y)
 {
     MoveLeftCreate(x - 100, y + 325);
     MoveRightCreate(x + 1600, y + 325);
     SdCreate(x, y);
-}
-
-void HelpButton::HelpButtonCreate(int x, int y)
-{
-#ifdef WINDOWS
-    h_path = "helpimages\\help.png";
-#else
-    h_path = "helpimages/help.png";
-#endif
-    hp.loadFromFile(h_path);
-    help_texture.loadFromImage(hp);
-    help_sprite.setTexture(help_texture);
-
-    help_sprite.setPosition(x, y);
-}
-
-void HelpButton::DrawHelpButton(sf::RenderWindow& window)
-{
-    window.draw(help_sprite);
 }
 
 void HelpButton::MoveLeftCreate(int x, int y)
@@ -70,25 +53,23 @@ void HelpButton::MoveRight()
     page_switch++;
 }
 
-void HelpButton::MoveRightButton(sf::RenderWindow& window)
+void HelpButton::MoveRightButton(sf::RenderWindow& window, sf::Event event)
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
-        && sf::IntRect(1800, 425, 50, 50)
-                   .contains(sf::Mouse::getPosition(window))) {
+    if (sf::IntRect(1800, 425, 50, 50).contains(sf::Mouse::getPosition(window))
+        && event.type == event.MouseButtonReleased
+        && event.mouseButton.button == sf::Mouse::Left) {
         if (page_switch != 4) {
-            sleep(1);
             MoveRight();
         }
     }
 }
 
-void HelpButton::MoveLeftButton(sf::RenderWindow& window)
+void HelpButton::MoveLeftButton(sf::RenderWindow& window, sf::Event event)
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
-        && sf::IntRect(100, 425, 50, 50)
-                   .contains(sf::Mouse::getPosition(window))) {
+    if (sf::IntRect(100, 425, 50, 50).contains(sf::Mouse::getPosition(window))
+        && event.type == event.MouseButtonReleased
+        && event.mouseButton.button == sf::Mouse::Left) {
         if (page_switch != 0) {
-            sleep(1);
             MoveLeft();
         }
     }

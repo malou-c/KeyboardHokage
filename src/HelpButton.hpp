@@ -3,12 +3,6 @@
 #include <iostream>
 #include <vector>
 
-//#ifdef WINDOWS
-//#include <Windows.h>
-//#else
-#include <unistd.h>
-//#endif
-
 class HelpButton {
 public:
     int page_switch = 0;
@@ -20,19 +14,17 @@ public:
     std::vector<sf::Texture> Textures;
     std::vector<sf::Sprite> Sprites;
     //конструкторы
-    HelpButton(){};
+    HelpButton();
     HelpButton(int x, int y);
 
     //функции
-    void HelpButtonCreate(int x, int y);
-    void DrawHelpButton(sf::RenderWindow& window);
     void MoveLeftCreate(int x, int y);
     void MoveRightCreate(int x, int y);
     void DrawMoves(sf::RenderWindow& window);
     void MoveRight();
     void MoveLeft();
-    void MoveRightButton(sf::RenderWindow& window);
-    void MoveLeftButton(sf::RenderWindow& window);
+    void MoveRightButton(sf::RenderWindow& window, sf::Event event);
+    void MoveLeftButton(sf::RenderWindow& window, sf::Event event);
     void DrawSd(sf::RenderWindow& window);
     void SdCreate(int x, int y);
 };
