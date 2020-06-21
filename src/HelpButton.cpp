@@ -9,25 +9,6 @@ HelpButton::HelpButton(int x, int y)
     SdCreate(x, y);
 }
 
-void HelpButton::HelpButtonCreate(int x, int y)
-{
-#ifdef WINDOWS
-    h_path = "helpimages\\help.png";
-#else
-    h_path = "helpimages/help.png";
-#endif
-    hp.loadFromFile(h_path);
-    help_texture.loadFromImage(hp);
-    help_sprite.setTexture(help_texture);
-
-    help_sprite.setPosition(x, y);
-}
-
-void HelpButton::DrawHelpButton(sf::RenderWindow& window)
-{
-    window.draw(help_sprite);
-}
-
 void HelpButton::MoveLeftCreate(int x, int y)
 {
 #ifdef WINDOWS

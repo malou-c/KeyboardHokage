@@ -18,8 +18,6 @@ public:
     HelpButton(int x, int y);
 
     //функции
-    void HelpButtonCreate(int x, int y);
-    void DrawHelpButton(sf::RenderWindow& window);
     void MoveLeftCreate(int x, int y);
     void MoveRightCreate(int x, int y);
     void DrawMoves(sf::RenderWindow& window);
