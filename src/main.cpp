@@ -98,6 +98,8 @@ int main()
             }
             name_input.window_for_name_input(window, event);
             person_stats.set_name(name_input.get_input());
+            help.MoveLeftButton(window, event);
+            help.MoveRightButton(window, event);
         }
         // чистим окно
         window.clear(Color::White);
@@ -162,9 +164,6 @@ int main()
         case 3:
             //
             butBack.is_clicked(window);
-
-            help.MoveLeftButton(window);
-            help.MoveRightButton(window);
 
             butBack.draw(window);
             help.DrawSd(window);

@@ -72,22 +72,22 @@ void HelpButton::MoveRight()
     page_switch++;
 }
 
-void HelpButton::MoveRightButton(sf::RenderWindow& window)
+void HelpButton::MoveRightButton(sf::RenderWindow& window, sf::Event event)
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
-        && sf::IntRect(1800, 425, 50, 50)
-                   .contains(sf::Mouse::getPosition(window))) {
+    if (sf::IntRect(1800, 425, 50, 50).contains(sf::Mouse::getPosition(window))
+        && event.type == event.MouseButtonReleased
+        && event.mouseButton.button == sf::Mouse::Left) {
         if (page_switch != 4) {
             MoveRight();
         }
     }
 }
 
-void HelpButton::MoveLeftButton(sf::RenderWindow& window)
+void HelpButton::MoveLeftButton(sf::RenderWindow& window, sf::Event event)
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
-        && sf::IntRect(100, 425, 50, 50)
-                   .contains(sf::Mouse::getPosition(window))) {
+    if (sf::IntRect(100, 425, 50, 50).contains(sf::Mouse::getPosition(window))
+        && event.type == event.MouseButtonReleased
+        && event.mouseButton.button == sf::Mouse::Left) {
         if (page_switch != 0) {
             MoveLeft();
         }
