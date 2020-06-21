@@ -42,7 +42,7 @@ TEST_CASE("CountChar")
     SECTION("Not Empty")
     {
         size_t char_amount;
-        std::string cc_name = "сс_test_file.txt";
+        std::string cc_name = "ссtestfile.txt";
         foldcc.CountChar(cc_name, char_amount);
         CHECK(char_amount != 0);
     }
