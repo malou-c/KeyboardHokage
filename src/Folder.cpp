@@ -20,9 +20,9 @@ std::vector<std::string> Folder::contains()
 
 void Folder::CountChar(std::string filename, size_t& size)
 {
-    std::ifstream CC_file(filename.c_str());
-    for (size = 0; !CC_file.eof(); size++)
-        CC_file.get();
-    CC_file.clear();
-    CC_file.close();
+    std::ifstream ссfile(filename.c_str());
+    for (size = 0; !ссfile.eof(); size++)
+        ссfile.get();
+    ссfile.clear();
+    ссfile.close();
 }
