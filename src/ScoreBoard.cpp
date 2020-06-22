@@ -1,20 +1,23 @@
 #include "ScoreBoard.hpp"
 
-std::vector<PersonStats> load_board()
+std::vector<PersonStats> ScoreBoard::load_board()
 { //Загружаем таблицу
 
     std::vector<PersonStats> stats;
     File file;
     stats = file.load(); //Загружаем данные (имя время)
+    is_loaded = true;
     return stats;
 }
 
-void draw_board(
-        sf::RenderWindow& window, std::vector<PersonStats> stats, int width)
+void ScoreBoard::draw_board(sf::RenderWindow& window, int width)
 { //Рисует таблицу рекордов
     /*     std::vector<PersonStats> stats;
         File file;
         stats = file.load();//Загружаем данные (имя время) */
+    if (!is_loaded) {
+        this->load();
+    }
 
     sf::Image image;
     image.loadFromFile("ye.jpg"); //Фон на котором будут отображаться данные
@@ -53,3 +56,19 @@ void draw_board(
     window.draw(bckgrnd_sprite);
     window.draw(text);
 }
+
+bool ScoreBoard::is_load()
+{
+    return is_loaded;
+};
+
+void ScoreBoard::clear()
+{
+    stats.clear();
+    is_loaded = false;
+};
+
+void ScoreBoard::load()
+{
+    stats = load_board();
+};

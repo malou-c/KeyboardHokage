@@ -17,8 +17,6 @@
 using namespace sf;
 int ID = 0;                      // глобал  ID
 int height = 1000, width = 1900; // высота и ширина окна
-bool lidboard_is_load = false; //загружена ли таблица рекордов
-std::vector<PersonStats> stats; //для хранения таблицы рекордов
 
 int main()
 {
@@ -64,7 +62,7 @@ int main()
 
     //страничка с выбором текста перед игрой
     TextSelection txtselect(300, 30);
-
+    ScoreBoard scoreboard;
     HelpButton help(200, 100);
 
     //Пока окно открыто
@@ -123,7 +121,7 @@ int main()
             butSelectText.draw(window);
             butRecord.draw(window);
             butHelp.draw(window);
-            lidboard_is_load = false;
+            scoreboard.clear();
 
             break;
         case 1:
@@ -155,11 +153,7 @@ int main()
             // draw
             butBack.draw(window); // кнопка назад
             //Рисуем таблицу рекордов
-            if (!lidboard_is_load) {
-                stats = load_board();
-                lidboard_is_load = true;
-            }
-            draw_board(window, stats);
+            scoreboard.draw_board(window);
             break;
         case 3:
             //
