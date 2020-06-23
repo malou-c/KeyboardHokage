@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <cstring>
 #include <sstream>
 #include <vector>
 
@@ -19,6 +20,7 @@ public:
     std::vector<Text> vec_txt;
     std::vector<int> vec_time;
     Text cps_text;
+    int cps_max = 0;
 
     //конструктор
     TextDubler(float x, float y);
