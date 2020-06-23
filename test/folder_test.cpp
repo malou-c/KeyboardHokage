@@ -39,9 +39,7 @@ TEST_CASE("Folder::contains")
 TEST_CASE("CountChar")
 {
     Folder foldcc;
-
-    std::string filetest = "cctestfile.txt";
-    size_t char_amount;
-    foldcc.CountChar(filetest, char_amount);
-    CHECK(char_amount != 0);
+    std::string filetest = "test/cctestfile.txt";
+    int char_amount = foldcc.CountChar(filetest);
+    CHECK(char_amount == 8);
 }

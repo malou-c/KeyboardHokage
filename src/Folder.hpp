@@ -1,7 +1,6 @@
 #pragma once
 #include <filesystem>
 #include <fstream>
-#include <iostream>
 #include <string>
 #include <vector>
 
@@ -12,7 +11,7 @@ private:
 public:
     Folder();
     Folder(std::string path);
-    void CountChar(std::string filename, size_t& size);
+    int CountChar(std::string filename);
 
     //возвращает имена фалов в дирректории без названия самой
     //дирректории
