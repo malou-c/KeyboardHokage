@@ -62,8 +62,11 @@ int main()
 
     //страничка с выбором текста перед игрой
     TextSelection txtselect(300, 30);
-    ScoreBoard scoreboard;
+
     HelpButton help(200, 100);
+
+    //таблица рекордов
+    ScoreBoard scorebd;
 
     //Пока окно открыто
     while (window.isOpen()) {
@@ -121,8 +124,8 @@ int main()
             butSelectText.draw(window);
             butRecord.draw(window);
             butHelp.draw(window);
-            scoreboard.clear();
-
+            //
+            scorebd.is_loaded = false;
             break;
         case 1:
             //рестартаем текст и таймер
@@ -134,6 +137,12 @@ int main()
             if (txwin.isEndString && clface.isStart) {
                 clface.ClockStop();
                 txtdubler.clear();
+                //запись в таблицу рекордов
+                scorebd.add(
+                        name_input.get_input(),
+                        txtselect.getCurrent(),
+                        14,
+                        txtdubler.cps_max);
             }
 
             // update
@@ -153,7 +162,8 @@ int main()
             // draw
             butBack.draw(window); // кнопка назад
             //Рисуем таблицу рекордов
-            scoreboard.draw_board(window);
+            scorebd.load_board();
+            scorebd.draw_board(window);
             break;
         case 3:
             //
