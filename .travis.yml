@@ -1,0 +1,11 @@
+language: cpp
+os: windows
+
+script:
+  - git ls-files src/ | xargs clang-format -i && git diff --exit-code
+  - make
+  - make test
+  - make checktest
+
+compiler:
+  -g++
