@@ -1,7 +1,7 @@
 ////////////////////////////////////////////////////////////
 //
 // SFML - Simple and Fast Multimedia Library
-// Copyright (C) 2007-2019 Laurent Gomila (laurent@sfml-dev.org)
+// Copyright (C) 2007-2018 Laurent Gomila (laurent@sfml-dev.org)
 //
 // This software is provided 'as-is', without any express or implied warranty.
 // In no event will the authors be held liable for any damages arising from the use of this software.
@@ -100,12 +100,6 @@ public:
     ////////////////////////////////////////////////////////////
     /// \brief Transform a 2D point
     ///
-    /// These two statements are equivalent:
-    /// \code
-    /// sf::Vector2f transformedPoint = matrix.transformPoint(x, y);
-    /// sf::Vector2f transformedPoint = matrix * sf::Vector2f(x, y);
-    /// \endcode
-    ///
     /// \param x X coordinate of the point to transform
     /// \param y Y coordinate of the point to transform
     ///
@@ -116,12 +110,6 @@ public:
 
     ////////////////////////////////////////////////////////////
     /// \brief Transform a 2D point
-    ///
-    /// These two statements are equivalent:
-    /// \code
-    /// sf::Vector2f transformedPoint = matrix.transformPoint(point);
-    /// sf::Vector2f transformedPoint = matrix * point;
-    /// \endcode
     ///
     /// \param point Point to transform
     ///
@@ -150,14 +138,8 @@ public:
     /// \brief Combine the current transform with another one
     ///
     /// The result is a transform that is equivalent to applying
-    /// \a transform followed by *this. Mathematically, it is
-    /// equivalent to a matrix multiplication (*this) * transform.
-    ///
-    /// These two statements are equivalent:
-    /// \code
-    /// left.combine(right);
-    /// left *= right;
-    /// \endcode
+    /// *this followed by \a transform. Mathematically, it is
+    /// equivalent to a matrix multiplication.
     ///
     /// \param transform Transform to combine with this transform
     ///
@@ -369,14 +351,14 @@ public:
     ////////////////////////////////////////////////////////////
     // Static member data
     ////////////////////////////////////////////////////////////
-    static const Transform Identity; //!< The identity transform (does nothing)
+    static const Transform Identity; ///< The identity transform (does nothing)
 
 private:
 
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    float m_matrix[16]; //!< 4x4 matrix defining the transformation
+    float m_matrix[16]; ///< 4x4 matrix defining the transformation
 };
 
 ////////////////////////////////////////////////////////////

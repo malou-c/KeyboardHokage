@@ -1,6 +1,6 @@
 .PHONY: all clean install uninstall 
 
-CC = g++-9 -std=c++17
+CC = g++ -std=c++17
 CFLAGS = -Wall -Werror -Wextra -MP -MMD -c
 SFMLFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 PROG = kbh.exe
@@ -13,7 +13,7 @@ all: $(FILESCPP) $(PROG)
 
 
 run:
-	export LD_LIBRARY_PATH=lib && ./bin/kbh.exe
+	./bin/kbh.exe
 
 $(PROG): $(subst src/,build/src/,$(OBJECTS))
 	$(CC) $^ -o bin/$@ -Llib $(SFMLFLAGS)
@@ -46,7 +46,7 @@ build/test/%.o: test/%.cpp
 -include build/test/*.d
 
 checktest:
-	export LD_LIBRARY_PATH=lib && ./bin/test.exe
+	./bin/test.exe
 
 clean:  
-	rm -rf build/*.o build/*.d build/test/*.o build/test/*.d  build/src/*.o build/src/*.d 
+	del build\*.o build\*.d build\test\*.o build\test\*.d  build\src\*.o build\src\*.d 
