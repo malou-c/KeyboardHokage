@@ -17,8 +17,6 @@
 using namespace sf;
 int ID = 0;                      // глобал  ID
 int height = 1000, width = 1900; // высота и ширина окна
-bool lidboard_is_load = false; //загружена ли таблица рекордов
-std::vector<PersonStats> stats; //для хранения таблицы рекордов
 
 int main()
 {
@@ -66,6 +64,9 @@ int main()
     TextSelection txtselect(300, 30);
 
     HelpButton help(200, 100);
+
+    //таблица рекордов
+    ScoreBoard scorebd;
 
     //Пока окно открыто
     while (window.isOpen()) {
@@ -123,8 +124,8 @@ int main()
             butSelectText.draw(window);
             butRecord.draw(window);
             butHelp.draw(window);
-            lidboard_is_load = false;
-
+            //
+            scorebd.is_loaded = false;
             break;
         case 1:
             //рестартаем текст и таймер
@@ -136,6 +137,12 @@ int main()
             if (txwin.isEndString && clface.isStart) {
                 clface.ClockStop();
                 txtdubler.clear();
+                //запись в таблицу рекордов
+                scorebd.add(
+                        name_input.get_input(),
+                        txtselect.getCurrent(),
+                        14,
+                        txtdubler.cps_max);
             }
 
             // update
@@ -155,11 +162,8 @@ int main()
             // draw
             butBack.draw(window); // кнопка назад
             //Рисуем таблицу рекордов
-            if (!lidboard_is_load) {
-                stats = load_board();
-                lidboard_is_load = true;
-            }
-            draw_board(window, stats);
+            scorebd.load_board();
+            scorebd.draw_board(window);
             break;
         case 3:
             //

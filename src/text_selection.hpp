@@ -47,6 +47,8 @@ public:
     void update_sections(TextWindow& txtwin, Event event, RenderWindow& window);
     void but_update(Event event, RenderWindow& window);
     void recount_sect();
+    // getts
+    std::string getCurrent();
 
     // draw
     void draw(RenderWindow& window);
