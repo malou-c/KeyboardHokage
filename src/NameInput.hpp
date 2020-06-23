@@ -7,7 +7,7 @@ extern int width;
 class NameInput {
 private:
     sf::RectangleShape background;
-    std::string temp_name = "";
+    std::string temp_name = "name";
     sf::Font font;
     sf::Text text;
 
