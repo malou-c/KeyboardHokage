@@ -72,11 +72,7 @@ void TextSelection::update_sections(
                     //меняем параметры текста на новый
                     std::string path_txt = "texts/" + name_folders[curr_sect];
                     txtwin.setText(path_txt); // берем текст
-                    // вычисляем сколько строк поместится в окно
-                    txtwin.change_count_text_str();
-                    // вычисляем характеристики текста
-                    txtwin.change_text_character();
-                }
+                                }
             } else {
                 sections[i].sprite_sect.setColor(Color::White);
             }
@@ -143,4 +139,11 @@ void TextSelection::draw(RenderWindow& window)
     //кнопки << >>
     window.draw(but_left);
     window.draw(but_right);
+}
+
+// getts
+
+std::string TextSelection::getCurrent()
+{
+    return name_folders[curr_sect];
 }
