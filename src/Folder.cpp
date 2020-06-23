@@ -1,7 +1,5 @@
 #include "Folder.hpp"
 
-Folder::Folder(){};
-
 Folder::Folder(std::string path)
 {
     this->path = path;
