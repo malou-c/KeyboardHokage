@@ -130,7 +130,7 @@ TEST_CASE("File::load")
 
     file_data.close();
 
-    person_loaded = file.load(path);
+    person_loaded = file.load_of_file(path);
     remove("scoreboard_test.dat");
 
     for (int i = 0; i < 3; i++) {
