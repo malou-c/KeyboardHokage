@@ -22,12 +22,16 @@ public:
     MenuButton(int x, int y, std::string button_name, int id);
     MenuButton(int x, int y, int id);
 
-    int get_id(); //Узнать id кнопки
+    //Узнать id кнопки
+    int get_id();
     /* sf::Sprite get_sprite() { return background; }; */
 
-    void set_borders(); //Установить границы кнопки
+    //Установить границы кнопки
+    void set_borders();
 
-    void is_clicked(sf::RenderWindow& window); //Проверяет была ли нажата кнопка
+    //Проверяет была ли нажата кнопка
+    void is_clicked(sf::RenderWindow& window);
 
-    void draw(sf::RenderWindow& window); //рисует кнопку
+    //рисует кнопку
+    void draw(sf::RenderWindow& window);
 };
