@@ -72,7 +72,7 @@ void TextSelection::update_sections(
                     //меняем параметры текста на новый
                     std::string path_txt = "texts/" + name_folders[curr_sect];
                     txtwin.setText(path_txt); // берем текст
-                                }
+                }
             } else {
                 sections[i].sprite_sect.setColor(Color::White);
             }
