@@ -5,7 +5,6 @@ TextWindow::TextWindow(int x, int y, TextDubler& txtdubler)
 {
     //текстовый дублер
     txtDubler = &txtdubler;
-
     //загружаем спрайт окошечка
     font.loadFromFile("fonts/3976.ttf");
     texture.loadFromFile("images/text_window.png");
@@ -31,6 +30,12 @@ void TextWindow::game_reset(ClockFace& clock)
     clock.ClockReset();
     //дубер вводимых символов
     txtDubler->clear();
+    //кончилась ли строка
+    isEndString = false;
+    // вычисляем сколько строк поместится в окно
+    change_count_text_str();
+    // вычисляем характеристики текста
+    change_text_character();
 }
 
 wchar_t TextWindow::fount_sym_forTxtDub()
@@ -139,7 +144,7 @@ void TextWindow::change_text_character()
 {
     sprite.setPosition(position.x, position.y); // ставим окошко в  позицию
     //стираем все  что было ДО в  векторе
-    for (unsigned int i = 0; i < vec_text.size(); i++) {
+    for (size_t i = 0; i < vec_text.size(); i++) {
         vec_text[i].setString("");
     }
     vec_text.resize(
@@ -178,16 +183,17 @@ void TextWindow::DrawTextWindow(RenderWindow& window)
 {
     window.draw(sprite); // фон
                          //рисуем текст
-    for (unsigned int i = 0; i < vec_text.size(); i++) {
+    for (size_t i = 0; i < vec_text.size(); i++) {
         window.draw(vec_text[i]);
     }
     //а тут дублер поверх текста
     window.draw(dubler);
 }
+
 //считаем сколько строк поместится в окно
 void TextWindow::change_count_text_str()
 {
-    std::cout << "text str size" << text_str.size() << std::endl;
+    std::cout << "text str size " << text_str.size() << std::endl;
     Text text_help("S", font, font_size);
     for (unsigned int i = 1; i <= text_str.size(); i++) {
         std::cout << (text_help.getLocalBounds().height + margin_y) * i
