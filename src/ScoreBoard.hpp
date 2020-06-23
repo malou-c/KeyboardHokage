@@ -6,21 +6,24 @@
 #include <iostream>
 
 //класс для загрузки таблицы рекордов и ее хранения
-class ScoreBoard {
-private:
-    bool is_loaded = false; //загружена ли таблица рекордов
-    std::vector<PersonStats> stats; //для хранения таблицы рекордов
-
-    //загружаем таблицу рекордов из файла
-    std::vector<PersonStats> load_board();
-
+class ScoreBoard : public File {
 public:
+    bool is_loaded = false; //загружена ли таблица рекордов
+    //фон для таблицы рекордов
+    sf::Texture bckgrnd_pic;
+    sf::Sprite bckgrnd_sprite;
+    //
+    sf::Text text;
+    std::string out_text = "";
+    sf::Font font;
+    //для хранения таблицы рекордов
+    std::vector<PersonStats> stats;
+    //конструктор
+    ScoreBoard();
     //Рисуем таблицу рекордов
-    void draw_board(sf::RenderWindow& window, int width = 1500);
-    //Загружена ли таблица
-    bool is_load();
+    void draw_board(sf::RenderWindow& window);
+    //загружаем таблицу рекордов из файла
+    void load_board();
     //Удаляем загруженную таблицу
     void clear();
-    //загружаем таблицу
-    void load();
 };
