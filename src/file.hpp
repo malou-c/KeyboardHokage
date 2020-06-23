@@ -8,8 +8,6 @@
 #include "PersonStats.hpp"
 
 class File {
-private:
-
 public:
     std::string path = "data/lider_board.dat";
     void sort(); //Сортирует файл по убыванию времени
