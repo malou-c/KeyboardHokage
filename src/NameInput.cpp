@@ -52,8 +52,8 @@ void NameInput::update(sf::RenderWindow& window, sf::Event event)
             break;
 
         default:
-            if (temp_name.size() <= 50) {
-                temp_name += event.text.unicode;
+            if (temp_name.size() < 9) {
+                temp_name += tolower(event.text.unicode);
             }
             break;
         }
