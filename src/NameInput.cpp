@@ -12,6 +12,7 @@ NameInput::NameInput()
     text.setFont(font);
     text.setCharacterSize(18);
     text.setFillColor(sf::Color::Black);
+    text.setString(temp_name);
 };
 
 void NameInput::window_for_name_input(sf::RenderWindow& window, sf::Event event)

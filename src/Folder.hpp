@@ -10,7 +10,6 @@ private:
     std::string path;
 
 public:
-    Folder();
     Folder(std::string path);
 
     //возвращает имена фалов в дирректории без названия самой дирректории

@@ -3,6 +3,7 @@
 #include <string>
 
 #include "Folder.hpp"
+#include "HelpButton.hpp"
 #include "MenuButton.hpp"
 #include "MyKeyboard.hpp"
 #include "NameInput.hpp"
@@ -11,12 +12,11 @@
 #include "clockface.hpp"
 #include "screentxt.hpp"
 #include "text_dubler.hpp"
+#include "text_selection.hpp"
 
 using namespace sf;
 int ID = 0;                      // глобал  ID
 int height = 1000, width = 1900; // высота и ширина окна
-bool lidboard_is_load = false; //загружена ли таблица рекордов
-std::vector<PersonStats> stats; //для хранения таблицы рекордов
 
 int main()
 {
@@ -31,13 +31,17 @@ int main()
     settings.antialiasingLevel = 8;
     //Инициализирую окно
     RenderWindow window(
-            VideoMode(width, height), "KeybordNinja", Style::Default, settings);
+            VideoMode(width, height),
+            "KeyboardNinja",
+            Style::Default,
+            settings);
     window.setVerticalSyncEnabled(true); // вертикальная синхронизация
     window.setFramerateLimit(60);
 
     //кнопки меню
     MenuButton butExit(width - 100, 0, -1), butBack(100, 600, 0),
-            butPlay(100, 100, 1), butRecord(100, 200, 2);
+            butPlay(100, 100, 1), butRecord(100, 200, 2), butHelp(100, 300, 3),
+            butSelectText(100, 400, 4);
 
     //клавиатура
     MyKeyboard mykb(270, 600); // инициализируем клавиатру в позиции x y
@@ -56,6 +60,14 @@ int main()
     NameInput name_input;
     PersonStats person_stats;
 
+    //страничка с выбором текста перед игрой
+    TextSelection txtselect(300, 30);
+
+    HelpButton help(200, 100);
+
+    //таблица рекордов
+    ScoreBoard scorebd;
+
     //Пока окно открыто
     while (window.isOpen()) {
         //Обработка событий
@@ -67,15 +79,19 @@ int main()
                  event.key.code == sf::Keyboard::Escape))
                 window.close(); //то закрыть окно
             switch (ID) {
+            case 0:
+                break;
             case 1:
                 //клавиатура обновляется только если текст не кончился
-                if (!txwin.isEndString) {
-                    mykb.Update(event, txwin);
-                }
-
+                mykb.Update(event, txwin);
                 if (event.type == Event::TextEntered && !clface.isStart) {
                     clface.ClockStart();
                 }
+                break;
+            case 4:
+                //кнопки << >>
+                txtselect.but_update(event, window);
+                txtselect.update_sections(txwin, event, window);
                 break;
 
             default:
@@ -83,6 +99,8 @@ int main()
             }
             name_input.window_for_name_input(window, event);
             person_stats.set_name(name_input.get_input());
+            help.MoveLeftButton(window, event);
+            help.MoveRightButton(window, event);
         }
         // чистим окно
         window.clear(Color::White);
@@ -93,22 +111,43 @@ int main()
             window.close();
             break;
         case 0:
+            //даем добро на рестарт так как мы вышли в меню
+            if (!txwin.is_not_reset) {
+                txwin.is_not_reset = true;
+            }
             // update
-            butPlay.is_clicked(window);
+            butSelectText.is_clicked(window);
             butRecord.is_clicked(window);
+            butHelp.is_clicked(window);
             // draw
             //кнопки меню
-            butPlay.draw(window);
+            butSelectText.draw(window);
             butRecord.draw(window);
-            lidboard_is_load = false;
+            butHelp.draw(window);
+            //
+            scorebd.is_loaded = false;
             break;
         case 1:
+            //рестартаем текст и таймер
+            if (txwin.is_not_reset) {
+                txwin.game_reset(clface);
+                txwin.is_not_reset = false;
+            }
+            // если кончился текст в окне
+            if (txwin.isEndString && clface.isStart) {
+                clface.ClockStop();
+                txtdubler.clear();
+                //запись в таблицу рекордов
+                scorebd.add(
+                        name_input.get_input(),
+                        txtselect.getCurrent(),
+                        14,
+                        txtdubler.cps_max);
+            }
+
             // update
             butBack.is_clicked(window);
             clface.update_clock();
-            if (txwin.isEndString) {
-                clface.ClockStop(); // если кончился текст в окне
-            }
 
             // draw
             butBack.draw(window);         // кнопка назад
@@ -123,11 +162,26 @@ int main()
             // draw
             butBack.draw(window); // кнопка назад
             //Рисуем таблицу рекордов
-            if (!lidboard_is_load) {
-                stats = load_board();
-                lidboard_is_load = true;
-            }
-            draw_board(window, stats);
+            scorebd.load_board();
+            scorebd.draw_board(window);
+            break;
+        case 3:
+            //
+            butBack.is_clicked(window);
+
+            butBack.draw(window);
+            help.DrawSd(window);
+            help.DrawMoves(window);
+            break;
+        case 4:
+            // update
+            butPlay.is_clicked(window);
+            butBack.is_clicked(window);
+            // draw
+            txtselect.draw(window);
+            //кнопки
+            butPlay.draw(window);
+            butBack.draw(window);
             break;
 
         default:

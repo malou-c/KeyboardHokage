@@ -3,7 +3,7 @@
 void File::sort()
 { //Сортирует файл по убыванию времени
     std::vector<PersonStats> user;
-    user = load();
+    user = load_of_file();
 
     for (unsigned int i = 0; i < user.size(); i++) {
         for (unsigned int j = 0; j < user.size() - i - 1; j++) {
@@ -25,8 +25,8 @@ void File::sort()
 }
 
 void File::add(
-        char user_name_in[50],
-        char text_name_in[50],
+        std::string user_name_in,
+        std::string text_name_in,
         float time_in,
         float cps_in,
         std::string path)
@@ -50,7 +50,7 @@ void File::add(
     sort();
 }
 
-std::vector<PersonStats> File::load(std::string path)
+std::vector<PersonStats> File::load_of_file(std::string path)
 { //Загружает информацию о пользователях из файла
     std::vector<PersonStats> users_stat;
     PersonStats buffer;
@@ -74,7 +74,7 @@ std::vector<PersonStats> File::load(std::string path)
 int File::find(char key[])
 { //Возвращает номер поизиции элемента в файле
     std::vector<PersonStats> users;
-    users = load();
+    users = load_of_file();
 
     int left = 0;
     int right = users.size();
@@ -100,7 +100,7 @@ int File::find(char key[])
 void File::show()
 { //Показываетс содержимое файла
     std::vector<PersonStats> user;
-    user = load();
+    user = load_of_file();
 
     for (unsigned int i = 0; i < user.size(); i++) {
         std::cout << user[i].user_name << " " << user[i].time << std::endl;
