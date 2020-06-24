@@ -3,7 +3,7 @@
 class PersonStats {
 private:
 public:
-    char user_name[50]; //имя пользователя
+    char user_name[9];  //имя пользователя
     char text_name[50]; //название текста
     float time;
     float cps; // clicks per second

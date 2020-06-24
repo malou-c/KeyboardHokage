@@ -33,8 +33,11 @@ void File::add(
 { //Добавялет запись о пользователе в конец файала
     PersonStats person;
 
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 9; i++) {
         person.user_name[i] = user_name_in[i];
+    }
+
+    for (int i = 0; i < 50; i++) {
         person.text_name[i] = text_name_in[i];
     }
 
