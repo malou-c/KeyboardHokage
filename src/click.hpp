@@ -6,6 +6,7 @@ using namespace sf;
 
 class Click {
 public:
+    bool enable_but = false;
     bool relise_L = true;
     bool relise_R = true;
     //функции
@@ -13,4 +14,5 @@ public:
     bool isReleased(Event event);
     bool isReleased_In(Sprite sprite, RenderWindow& window, Event event);
     bool isContain(Sprite sprite, RenderWindow& window);
+    bool isFullClick(Sprite sprite, RenderWindow& window, Event event);
 };

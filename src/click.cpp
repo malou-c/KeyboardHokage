@@ -46,3 +46,15 @@ bool Click::isContain(Sprite sprite, RenderWindow& window)
         return false;
     }
 }
+
+bool Click::isFullClick(Sprite sprite, RenderWindow& window, Event event)
+{
+    if (!enable_but && isClicked(sprite, window, event)) {
+        enable_but = true;
+    }
+    if (enable_but && isReleased_In(sprite, window, event)) {
+        enable_but = false;
+        return true;
+    }
+    return false;
+}
