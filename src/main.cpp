@@ -62,7 +62,7 @@ int main()
 
     //таймер
     ClockFace clface(10, 10, txtdubler); // инициализируем часы в  позиции x y
-    NameInput name_input;
+    NameInput name_input(300, 5);
     PersonStats person_stats;
 
     //страничка с выбором текста перед игрой
@@ -85,6 +85,8 @@ int main()
                 window.close(); //то закрыть окно
             switch (ID) {
             case 0:
+                // update name input
+                name_input.update(window, event);
                 // update
                 butSelectText.is_clicked(window, event);
                 butRecord.is_clicked(window, event);
@@ -119,7 +121,6 @@ int main()
             default:
                 break;
             }
-            name_input.window_for_name_input(window, event);
             person_stats.set_name(name_input.get_input());
             help.MoveLeftButton(window, event);
             help.MoveRightButton(window, event);
