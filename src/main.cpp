@@ -39,9 +39,14 @@ int main()
     window.setFramerateLimit(60);
 
     //кнопки меню
-    MenuButton butExit(width - 100, 0, -1), butBack(100, 600, 0),
-            butPlay(100, 100, 1), butRecord(100, 200, 2), butHelp(100, 300, 3),
-            butSelectText(100, 400, 4);
+
+    MenuButton butSelectText(100, 200, "MB_play.png", 4);
+    MenuButton butHelp(100, 300, "MB_theory.png", 3);
+    MenuButton butRecord(100, 400, "MB_records.png", 2);
+    MenuButton butExit(100, 500, "MB_exit.png", -1);
+    //
+    MenuButton butBack(100, 600, 0);
+    MenuButton butPlay(100, 100, "MB_play.png", 1);
 
     //клавиатура
     MyKeyboard mykb(270, 600); // инициализируем клавиатру в позиции x y
@@ -80,6 +85,11 @@ int main()
                 window.close(); //то закрыть окно
             switch (ID) {
             case 0:
+                // update
+                butSelectText.is_clicked(window, event);
+                butRecord.is_clicked(window, event);
+                butHelp.is_clicked(window, event);
+                butExit.is_clicked(window, event);
                 break;
             case 1:
                 //клавиатура обновляется только если текст не кончился
@@ -87,8 +97,20 @@ int main()
                 if (event.type == Event::TextEntered && !clface.isStart) {
                     clface.ClockStart();
                 }
+                butBack.is_clicked(window, event);
+                break;
+            case 2:
+                // update
+                butBack.is_clicked(window, event);
+                break;
+            case 3:
+                // update
+                butBack.is_clicked(window, event);
                 break;
             case 4:
+                // update
+                butPlay.is_clicked(window, event);
+                butBack.is_clicked(window, event);
                 //кнопки << >>
                 txtselect.but_update(event, window);
                 txtselect.update_sections(txwin, event, window);
@@ -115,15 +137,12 @@ int main()
             if (!txwin.is_not_reset) {
                 txwin.is_not_reset = true;
             }
-            // update
-            butSelectText.is_clicked(window);
-            butRecord.is_clicked(window);
-            butHelp.is_clicked(window);
             // draw
             //кнопки меню
             butSelectText.draw(window);
             butRecord.draw(window);
             butHelp.draw(window);
+            butExit.draw(window);
             //
             scorebd.is_loaded = false;
             break;
@@ -146,7 +165,6 @@ int main()
             }
 
             // update
-            butBack.is_clicked(window);
             clface.update_clock();
 
             // draw
@@ -157,8 +175,6 @@ int main()
             txtdubler.draw(window);
             break;
         case 2:
-            // update
-            butBack.is_clicked(window);
             // draw
             butBack.draw(window); // кнопка назад
             //Рисуем таблицу рекордов
@@ -166,17 +182,11 @@ int main()
             scorebd.draw_board(window);
             break;
         case 3:
-            //
-            butBack.is_clicked(window);
-
             butBack.draw(window);
             help.DrawSd(window);
             help.DrawMoves(window);
             break;
         case 4:
-            // update
-            butPlay.is_clicked(window);
-            butBack.is_clicked(window);
             // draw
             txtselect.draw(window);
             //кнопки
@@ -187,11 +197,9 @@ int main()
         default:
             break;
         }
-        //Выход из приложения
-        butExit.is_clicked(window);
+        // ввод имени
         name_input.draw(window);
-
-        butExit.draw(window);
+        //вывод ВСЕГО на экран
         window.display();
     }
 

@@ -11,4 +11,6 @@ public:
     //функции
     bool isClicked(Sprite sprite, RenderWindow& window, Event event);
     bool isReleased(Event event);
+    bool isReleased_In(Sprite sprite, RenderWindow& window, Event event);
+    bool isContain(Sprite sprite, RenderWindow& window);
 };
