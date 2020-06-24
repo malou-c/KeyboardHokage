@@ -23,8 +23,8 @@ public:
     //вектор из секций
     std::vector<Section> sections;
     int curr_sect = -1;
-    Color color_curr = Color(20, 20, 150);
-    Color color_contain = Color(20, 20, 255);
+    Color color_curr = Color(128, 128, 128);
+    Color color_contain = Color(191, 191, 191);
     //отступы для секций
     Vector2i indent_sect;
     size_t count_section = 10; // кол-во секций

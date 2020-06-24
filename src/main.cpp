@@ -67,10 +67,9 @@ int main()
     PersonStats person_stats;
 
     //страничка с выбором текста перед игрой
-    TextSelection txtselect(300, 30);
+    TextSelection txtselect(550, 70);
 
     HelpButton help(200, 100);
-
     //таблица рекордов
     ScoreBoard scorebd;
 
