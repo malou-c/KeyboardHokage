@@ -45,7 +45,8 @@ int main()
     MenuButton butRecord(100, 400, "MB_records.png", 2);
     MenuButton butExit(100, 500, "MB_exit.png", -1);
     //
-    MenuButton butBack(100, 600, 0);
+    MenuButton butBackMenu(50, 900, "MB_back.png", 0);
+    MenuButton butBackSelect(50, 900, "MB_back.png", 4);
     MenuButton butPlay(100, 100, "MB_play.png", 1);
 
     //клавиатура
@@ -99,20 +100,20 @@ int main()
                 if (event.type == Event::TextEntered && !clface.isStart) {
                     clface.ClockStart();
                 }
-                butBack.is_clicked(window, event);
+                butBackSelect.is_clicked(window, event);
                 break;
             case 2:
                 // update
-                butBack.is_clicked(window, event);
+                butBackMenu.is_clicked(window, event);
                 break;
             case 3:
                 // update
-                butBack.is_clicked(window, event);
+                butBackMenu.is_clicked(window, event);
                 break;
             case 4:
                 // update
                 butPlay.is_clicked(window, event);
-                butBack.is_clicked(window, event);
+                butBackMenu.is_clicked(window, event);
                 //кнопки << >>
                 txtselect.but_update(event, window);
                 txtselect.update_sections(txwin, event, window);
@@ -169,7 +170,7 @@ int main()
             clface.update_clock();
 
             // draw
-            butBack.draw(window);         // кнопка назад
+            butBackSelect.draw(window);   // кнопка назад
             clface.DrawClock(window);     //таймер
             mykb.DrawKB(window);          // клавиатура
             txwin.DrawTextWindow(window); // окно с  текстом
@@ -177,13 +178,13 @@ int main()
             break;
         case 2:
             // draw
-            butBack.draw(window); // кнопка назад
+            butBackMenu.draw(window); // кнопка назад
             //Рисуем таблицу рекордов
             scorebd.load_board();
             scorebd.draw_board(window);
             break;
         case 3:
-            butBack.draw(window);
+            butBackMenu.draw(window);
             help.DrawSd(window);
             help.DrawMoves(window);
             break;
@@ -192,7 +193,7 @@ int main()
             txtselect.draw(window);
             //кнопки
             butPlay.draw(window);
-            butBack.draw(window);
+            butBackMenu.draw(window);
             break;
 
         default:
