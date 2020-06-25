@@ -27,7 +27,7 @@ TEST_CASE("Folder::contains")
     files_name = folder.contains();
     sort(files_name.begin(), files_name.end());
 
-    for (size_t i = 0; i < 5; i++) {
+    for (int i = 0; i < 5; i++) {
         name = "file";
         name += i + '0';
         name += ".txt";
