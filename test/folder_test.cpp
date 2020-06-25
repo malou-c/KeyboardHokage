@@ -1,4 +1,5 @@
 #include "../src/Folder.hpp"
+#include "../src/filereader.hpp"
 #include "testparty/catch.hpp"
 
 #include <algorithm>
@@ -39,9 +40,5 @@ TEST_CASE("Folder::contains")
 TEST_CASE("CountChar")
 {
     Folder foldcc;
-
-    std::string filetest = "cctestfile.txt";
-    size_t char_amount;
-    foldcc.CountChar(filetest, char_amount);
-    CHECK(char_amount != 0);
+    CHECK(foldcc.CountChar(readfile_to_wstr("test/cctestfile.txt")) == 7);
 }
