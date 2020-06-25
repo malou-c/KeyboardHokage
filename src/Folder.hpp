@@ -11,7 +11,7 @@ private:
 
 public:
     Folder(std::string path);
-    void CountChar(std::string filename, size_t& size);
+    int CountChar(std::wstring filestr);
 
     //возвращает имена фалов в дирректории без названия самой
     //дирректории
