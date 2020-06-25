@@ -69,9 +69,9 @@ int main()
     //страничка с выбором текста перед игрой
     TextSelection txtselect(550, 70);
 
-    HelpButton help(200, 100);
+    HelpButton help(180, 70);
     //таблица рекордов
-    ScoreBoard scorebd;
+    ScoreBoard scorebd(550, 70);
 
     //Пока окно открыто
     while (window.isOpen()) {
@@ -161,7 +161,9 @@ int main()
                 scorebd.add(
                         name_input.get_input(),
                         txtselect.getCurrent(),
-                        14,
+                        clface.msec,
+                        clface.seconds,
+                        clface.minutes,
                         txtdubler.cps_max);
             }
 
