@@ -123,6 +123,9 @@ void TextDubler::cps_update()
     for (size_t i = 0; i < time_size - 1; i++) {
         sum += vec_time[i];
     }
+    //обновляем cps max
+    if (cps_max < sum)
+        cps_max = sum;
     std::ostringstream stream_cps;
     stream_cps << sum;
     cps_text.setString(stream_cps.str());
