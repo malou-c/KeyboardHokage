@@ -18,13 +18,14 @@ std::vector<std::string> Folder::contains()
     return list;
 };
 
-void Folder::CountChar(std::string filename, size_t& size)
+int Folder::CountChar(std::wstring filestr)
 {
-    std::ifstream ccfile(filename.c_str());
-    for (size = 0; !ccfile.eof(); size++) {
-        ccfile.get();
-        std::cout << "Chtonib" << std::endl;
+    int size = 0, space = 0;
+    for (int i = 0; i < filestr.size(); i++) {
+        size++;
+        if (filestr[i] == ' ') {
+            space++;
+        }
     }
-    ccfile.clear();
-    ccfile.close();
+    return size - space;
 }
