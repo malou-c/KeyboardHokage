@@ -2,13 +2,17 @@
 
 void File::sort()
 { //Сортирует файл по убыванию времени
-    std::vector<PersonStats> user;
-    user = load_of_file();
+    std::vector<PersonStats> users;
+    users = load_of_file();
 
-    for (unsigned int i = 0; i < user.size(); i++) {
-        for (unsigned int j = 0; j < user.size() - i - 1; j++) {
-            if (user[j].time < user[j + 1].time) {
-                std::swap(user[j], user[j + 1]);
+    for (size_t i = 0; i < users.size(); i++) {
+        for (size_t j = 0; j < users.size() - i - 1; j++) {
+            if (users[j].time_min < users[j + 1].time_min) {
+                std::swap(users[j], users[j + 1]);
+            } else if (users[j].time_sec < users[j + 1].time_sec) {
+                std::swap(users[j], users[j + 1]);
+            } else if (users[j].time_ms < users[j + 1].time_ms) {
+                std::swap(users[j], users[j + 1]);
             }
         }
     }
@@ -17,8 +21,8 @@ void File::sort()
 
     file.open(path, std::ios::trunc);
 
-    for (unsigned int i = 0; i < user.size(); i++) {
-        file.write((char*)&user[i], sizeof(PersonStats));
+    for (auto user : users) {
+        file.write((char*)&user, sizeof(PersonStats));
     }
 
     file.close();
@@ -27,8 +31,10 @@ void File::sort()
 void File::add(
         std::string user_name_in,
         std::string text_name_in,
-        float time_in,
-        float cps_in,
+        int time_ms_in,
+        int time_sec_in,
+        int time_min_in,
+        int max_cps_in,
         std::string path)
 { //Добавялет запись о пользователе в конец файала
     PersonStats person;
@@ -41,8 +47,11 @@ void File::add(
         person.text_name[i] = text_name_in[i];
     }
 
-    person.time = time_in;
-    person.cps = cps_in;
+    person.time_ms = time_ms_in;
+    person.time_sec = time_sec_in;
+    person.time_min = time_min_in;
+
+    person.max_cps = max_cps_in;
 
     std::ofstream file;
     file.open(
@@ -106,6 +115,6 @@ void File::show()
     user = load_of_file();
 
     for (unsigned int i = 0; i < user.size(); i++) {
-        std::cout << user[i].user_name << " " << user[i].time << std::endl;
+        std::cout << user[i].user_name << " " << user[i].time_sec << std::endl;
     }
 }
