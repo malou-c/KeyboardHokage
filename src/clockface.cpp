@@ -2,9 +2,7 @@
 //конструктор
 ClockFace::ClockFace(int x, int y, TextDubler& txtdubler)
 {
-    if (!font.loadFromFile("fonts/CyrilicOld.ttf")) {
-        std::cout << "AAAAAAAA HELP" << std::endl;
-    }
+    font.loadFromFile("fonts/CyrilicOld.ttf");
     //текстовый дублер
     txtDubler = &txtdubler;
 
@@ -12,7 +10,7 @@ ClockFace::ClockFace(int x, int y, TextDubler& txtdubler)
     text.setFont(font);
     text.setCharacterSize(25);
     text.setFillColor(Color::Black);
-    setPosition(x, y);
+    text.setPosition(x, y);
 }
 
 //функции
