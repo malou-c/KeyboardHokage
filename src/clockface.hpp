@@ -19,7 +19,7 @@ public:
     Text text;
     Clock msstorage;
     Clock secstorage;
-    int time = 0;
+    int msec = 0;
     int seconds = 0;
     int minsum = 1;
     int minutes = 0;

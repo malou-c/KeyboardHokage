@@ -30,10 +30,10 @@ void ClockFace::update_clock()
         }
 
         // timer
-        if (time < 1000) {
-            time = (msstorage.getElapsedTime().asMilliseconds());
+        if (msec < 1000) {
+            msec = (msstorage.getElapsedTime().asMilliseconds());
         } else {
-            time = 0;
+            msec = 0;
             msstorage.restart();
         }
 
@@ -53,7 +53,7 @@ void ClockFace::update_clock()
 void ClockFace::DrawClock(RenderWindow& window)
 {
     std::ostringstream stringmillsec, stringsec, stringmin;
-    stringmillsec << time;
+    stringmillsec << msec;
     stringsec << seconds;
     stringmin << minutes;
 
@@ -72,7 +72,7 @@ void ClockFace::setPosition(int x, int y)
 void ClockFace::ClockReset()
 {
     switcher = 0;
-    time = 0;
+    msec = 0;
     seconds = 0;
     minutes = 0;
 }
