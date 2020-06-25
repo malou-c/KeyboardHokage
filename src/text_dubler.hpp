@@ -34,7 +34,7 @@ public:
     void addsymCorrect(wchar_t sym);
     bool isAllWrong();
     bool isWrong();
-    void delsym(wchar_t sym);
+    void delsym(wchar_t sym, bool hardmode);
     int countWrong();
     //для показателя CPS
     void cps_plus();

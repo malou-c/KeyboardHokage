@@ -47,7 +47,7 @@ public:
     void add_sym_to_dubler(wchar_t sym);
     void pop_sym_to_dubler();
     void dubler_fill();
-    void checksym_dubler(int symbol);
+    void checksym_dubler(int symbol, bool hardmode);
     void dubler_clean();
 
     std::vector<std::wstring> convert_file_to_text(std::string filename);

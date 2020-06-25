@@ -146,7 +146,7 @@ void MyKeyboard::setPosition(int x, int y)
     position.y = y;
 }
 
-void MyKeyboard::Update(sf::Event event, TextWindow& txwin)
+void MyKeyboard::Update(sf::Event event, TextWindow& txwin, bool hardmode)
 {
     int symbol;
     switch (event.type) {
@@ -158,7 +158,7 @@ void MyKeyboard::Update(sf::Event event, TextWindow& txwin)
         //если строка не кончилась
         if (!txwin.isEndString) {
             //символ который нажали проверяем в окне
-            txwin.checksym_dubler(symbol);
+            txwin.checksym_dubler(symbol, hardmode);
         }
 
         //меняем цвет клавиши

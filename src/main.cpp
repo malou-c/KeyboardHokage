@@ -10,6 +10,7 @@
 #include "PersonStats.hpp"
 #include "ScoreBoard.hpp"
 #include "clockface.hpp"
+#include "mode_game.hpp"
 #include "screentxt.hpp"
 #include "text_dubler.hpp"
 #include "text_selection.hpp"
@@ -39,7 +40,6 @@ int main()
     window.setFramerateLimit(60);
 
     //кнопки меню
-
     MenuButton butSelectText(100, 200, "MB_play.png", 4);
     MenuButton butHelp(100, 300, "MB_theory.png", 3);
     MenuButton butRecord(100, 400, "MB_records.png", 2);
@@ -47,7 +47,8 @@ int main()
     //
     MenuButton butBackMenu(50, 900, "MB_back.png", 0);
     MenuButton butBackSelect(50, 900, "MB_back.png", 4);
-    MenuButton butPlay(100, 100, "MB_play.png", 1);
+    //кнопка играть
+    MenuButton butPlay(1420, 900, "MB_play.png", 1);
 
     //клавиатура
     MyKeyboard mykb(270, 600); // инициализируем клавиатру в позиции x y
@@ -64,11 +65,13 @@ int main()
     // таймер
     ClockFace clface(350, 167, txtdubler);
 
-    NameInput name_input(300, 5);
+    NameInput name_input(10, 5);
     PersonStats person_stats;
 
     //страничка с выбором текста перед игрой
     TextSelection txtselect(550, 70);
+    //выбор режима игры
+    ModeGame gamemode(1400, 820);
 
     HelpButton help(180, 70);
     //таблица рекордов
@@ -96,7 +99,7 @@ int main()
                 break;
             case 1:
                 //клавиатура обновляется только если текст не кончился
-                mykb.Update(event, txwin);
+                mykb.Update(event, txwin, gamemode.is_hardmode);
                 if (event.type == Event::TextEntered && !clface.isStart) {
                     clface.ClockStart();
                 }
@@ -114,6 +117,7 @@ int main()
                 // update
                 butPlay.is_clicked(window, event);
                 butBackMenu.is_clicked(window, event);
+                gamemode.update(window, event);
                 //кнопки << >>
                 txtselect.but_update(event, window);
                 txtselect.update_sections(txwin, event, window);
@@ -135,10 +139,6 @@ int main()
             window.close();
             break;
         case 0:
-            //даем добро на рестарт так как мы вышли в меню
-            if (!txwin.is_not_reset) {
-                txwin.is_not_reset = true;
-            }
             // draw
             //кнопки меню
             butSelectText.draw(window);
@@ -191,8 +191,13 @@ int main()
             help.DrawMoves(window);
             break;
         case 4:
+            //даем добро на рестарт так как мы вышли в меню
+            if (!txwin.is_not_reset) {
+                txwin.is_not_reset = true;
+            }
             // draw
             txtselect.draw(window);
+            gamemode.draw(window);
             //кнопки
             butPlay.draw(window);
             butBackMenu.draw(window);

@@ -19,10 +19,10 @@ public:
     MyKeyboard(int x, int y);
 
     //функции
-    void DrawKB(sf::RenderWindow& window); //рисуем клаватуру
-    void
-    Update(sf::Event event,
-           TextWindow& txwin); // обновляем события (внутри цикла pollEvent)
+    //рисуем клаватуру
+    void DrawKB(sf::RenderWindow& window);
+    // обновляем события (внутри цикла pollEvent)
+    void Update(sf::Event event, TextWindow& txwin, bool hardmode);
 
     // get
     sf::Vector2i getPosition();

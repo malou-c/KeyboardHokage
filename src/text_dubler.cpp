@@ -93,8 +93,11 @@ int TextDubler::countWrong()
     return count;
 }
 
-void TextDubler::delsym(wchar_t sym)
+void TextDubler::delsym(wchar_t sym, bool hardmode)
 {
+    //если гейм мод easy то символ будет *
+    if (!hardmode)
+        sym = L'*';
     //создаем экземпляр буквы
     Text tch(sym, font, font_size);
     tch.setFillColor(correctColor);

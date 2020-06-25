@@ -94,7 +94,7 @@ void TextWindow::dubler_clean()
     dubler.setString("");
 }
 
-void TextWindow::checksym_dubler(int symbol)
+void TextWindow::checksym_dubler(int symbol, bool hardmode)
 {
     //отдельно если ввели backspace (8)
     if (symbol == 8) {
@@ -114,13 +114,13 @@ void TextWindow::checksym_dubler(int symbol)
             }
         }
         //из текстового дублера в любом случае удаляем букву
-        txtDubler->delsym(sym);
+        txtDubler->delsym(sym, hardmode);
 
     }
     //если текущий символ равен введеному и не было неверных
     else if (
             symbol == (int)text_str[start_str][curr_sym]
-            && !txtDubler->isWrong()) {
+            && (!txtDubler->isWrong() || !hardmode)) {
         std::cout << "right" << text_str[start_str][curr_sym] << std::endl;
         std::cout << "was: " << curr_sym << std::endl;
         add_sym_to_dubler(text_str[start_str][curr_sym]);
