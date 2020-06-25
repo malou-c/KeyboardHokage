@@ -53,16 +53,17 @@ int main()
     MyKeyboard mykb(270, 600); // инициализируем клавиатру в позиции x y
 
     //текстовый дублер
-    TextDubler txtdubler(700, 430);
+    TextDubler txtdubler(620, 130);
 
     //окно с  текстом
-    TextWindow txwin(400, 200, txtdubler); //окно с  текстом
+    TextWindow txwin(320, 200, txtdubler); //окно с  текстом
     txwin.setText("texts/text_1.txt");     // берем текст
     txwin.change_count_text_str(); // вычисляем сколько строк поместится в  окно
     txwin.change_text_character(); // вычисляем характеристики текста
 
-    //таймер
-    ClockFace clface(10, 10, txtdubler); // инициализируем часы в  позиции x y
+    // таймер
+    ClockFace clface(350, 167, txtdubler);
+
     NameInput name_input(300, 5);
     PersonStats person_stats;
 

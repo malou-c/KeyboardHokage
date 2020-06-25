@@ -8,13 +8,16 @@ using namespace sf;
 
 class TextDubler {
 private:
-    Vector2f position;
-    Color correctColor = Color::Black;
-    Color wrongColor = Color::Red;
+    Vector2f pos_text;
+    Color correctColor = Color(64, 64, 64);
+    Color wrongColor = Color(182, 0, 14);
     Font font;
     int font_size = 30;
     size_t vec_size = 10;
     size_t time_size = 5;
+    // bkgr
+    Texture texture_bkground;
+    Sprite bkground;
 
 public:
     std::vector<Text> vec_txt;

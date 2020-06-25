@@ -6,21 +6,26 @@ TextDubler::TextDubler()
 }
 TextDubler::TextDubler(float x, float y)
 { //ставим в  позицию
-    position.x = x;
-    position.y = y;
+    pos_text.x = x + 15;
+    pos_text.y = y + 25;
+    // bkgr
+    texture_bkground.loadFromFile("images/TD_bkground.png");
+    bkground.setTexture(texture_bkground);
+    bkground.setPosition(x, y);
     //загружаем шрифт
     font.loadFromFile("fonts/3976.ttf");
     // vector txt
     vec_txt.resize(vec_size);
-    Text ch(L"*", font, 30);
-    ch.setFillColor(sf::Color::Blue);
+    Text ch(L"*", font, font_size);
+    ch.setFillColor(correctColor);
     for (size_t i = 0; i < vec_txt.size(); i++) {
         vec_txt[i] = ch;
-        vec_txt[i].setPosition(position.x + (i * 30), position.y);
+        vec_txt[i].setPosition(pos_text.x + (i * 30), pos_text.y);
     }
     // CPS
     cps_text = ch; // берем те же настройки что и для букв
-    cps_text.setPosition(position.x + 400, position.y);
+    cps_text.setPosition(
+            x + bkground.getGlobalBounds().width + 5, pos_text.y + 5);
     cps_text.setString("0.0");
     vec_time.resize(time_size);
     //обнуление
@@ -144,6 +149,8 @@ void TextDubler::clear()
 // draw
 void TextDubler::draw(RenderWindow& window)
 {
+    // bkgr
+    window.draw(bkground);
     //буквы
     for (size_t i = 0; i < vec_txt.size(); i++) {
         window.draw(vec_txt[i]);
