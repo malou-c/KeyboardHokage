@@ -1,33 +1,38 @@
 #include "file.hpp"
 
+//Сортирует файл по убыванию времени
 void File::sort()
-{ //Сортирует файл по убыванию времени
+{
     std::vector<PersonStats> users;
     users = load_of_file();
 
+    unsigned long long int time1, time2;
+
     for (size_t i = 0; i < users.size(); i++) {
         for (size_t j = 0; j < users.size() - i - 1; j++) {
-            if (users[j].time_min < users[j + 1].time_min) {
-                std::swap(users[j], users[j + 1]);
-            } else if (users[j].time_sec < users[j + 1].time_sec) {
-                std::swap(users[j], users[j + 1]);
-            } else if (users[j].time_ms < users[j + 1].time_ms) {
+            time1 = ((users[j].time_min * 60000) * 1000)
+                    + (users[j].time_sec * 1000) + users[j].time_ms;
+
+            time2 = ((users[j + 1].time_min * 60000) * 1000)
+                    + (users[j + 1].time_sec * 1000) + users[j + 1].time_ms;
+            if (time1 > time2) {
                 std::swap(users[j], users[j + 1]);
             }
         }
+
+        std::ofstream file;
+
+        file.open(path, std::ios::trunc);
+
+        for (auto user : users) {
+            file.write((char*)&user, sizeof(PersonStats));
+        }
+
+        file.close();
     }
-
-    std::ofstream file;
-
-    file.open(path, std::ios::trunc);
-
-    for (auto user : users) {
-        file.write((char*)&user, sizeof(PersonStats));
-    }
-
-    file.close();
 }
 
+//Добавялет запись о пользователе в конец файала
 void File::add(
         std::string user_name_in,
         std::string text_name_in,
@@ -36,7 +41,7 @@ void File::add(
         int time_min_in,
         int max_cps_in,
         std::string path)
-{ //Добавялет запись о пользователе в конец файала
+{
     PersonStats person;
 
     for (int i = 0; i < 9; i++) {
@@ -62,8 +67,9 @@ void File::add(
     sort();
 }
 
+//Загружает информацию о пользователях из файла
 std::vector<PersonStats> File::load_of_file(std::string path)
-{ //Загружает информацию о пользователях из файла
+{
     std::vector<PersonStats> users_stat;
     PersonStats buffer;
     std::ifstream file;
@@ -83,8 +89,9 @@ std::vector<PersonStats> File::load_of_file(std::string path)
     return users_stat;
 }
 
+//Возвращает номер поизиции элемента в файле
 int File::find(char key[])
-{ //Возвращает номер поизиции элемента в файле
+{
     std::vector<PersonStats> users;
     users = load_of_file();
 
@@ -109,8 +116,9 @@ int File::find(char key[])
     return -1;
 }
 
+//Показываетс содержимое файла
 void File::show()
-{ //Показываетс содержимое файла
+{
     std::vector<PersonStats> user;
     user = load_of_file();
 
