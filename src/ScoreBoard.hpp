@@ -6,7 +6,7 @@
 #include <iostream>
 
 //класс для загрузки таблицы рекордов и ее хранения
-class ScoreBoard : public File {
+class ScoreBoard : public ScoreBoardFile {
 private:
     sf::Color color_text = sf::Color(0, 0, 0);
     sf::Font font;

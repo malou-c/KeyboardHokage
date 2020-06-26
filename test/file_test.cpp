@@ -5,13 +5,13 @@
 #include <fstream>
 #include <vector>
 
-TEST_CASE("File::add")
+TEST_CASE("ScoreBoardFile::add")
 {
     // объекты класса для вгрузки и выгрузки информации из файла
     PersonStats person[3], person_loaded[3];
     std::ifstream file_data;
     std::string path = "scoreboard_test.dat";
-    File file;
+    ScoreBoardFile file;
     int i = 0;
 
     file.add(
@@ -104,14 +104,14 @@ TEST_CASE("File::add")
     remove("scoreboard_test.dat");
 }
 
-TEST_CASE("File::load")
+TEST_CASE("ScoreBoardFile::load")
 {
     PersonStats person[3];
     std::vector<PersonStats> person_loaded; // объекты класса для вгрузки и
                                             // выгрузки информации из файла
     std::ofstream file_data;
     std::string path = "scoreboard_test.dat";
-    File file;
+    ScoreBoardFile file;
 
     strcpy(person[0].user_name, "Carti");
     strcpy(person[0].text_name, "Magnolia");

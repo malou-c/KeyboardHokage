@@ -7,7 +7,7 @@
 
 #include "PersonStats.hpp"
 
-class File {
+class ScoreBoardFile {
 public:
     std::string path = "data/lider_board.dat";
     void sort(); //Сортирует файл по убыванию времени

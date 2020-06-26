@@ -1,7 +1,7 @@
 #include "file.hpp"
 
 //Сортирует файл по убыванию времени
-void File::sort()
+void ScoreBoardFile::sort()
 {
     std::vector<PersonStats> users;
     users = load_of_file();
@@ -33,7 +33,7 @@ void File::sort()
 }
 
 //Добавялет запись о пользователе в конец файала
-void File::add(
+void ScoreBoardFile::add(
         std::string user_name_in,
         std::string text_name_in,
         int time_ms_in,
@@ -68,7 +68,7 @@ void File::add(
 }
 
 //Загружает информацию о пользователях из файла
-std::vector<PersonStats> File::load_of_file(std::string path)
+std::vector<PersonStats> ScoreBoardFile::load_of_file(std::string path)
 {
     std::vector<PersonStats> users_stat;
     PersonStats buffer;
@@ -90,7 +90,7 @@ std::vector<PersonStats> File::load_of_file(std::string path)
 }
 
 //Возвращает номер поизиции элемента в файле
-int File::find(char key[])
+int ScoreBoardFile::find(char key[])
 {
     std::vector<PersonStats> users;
     users = load_of_file();
@@ -117,7 +117,7 @@ int File::find(char key[])
 }
 
 //Показываетс содержимое файла
-void File::show()
+void ScoreBoardFile::show()
 {
     std::vector<PersonStats> user;
     user = load_of_file();
