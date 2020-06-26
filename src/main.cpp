@@ -51,7 +51,7 @@ int main()
     MenuButton butPlay(1420, 900, "MB_play.png", 1);
 
     //клавиатура
-    MyKeyboard mykb(270, 600); // инициализируем клавиатру в позиции x y
+    MyKeyboard mykb(460, 500); // инициализируем клавиатру в позиции x y
 
     //текстовый дублер
     TextDubler txtdubler(620, 130);
