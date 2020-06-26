@@ -8,12 +8,12 @@ MyKeyboard::MyKeyboard(int x, int y)
     //используется для проверки нажатий
     wchar_t code_line1[num_in_line[0]][count_code] = {{L'`', L'~', L'ё', L'Ё'},
                                                       {L'1', L'!', L'1', L'!'},
-                                                      {L'2', L'@', L'2', L'"'},
+                                                      {L'2', L'@', L'2', L'2'},
                                                       {L'3', L'#', L'3', L'№'},
-                                                      {L'4', L'$', L'4', L';'},
+                                                      {L'4', L'$', L'4', L'4'},
                                                       {L'5', L'%', L'5', L'%'},
-                                                      {L'6', L'^', L'6', L':'},
-                                                      {L'7', L'&', L'7', L'?'},
+                                                      {L'6', L'^', L'6', L'6'},
+                                                      {L'7', L'&', L'7', L'7'},
                                                       {L'8', L'*', L'8', L'*'},
                                                       {L'9', L'(', L'9', L'('},
                                                       {L'0', L')', L'0', L')'},
@@ -40,8 +40,8 @@ MyKeyboard::MyKeyboard(int x, int y)
                                                       {L'j', L'J', L'о', L'О'},
                                                       {L'k', L'K', L'л', L'Л'},
                                                       {L'l', L'L', L'д', L'Д'},
-                                                      {L';', L':', L'ж', L'Ж'},
-                                                      {L'"', L'"', L'э', L'Э'}};
+                                                      {L'ж', L'Ж', L'ж', L'Ж'},
+                                                      {L'э', L'Э', L'э', L'Э'}};
     wchar_t code_line4[num_in_line[3]][count_code] = {{L'z', L'Z', L'я', L'Я'},
                                                       {L'x', L'X', L'ч', L'Ч'},
                                                       {L'c', L'C', L'с', L'С'},
@@ -49,9 +49,9 @@ MyKeyboard::MyKeyboard(int x, int y)
                                                       {L'b', L'B', L'и', L'И'},
                                                       {L'n', L'N', L'т', L'Т'},
                                                       {L'm', L'M', L'ь', L'Ь'},
-                                                      {L',', L'<', L'б', L'Б'},
-                                                      {L'.', L'>', L'ю', L'Ю'},
-                                                      {L'/', L'?', L'.', L','}};
+                                                      {L'<', L'<', L'б', L'Б'},
+                                                      {L'>', L'>', L'ю', L'Ю'},
+                                                      {L'/', L'/', L'/', L'/'}};
     int size_vec
             = num_in_line[0] + num_in_line[1] + num_in_line[2] + num_in_line[3];
     vec_buttons.resize(size_vec);
@@ -156,9 +156,11 @@ void MyKeyboard::Update(sf::Event event, TextWindow& txwin, bool hardmode)
         } else if ((int)event.text.unicode == backspace.code) {
             backspace.sprite.setColor(color_enable);
         }
+        break;
+    case sf::Event::KeyPressed:
 
         break;
-    // мы не обрабатываем другие типы событий
+
     default:
         //меняем цвет  обратно
         //у  кнопок
@@ -167,15 +169,44 @@ void MyKeyboard::Update(sf::Event event, TextWindow& txwin, bool hardmode)
         }
         space.sprite.setColor(color_def);     // у  пробела
         backspace.sprite.setColor(color_def); // у backspace
-        //нажатие шифт
+        // шифт
         if (shift.sprite.getColor() != color_def) {
             shift.sprite.setColor(color_def);
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)
-            || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
-            shift.sprite.setColor(color_enable);
-        }
-
         break;
+    }
+
+    //нажатие шифт
+    if (Keyboard::isKeyPressed(sf::Keyboard::LShift)
+        || sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
+        shift.sprite.setColor(color_enable);
+    }
+    // спорное решение решающее отрисовку двух разных клавиш с одинаковым кодом
+    if (Keyboard::isKeyPressed(sf::Keyboard::Semicolon)) {
+        vec_buttons[34].sprite.setColor(color_enable);
+    }
+    if (Keyboard::isKeyPressed(sf::Keyboard::Quote)) {
+        vec_buttons[35].sprite.setColor(color_enable);
+    }
+    if (Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
+        vec_buttons[2].sprite.setColor(color_enable);
+    }
+    if (Keyboard::isKeyPressed(sf::Keyboard::Num4)) {
+        vec_buttons[4].sprite.setColor(color_enable);
+    }
+    if (Keyboard::isKeyPressed(sf::Keyboard::Num6)) {
+        vec_buttons[6].sprite.setColor(color_enable);
+    }
+    if (Keyboard::isKeyPressed(sf::Keyboard::Num7)) {
+        vec_buttons[7].sprite.setColor(color_enable);
+    }
+    if (Keyboard::isKeyPressed(sf::Keyboard::Slash)) {
+        vec_buttons[45].sprite.setColor(color_enable);
+    }
+    if (Keyboard::isKeyPressed(sf::Keyboard::Period)) {
+        vec_buttons[44].sprite.setColor(color_enable);
+    }
+    if (Keyboard::isKeyPressed(sf::Keyboard::Comma)) {
+        vec_buttons[43].sprite.setColor(color_enable);
     }
 }
