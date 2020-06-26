@@ -17,15 +17,3 @@ std::vector<std::string> Folder::contains()
     }
     return list;
 };
-
-int Folder::CountChar(std::wstring filestr)
-{
-    int size = 0, space = 0;
-    for (size_t i = 0; i < filestr.size(); i++) {
-        size++;
-        if (filestr[i] == ' ') {
-            space++;
-        }
-    }
-    return size - space;
-}
