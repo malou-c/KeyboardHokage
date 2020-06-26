@@ -38,3 +38,8 @@ TEST_CASE("filereader")
     wstring wrong_msg = L"wrong test";
     CHECK(readfile_to_wstr(path) != wrong_msg);
 }
+
+TEST_CASE("CountChar")
+{
+    CHECK(CountChar(readfile_to_wstr("test/cctestfile.txt")) == 7);
+}

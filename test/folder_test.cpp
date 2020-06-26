@@ -36,9 +36,3 @@ TEST_CASE("Folder::contains")
 
     std::filesystem::remove_all("test_files");
 }
-
-TEST_CASE("CountChar")
-{
-    Folder foldcc;
-    CHECK(foldcc.CountChar(readfile_to_wstr("test/cctestfile.txt")) == 7);
-}
