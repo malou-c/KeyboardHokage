@@ -83,10 +83,8 @@ int main()
         Event event;
         while (window.pollEvent(event)) {
             //Если событие закрытия
-            if (event.type == sf::Event::Closed || //если окно закрыто или
-                (event.type == sf::Event::KeyPressed && //если нажат esc
-                 event.key.code == sf::Keyboard::Escape))
-                window.close(); //то закрыть окно
+            if (event.type == sf::Event::Closed) //если окно закрыто
+                window.close();                  //то закрыть окно
             switch (ID) {
             case 0:
                 // update name input
