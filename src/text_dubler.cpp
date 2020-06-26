@@ -143,6 +143,7 @@ void TextDubler::clear()
 {
     for (size_t i = 0; i < vec_txt.size(); i++) {
         vec_txt[i].setString(L"*");
+        vec_txt[i].setFillColor(correctColor);
     }
     for (size_t i = 0; i < time_size - 1; i++) {
         vec_time[i] = 0;
