@@ -1,28 +1,20 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#define FONT "fonts/stdFont.ttf"
 
 class ButtonForKB {
-public:
+private:
     sf::Image img;
     sf::Texture texture;
+    std::string path = "images/MK_buttons.png";
+
+public:
     sf::Sprite sprite;
-    sf::Font font;
-    sf::Text text;
-    std::string path = "images/button.png";
-    sf::String name;
     int code[4];
 
     // конструкторы
-    ButtonForKB(sf::String name_button);
     ButtonForKB();
-    //функция-конструктор
-    void Create();
     //функции
     void DrawButton(sf::RenderWindow& window);
     // get
-
-    // set
-    void setName(sf::String str);
 };

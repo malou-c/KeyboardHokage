@@ -6,15 +6,20 @@
 #include "button.hpp"
 #include "screentxt.hpp"
 #include "sysbutton.hpp"
+
+using namespace sf;
+
 class MyKeyboard {
 private:
     sf::Vector2i position;
+    Color color_def = Color::White;
+    Color color_enable = Color(141, 141, 141);
 
 public:
     std::vector<ButtonForKB> vec_buttons;
-    SysButtonForKB space{"images/space.png", 32};
-    SysButtonForKB backspace{"images/backspace.png", 8};
-    SysButtonForKB shift{"images/shift.png"};
+    SysButtonForKB space{"images/MK_space.png", 32};
+    SysButtonForKB backspace{"images/MK_bkspace.png", 8};
+    SysButtonForKB shift{"images/MK_shift.png"};
     //конструкторы
     MyKeyboard(int x, int y);
 
