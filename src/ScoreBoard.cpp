@@ -20,8 +20,8 @@ void ScoreBoard::load_board()
         out_text = "";
         stats = load_of_file(); //Загружаем данные (имя время)
         is_loaded = true;
-        //запись информации о первых 12
-        for (size_t i = 0; i < stats.size() && i < 12; i++) {
+        //запись информации о первых пользователях в таблице
+        for (size_t i = 0; i < stats.size() && i < count_draw; i++) {
             out_text += std::to_string(i + 1)
                     + ") Name: " + (std::string)stats[i].user_name
                     + "\nText: " + (std::string)stats[i].text_name

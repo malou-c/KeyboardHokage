@@ -11,6 +11,7 @@ private:
     sf::Color color_text = sf::Color(0, 0, 0);
     sf::Font font;
     int font_size = 20;
+    size_t count_draw = 18;
 
 public:
     bool is_loaded = false; //загружена ли таблица рекордов
