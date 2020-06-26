@@ -10,6 +10,7 @@
 #include "PersonStats.hpp"
 #include "ScoreBoard.hpp"
 #include "clockface.hpp"
+#include "mode_game.hpp"
 #include "screentxt.hpp"
 #include "text_dubler.hpp"
 #include "text_selection.hpp"
@@ -39,34 +40,42 @@ int main()
     window.setFramerateLimit(60);
 
     //кнопки меню
-    MenuButton butExit(width - 100, 0, -1), butBack(100, 600, 0),
-            butPlay(100, 100, 1), butRecord(100, 200, 2), butHelp(100, 300, 3),
-            butSelectText(100, 400, 4);
+    MenuButton butSelectText(100, 200, "MB_play.png", 4);
+    MenuButton butHelp(100, 300, "MB_theory.png", 3);
+    MenuButton butRecord(100, 400, "MB_records.png", 2);
+    MenuButton butExit(100, 500, "MB_exit.png", -1);
+    //
+    MenuButton butBackMenu(50, 900, "MB_back.png", 0);
+    MenuButton butBackSelect(50, 900, "MB_back.png", 4);
+    //кнопка играть
+    MenuButton butPlay(1420, 900, "MB_play.png", 1);
 
     //клавиатура
     MyKeyboard mykb(270, 600); // инициализируем клавиатру в позиции x y
 
     //текстовый дублер
-    TextDubler txtdubler(700, 430);
+    TextDubler txtdubler(620, 130);
 
     //окно с  текстом
-    TextWindow txwin(400, 200, txtdubler); //окно с  текстом
+    TextWindow txwin(320, 200, txtdubler); //окно с  текстом
     txwin.setText("texts/text_1.txt");     // берем текст
     txwin.change_count_text_str(); // вычисляем сколько строк поместится в  окно
     txwin.change_text_character(); // вычисляем характеристики текста
 
-    //таймер
-    ClockFace clface(10, 10, txtdubler); // инициализируем часы в  позиции x y
-    NameInput name_input;
+    // таймер
+    ClockFace clface(350, 167, txtdubler);
+
+    NameInput name_input(10, 5);
     PersonStats person_stats;
 
     //страничка с выбором текста перед игрой
-    TextSelection txtselect(300, 30);
+    TextSelection txtselect(550, 70);
+    //выбор режима игры
+    ModeGame gamemode(1400, 820);
 
-    HelpButton help(200, 100);
-
+    HelpButton help(180, 70);
     //таблица рекордов
-    ScoreBoard scorebd;
+    ScoreBoard scorebd(550, 70);
 
     //Пока окно открыто
     while (window.isOpen()) {
@@ -80,15 +89,35 @@ int main()
                 window.close(); //то закрыть окно
             switch (ID) {
             case 0:
+                // update name input
+                name_input.update(window, event);
+                // update
+                butSelectText.is_clicked(window, event);
+                butRecord.is_clicked(window, event);
+                butHelp.is_clicked(window, event);
+                butExit.is_clicked(window, event);
                 break;
             case 1:
                 //клавиатура обновляется только если текст не кончился
-                mykb.Update(event, txwin);
+                mykb.Update(event, txwin, gamemode.is_hardmode);
                 if (event.type == Event::TextEntered && !clface.isStart) {
                     clface.ClockStart();
                 }
+                butBackSelect.is_clicked(window, event);
+                break;
+            case 2:
+                // update
+                butBackMenu.is_clicked(window, event);
+                break;
+            case 3:
+                // update
+                butBackMenu.is_clicked(window, event);
                 break;
             case 4:
+                // update
+                butPlay.is_clicked(window, event);
+                butBackMenu.is_clicked(window, event);
+                gamemode.update(window, event);
                 //кнопки << >>
                 txtselect.but_update(event, window);
                 txtselect.update_sections(txwin, event, window);
@@ -97,7 +126,6 @@ int main()
             default:
                 break;
             }
-            name_input.window_for_name_input(window, event);
             person_stats.set_name(name_input.get_input());
             help.MoveLeftButton(window, event);
             help.MoveRightButton(window, event);
@@ -111,19 +139,12 @@ int main()
             window.close();
             break;
         case 0:
-            //даем добро на рестарт так как мы вышли в меню
-            if (!txwin.is_not_reset) {
-                txwin.is_not_reset = true;
-            }
-            // update
-            butSelectText.is_clicked(window);
-            butRecord.is_clicked(window);
-            butHelp.is_clicked(window);
             // draw
             //кнопки меню
             butSelectText.draw(window);
             butRecord.draw(window);
             butHelp.draw(window);
+            butExit.draw(window);
             //
             scorebd.is_loaded = false;
             break;
@@ -141,57 +162,53 @@ int main()
                 scorebd.add(
                         name_input.get_input(),
                         txtselect.getCurrent(),
-                        14,
+                        clface.msec,
+                        clface.seconds,
+                        clface.minutes,
                         txtdubler.cps_max);
             }
 
             // update
-            butBack.is_clicked(window);
             clface.update_clock();
 
             // draw
-            butBack.draw(window);         // кнопка назад
+            butBackSelect.draw(window);   // кнопка назад
             clface.DrawClock(window);     //таймер
             mykb.DrawKB(window);          // клавиатура
             txwin.DrawTextWindow(window); // окно с  текстом
             txtdubler.draw(window);
             break;
         case 2:
-            // update
-            butBack.is_clicked(window);
             // draw
-            butBack.draw(window); // кнопка назад
+            butBackMenu.draw(window); // кнопка назад
             //Рисуем таблицу рекордов
             scorebd.load_board();
             scorebd.draw_board(window);
             break;
         case 3:
-            //
-            butBack.is_clicked(window);
-
-            butBack.draw(window);
+            butBackMenu.draw(window);
             help.DrawSd(window);
             help.DrawMoves(window);
             break;
         case 4:
-            // update
-            butPlay.is_clicked(window);
-            butBack.is_clicked(window);
+            //даем добро на рестарт так как мы вышли в меню
+            if (!txwin.is_not_reset) {
+                txwin.is_not_reset = true;
+            }
             // draw
             txtselect.draw(window);
+            gamemode.draw(window);
             //кнопки
             butPlay.draw(window);
-            butBack.draw(window);
+            butBackMenu.draw(window);
             break;
 
         default:
             break;
         }
-        //Выход из приложения
-        butExit.is_clicked(window);
+        // ввод имени
         name_input.draw(window);
-
-        butExit.draw(window);
+        //вывод ВСЕГО на экран
         window.display();
     }
 

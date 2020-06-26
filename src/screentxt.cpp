@@ -14,7 +14,7 @@ TextWindow::TextWindow(int x, int y, TextDubler& txtdubler)
     text_color = sf::Color::Black;
     dubler_color = sf::Color::Black;
     font_size = 25; // размер текста
-    margin_y = 10;  // расстояние между строками
+    margin_y = 12;  // расстояние между строками
     start_str = 0; // строка с которой начинается вывод
     curr_sym = 0; //текущий символ
 }
@@ -94,7 +94,7 @@ void TextWindow::dubler_clean()
     dubler.setString("");
 }
 
-void TextWindow::checksym_dubler(int symbol)
+void TextWindow::checksym_dubler(int symbol, bool hardmode)
 {
     //отдельно если ввели backspace (8)
     if (symbol == 8) {
@@ -114,13 +114,13 @@ void TextWindow::checksym_dubler(int symbol)
             }
         }
         //из текстового дублера в любом случае удаляем букву
-        txtDubler->delsym(sym);
+        txtDubler->delsym(sym, hardmode);
 
     }
     //если текущий символ равен введеному и не было неверных
     else if (
             symbol == (int)text_str[start_str][curr_sym]
-            && !txtDubler->isWrong()) {
+            && (!txtDubler->isWrong() || !hardmode)) {
         std::cout << "right" << text_str[start_str][curr_sym] << std::endl;
         std::cout << "was: " << curr_sym << std::endl;
         add_sym_to_dubler(text_str[start_str][curr_sym]);
@@ -147,16 +147,12 @@ void TextWindow::change_text_character()
     for (size_t i = 0; i < vec_text.size(); i++) {
         vec_text[i].setString("");
     }
-    vec_text.resize(
-            count_text_string); // меняем размер вектора = кол-ву строк в окошке
-
-    std::cout << "razmer vec" << vec_text.size() << std::endl;
-    std::cout << "razmer str" << text_str.size() << std::endl;
-
+    // меняем размер вектора = кол-ву строк в окошке
+    vec_text.resize(count_text_string);
     //если кончились строки
     if (start_str == (int)text_str.size())
         isEndString = true;
-
+    Vector2i indent(20, 3);
     for (int i = start_str, j = 0; i < (int)text_str.size(); i++, j++) {
         if (i - start_str >= count_text_string || i >= (int)text_str.size())
             break; // условия остановки
@@ -164,8 +160,8 @@ void TextWindow::change_text_character()
         vec_text[j].setFillColor(Color::Black);
         vec_text[j].setCharacterSize(font_size);
         vec_text[j].setPosition(
-                getPosition().x + 20,
-                getPosition().y + ((margin_y + font_size) * j));
+                getPosition().x + indent.x,
+                getPosition().y + indent.y + ((margin_y + font_size) * j));
         vec_text[j].setString(text_str[i]);
     }
     //характериситики дублера
@@ -195,10 +191,8 @@ void TextWindow::change_count_text_str()
 {
     std::cout << "text str size " << text_str.size() << std::endl;
     Text text_help("S", font, font_size);
-    for (unsigned int i = 1; i <= text_str.size(); i++) {
-        std::cout << (text_help.getLocalBounds().height + margin_y) * i
-                  << std::endl;
-        if ((text_help.getLocalBounds().height + margin_y) * (i + 1)
+    for (size_t i = 1; i <= text_str.size(); i++) {
+        if ((text_help.getLocalBounds().height + margin_y) * (i + 1) + margin_y
                     > sprite.getLocalBounds().height - (font_size * 2)
             || i == text_str.size()) {
             count_text_string = i;

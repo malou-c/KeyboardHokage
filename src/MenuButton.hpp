@@ -1,36 +1,35 @@
 #pragma once
-
+#include "click.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
 
-class MenuButton {
+using namespace sf;
+
+class MenuButton : Click {
 private:
-    std::string name;
-    sf::Text out_name;
     int id;
-    int l_border;          //левая граница кнопки (x)
-    int r_border;          //правая граница кнопки (x)
-    int u_border;          //верхняя граница кнопки (y)
-    int d_border;          //нижняя граница кнопки (y)
-    sf::Sprite background; //фон для кнопки
     sf::Font font;         //шрифт текста кнопки
     sf::Image image;       //фото для фона кнопки
     sf::Texture texture;   //текстура для фона кнопки
+    sf::Sprite background; //фон для кнопки
+    IntRect rect_def;
+    IntRect rect_enable;
 
 public:
-    MenuButton(int x, int y, std::string button_name, int id);
+    bool enable = false;
+    //конструкторы
     MenuButton(int x, int y, int id);
+    MenuButton(int x, int y, std::string img_path, int id);
 
     //Узнать id кнопки
     int get_id();
-    /* sf::Sprite get_sprite() { return background; }; */
 
     //Установить границы кнопки
     void set_borders();
 
     //Проверяет была ли нажата кнопка
-    void is_clicked(sf::RenderWindow& window);
+    void is_clicked(RenderWindow& window, Event event);
 
     //рисует кнопку
     void draw(sf::RenderWindow& window);

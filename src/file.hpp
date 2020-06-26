@@ -16,8 +16,10 @@ public:
     void
     add(std::string user_name_in,
         std::string text_name_in,
-        float time_in,
-        float cps_in,
+        int time_ms_in,
+        int time_sec_in,
+        int time_min_in,
+        int max_cps_in,
         std::string path = "data/lider_board.dat");
 
     std::vector<PersonStats> load_of_file(

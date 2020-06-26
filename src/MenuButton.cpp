@@ -5,67 +5,68 @@
 #include <string>
 
 extern int ID; // глобал  ID
-MenuButton::MenuButton(int x, int y, std::string button_name, int id)
-{
-    this->id = id;
-    name = button_name; //Имя кнопки
 
-    font.loadFromFile("fonts/stdFont.ttf"); //шрифт
-    out_name.setString(name);
-    out_name.setFont(font);
-    out_name.setCharacterSize(16);
-    out_name.setFillColor(sf::Color::Red);
-    out_name.setPosition(x + 10, y + 10);
-
-    image.loadFromFile("images/yo.jpg");
-
-    texture.loadFromImage(image); //загружаем текстуру для фона
-
-    background.setTexture(texture);
-    background.setTextureRect(
-            sf::IntRect(0, 0, 100, 100)); //устанавливаем текстуру для спрайта
-    background.setPosition(x, y); //координаты для отрисовки кнопки
-    // background.scale(0.5, 0.5);
-
-    set_borders();
-}
 MenuButton::MenuButton(int x, int y, int id)
 {
     this->id = id;
-    image.loadFromFile("images/yo.jpg");
+    image.loadFromFile("images/MB_play.png");
+    texture.loadFromImage(image); //загружаем текстуру для фона
+    background.setTexture(texture);
+    //прямоугольники для спрайтов
+    rect_def = IntRect(0, 0, texture.getSize().x / 2, texture.getSize().y);
+    rect_enable = IntRect(
+            texture.getSize().x / 2,
+            0,
+            texture.getSize().x / 2,
+            texture.getSize().y);
+
+    background.setTextureRect(rect_def); //устанавливаем текстуру для спрайта
+    background.setPosition(x, y); //координаты для отрисовки кнопки
+}
+
+MenuButton::MenuButton(int x, int y, std::string img_path, int id)
+{
+    this->id = id;
+    image.loadFromFile("images/" + img_path);
     texture.loadFromImage(image); //загружаем текстуру для фона
 
     background.setTexture(texture);
-    background.setTextureRect(
-            sf::IntRect(0, 0, 100, 100)); //устанавливаем текстуру для спрайта
+    //прямоугольники для спрайтов
+    rect_def = IntRect(0, 0, texture.getSize().x / 2, texture.getSize().y);
+    rect_enable = IntRect(
+            texture.getSize().x / 2,
+            0,
+            texture.getSize().x / 2,
+            texture.getSize().y);
+
+    background.setTextureRect(rect_def); //устанавливаем текстуру для спрайта
     background.setPosition(x, y); //координаты для отрисовки кнопки
 }
 
 int MenuButton::get_id()
 {
     return id;
-}; //Узнать id кнопки
+};
 
-void MenuButton::set_borders() //Установить границы кнопки
+void MenuButton::is_clicked(RenderWindow& window, Event event)
 {
-    l_border = background.getLocalBounds().left;
-    r_border = background.getLocalBounds().width;
-    u_border = background.getLocalBounds().top;
-    d_border = background.getLocalBounds().height;
-}
-
-void MenuButton::is_clicked(
-        sf::RenderWindow& window) //Проверяет была ли нажата кнопка
-{
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)
-        && sf::IntRect((background).getGlobalBounds())
-                   .contains(sf::Mouse::getPosition(window))) {
-        ID = id; // меняем  глобальный   ID
+    if (isContain(background, window)) {
+        //двигаем изображение ко второму тайлу
+        background.setTextureRect(rect_enable);
+        if (!enable && isClicked(background, window, event)) {
+            enable = true;
+        }
+        if (enable && isReleased_In(background, window, event)) {
+            ID = id; // меняем  глобальный   ID
+            enable = false;
+        }
+    } else {
+        //двигаем обратно
+        background.setTextureRect(rect_def);
     }
 }
 
 void MenuButton::draw(sf::RenderWindow& window) //рисует кнопку
 {
     window.draw(background);
-    window.draw(out_name);
 }

@@ -12,8 +12,8 @@ TextSelection::TextSelection(int x, int y)
     background.setTexture(texture_bg);
     background.setPosition(pos.x, pos.y);
     //отступы для секций
-    indent_sect.x = 18;
-    indent_sect.y = 15;
+    indent_sect.x = 8;
+    indent_sect.y = 48;
     //класс работы с папками
     std::string path_folder = "texts";
     Folder folder(path_folder);
@@ -43,7 +43,8 @@ TextSelection::TextSelection(int x, int y)
     recount_sect(); //изначальный подсчет секций
     //кнопки << >>
     but_pos.x = background.getPosition().x + 260;
-    but_pos.y = background.getPosition().y + background.getLocalBounds().height;
+    but_pos.y = background.getPosition().y + background.getLocalBounds().height
+            + 8;
     texture_but_left.loadFromFile("images/TS_button_left.png");
     but_left.setTexture(texture_but_left);
     but_left.setPosition(but_pos);

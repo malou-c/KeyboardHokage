@@ -4,18 +4,15 @@ HelpButton::HelpButton(){};
 
 HelpButton::HelpButton(int x, int y)
 {
-    MoveLeftCreate(x - 100, y + 325);
-    MoveRightCreate(x + 1600, y + 325);
     SdCreate(x, y);
+    MoveLeftCreate(x - 100, y + Textures[0].getSize().y / 2);
+    MoveRightCreate(
+            x + Textures[0].getSize().x + 20, y + Textures[0].getSize().y / 2);
 }
 
 void HelpButton::MoveLeftCreate(int x, int y)
 {
-#ifdef WINDOWS
-    l_path = "helpimages\\left.jpg";
-#else
-    l_path = "helpimages/left.jpg";
-#endif
+    l_path = "helpimages/left.png";
     left.loadFromFile(l_path);
     left_tr.loadFromImage(left);
     left_triangle.setTexture(left_tr);
@@ -25,15 +22,10 @@ void HelpButton::MoveLeftCreate(int x, int y)
 
 void HelpButton::MoveRightCreate(int x, int y)
 {
-#ifdef WINDOWS
-    r_path = "helpimages\\right.jpg";
-#else
-    r_path = "helpimages/right.jpg";
-#endif
+    r_path = "helpimages/right.png";
     right.loadFromFile(r_path);
     right_tr.loadFromImage(right);
     right_triangle.setTexture(right_tr);
-
     right_triangle.setPosition(x, y);
 }
 
@@ -55,7 +47,8 @@ void HelpButton::MoveRight()
 
 void HelpButton::MoveRightButton(sf::RenderWindow& window, sf::Event event)
 {
-    if (sf::IntRect(1800, 425, 50, 50).contains(sf::Mouse::getPosition(window))
+    if (sf::IntRect(right_triangle.getGlobalBounds())
+                .contains(sf::Mouse::getPosition(window))
         && event.type == event.MouseButtonReleased
         && event.mouseButton.button == sf::Mouse::Left) {
         if (page_switch != 4) {
@@ -66,7 +59,8 @@ void HelpButton::MoveRightButton(sf::RenderWindow& window, sf::Event event)
 
 void HelpButton::MoveLeftButton(sf::RenderWindow& window, sf::Event event)
 {
-    if (sf::IntRect(100, 425, 50, 50).contains(sf::Mouse::getPosition(window))
+    if (sf::IntRect(left_triangle.getGlobalBounds())
+                .contains(sf::Mouse::getPosition(window))
         && event.type == event.MouseButtonReleased
         && event.mouseButton.button == sf::Mouse::Left) {
         if (page_switch != 0) {
