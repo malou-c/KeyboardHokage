@@ -14,8 +14,10 @@ ScoreBoard::ScoreBoard(int x, int y)
     text.setFillColor(color_text);
     text.setPosition(x + 14, y + 55);
 }
+
+//Загружаем таблицу
 void ScoreBoard::load_board()
-{ //Загружаем таблицу
+{
     if (!is_loaded) {
         out_text = "";
         stats = load_of_file(); //Загружаем данные (имя время)

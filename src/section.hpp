@@ -12,5 +12,4 @@ public:
     Text name_txt;
     //конструктор
     Section();
-    //функции
 };

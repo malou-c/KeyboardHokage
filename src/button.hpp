@@ -16,5 +16,4 @@ public:
     ButtonForKB();
     //функции
     void DrawButton(sf::RenderWindow& window);
-    // get
 };

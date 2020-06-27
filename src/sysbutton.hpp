@@ -13,11 +13,6 @@ public:
     // конструкторы
     SysButtonForKB(sf::String path);
     SysButtonForKB(sf::String path, int code);
-    //функция-конструктор
-
     //функции
     void DrawButton(sf::RenderWindow& window);
-    // get
-
-    // set
 };
