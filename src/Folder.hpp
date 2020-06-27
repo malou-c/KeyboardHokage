@@ -13,5 +13,5 @@ public:
     Folder(std::string path);
 
     //возвращает имена фалов в дирректории без названия самой дирректории
-    std::vector<std::string> contains();
+    std::vector<std::string> contains_txt();
 };

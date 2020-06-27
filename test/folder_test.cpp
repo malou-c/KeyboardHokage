@@ -23,7 +23,7 @@ TEST_CASE("Folder::contains")
         std::ofstream file(name);
     }
 
-    files_name = folder.contains();
+    files_name = folder.contains_txt();
     sort(files_name.begin(), files_name.end());
 
     for (int i = 0; i < 5; i++) {
