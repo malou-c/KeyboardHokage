@@ -113,14 +113,3 @@ int ScoreBoardFile::find(char key[])
 
     return -1;
 }
-
-//Показываетс содержимое файла
-void ScoreBoardFile::show()
-{
-    std::vector<PersonStats> user;
-    user = load_of_file();
-
-    for (unsigned int i = 0; i < user.size(); i++) {
-        std::cout << user[i].user_name << " " << user[i].time_sec << std::endl;
-    }
-}
