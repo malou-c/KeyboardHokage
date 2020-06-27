@@ -18,7 +18,7 @@ template <class T>
 void writefile(T msg, std::string path)
 {
     //чистит файл перед тестом
-    fstream file;
+    std::fstream file;
     file.open(path, std::ios::out | std::ios::trunc);
     file << msg;
     file.close();
