@@ -152,12 +152,12 @@ void TextWindow::change_text_character()
     //если кончились строки
     if (start_str == (int)text_str.size())
         isEndString = true;
-    Vector2i indent(20, 3);
+    sf::Vector2i indent(20, 3);
     for (int i = start_str, j = 0; i < (int)text_str.size(); i++, j++) {
         if (i - start_str >= count_text_string || i >= (int)text_str.size())
             break; // условия остановки
         vec_text[j].setFont(font);
-        vec_text[j].setFillColor(Color::Black);
+        vec_text[j].setFillColor(sf::Color::Black);
         vec_text[j].setCharacterSize(font_size);
         vec_text[j].setPosition(
                 getPosition().x + indent.x,
@@ -168,14 +168,14 @@ void TextWindow::change_text_character()
     dubler.setFont(font);
     dubler.setCharacterSize(font_size);
     dubler.setFillColor(dubler_color);
-    dubler.setOutlineColor(Color::Green);
+    dubler.setOutlineColor(sf::Color::Green);
     dubler.setOutlineThickness(1);
-    dubler.setStyle(Text::Underlined);
+    dubler.setStyle(sf::Text::Underlined);
     dubler.setPosition(vec_text[0].getPosition());
 }
 
 //рисуем текст внутри окна
-void TextWindow::DrawTextWindow(RenderWindow& window)
+void TextWindow::DrawTextWindow(sf::RenderWindow& window)
 {
     window.draw(sprite); // фон
                          //рисуем текст
@@ -190,7 +190,7 @@ void TextWindow::DrawTextWindow(RenderWindow& window)
 void TextWindow::change_count_text_str()
 {
     std::cout << "text str size " << text_str.size() << std::endl;
-    Text text_help("S", font, font_size);
+    sf::Text text_help("S", font, font_size);
     for (size_t i = 1; i <= text_str.size(); i++) {
         if ((text_help.getLocalBounds().height + margin_y) * (i + 1) + margin_y
                     > sprite.getLocalBounds().height - (font_size * 2)
@@ -226,7 +226,7 @@ void TextWindow::add_word_in_text(
 // конвертирование файла в вектор с текстом
 std::vector<std::wstring> TextWindow::convert_file_to_text(std::string filename)
 {
-    Text text_help("W", font, font_size);
+    sf::Text text_help("W", font, font_size);
     std::wstring str = readfile_to_wstr(filename);
     std::vector<std::wstring> text;
     Word word;
@@ -272,7 +272,7 @@ void TextWindow::setText(std::string filename)
 }
 
 // getters
-Vector2i TextWindow::getPosition()
+sf::Vector2i TextWindow::getPosition()
 {
     return position;
 }

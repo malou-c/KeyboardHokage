@@ -4,25 +4,23 @@
 #include <sstream>
 #include <vector>
 
-using namespace sf;
-
 class TextDubler {
 private:
-    Vector2f pos_text;
-    Color correctColor = Color(64, 64, 64);
-    Color wrongColor = Color(182, 0, 14);
-    Font font;
+    sf::Vector2f pos_text;
+    sf::Color correctColor = sf::Color(64, 64, 64);
+    sf::Color wrongColor = sf::Color(182, 0, 14);
+    sf::Font font;
     int font_size = 30;
     size_t vec_size = 10;
     size_t time_size = 5;
     // bkgr
-    Texture texture_bkground;
-    Sprite bkground;
+    sf::Texture texture_bkground;
+    sf::Sprite bkground;
 
 public:
-    std::vector<Text> vec_txt;
+    std::vector<sf::Text> vec_txt;
     std::vector<int> vec_time;
-    Text cps_text;
+    sf::Text cps_text;
     int cps_max = 0;
 
     //конструктор

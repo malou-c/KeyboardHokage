@@ -2,17 +2,18 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-using namespace sf;
-
 class Click {
 public:
     bool enable_but = false;
     bool relise_L = true;
     bool relise_R = true;
     //функции
-    bool isClicked(Sprite sprite, RenderWindow& window, Event event);
-    bool isReleased(Event event);
-    bool isReleased_In(Sprite sprite, RenderWindow& window, Event event);
-    bool isContain(Sprite sprite, RenderWindow& window);
-    bool isFullClick(Sprite sprite, RenderWindow& window, Event event);
+    bool
+    isClicked(sf::Sprite sprite, sf::RenderWindow& window, sf::Event event);
+    bool isReleased(sf::Event event);
+    bool
+    isReleased_In(sf::Sprite sprite, sf::RenderWindow& window, sf::Event event);
+    bool isContain(sf::Sprite sprite, sf::RenderWindow& window);
+    bool
+    isFullClick(sf::Sprite sprite, sf::RenderWindow& window, sf::Event event);
 };

@@ -16,7 +16,7 @@ TextDubler::TextDubler(float x, float y)
     font.loadFromFile("fonts/3976.ttf");
     // vector txt
     vec_txt.resize(vec_size);
-    Text ch(L"*", font, font_size);
+    sf::Text ch(L"*", font, font_size);
     ch.setFillColor(correctColor);
     for (size_t i = 0; i < vec_txt.size(); i++) {
         vec_txt[i] = ch;
@@ -37,10 +37,10 @@ TextDubler::TextDubler(float x, float y)
 void TextDubler::addsymWrong(wchar_t sym)
 {
     //создаем экземпляр буквы
-    Text tch(sym, font, font_size);
+    sf::Text tch(sym, font, font_size);
     tch.setFillColor(wrongColor);
     tch.setPosition(vec_txt[vec_size - 1].getPosition()); //поз.последней буквы
-    Vector2f pos_element; // буфер для позиции
+    sf::Vector2f pos_element; // буфер для позиции
     for (size_t i = 0; i < vec_size - 1; i++) {
         pos_element = vec_txt[i].getPosition();
         vec_txt[i] = vec_txt[i + 1];
@@ -52,10 +52,10 @@ void TextDubler::addsymWrong(wchar_t sym)
 void TextDubler::addsymCorrect(wchar_t sym)
 {
     //создаем экземпляр буквы
-    Text tch(sym, font, font_size);
+    sf::Text tch(sym, font, font_size);
     tch.setFillColor(correctColor);
     tch.setPosition(vec_txt[vec_size - 1].getPosition()); //поз.последней буквы
-    Vector2f pos_element; // буфер для позиции
+    sf::Vector2f pos_element; // буфер для позиции
     for (size_t i = 0; i < vec_size - 1; i++) {
         pos_element = vec_txt[i].getPosition();
         vec_txt[i] = vec_txt[i + 1];
@@ -99,10 +99,10 @@ void TextDubler::delsym(wchar_t sym, bool hardmode)
     if (!hardmode)
         sym = L'*';
     //создаем экземпляр буквы
-    Text tch(sym, font, font_size);
+    sf::Text tch(sym, font, font_size);
     tch.setFillColor(correctColor);
     tch.setPosition(vec_txt[0].getPosition()); //поз.первой буквы
-    Vector2f pos_element; // буфер для позиции
+    sf::Vector2f pos_element; // буфер для позиции
     for (size_t i = vec_size - 1; i > 0; i--) {
         pos_element = vec_txt[i].getPosition();
         vec_txt[i] = vec_txt[i - 1];
@@ -151,7 +151,7 @@ void TextDubler::clear()
     cps_text.setString("0");
 }
 // draw
-void TextDubler::draw(RenderWindow& window)
+void TextDubler::draw(sf::RenderWindow& window)
 {
     // bkgr
     window.draw(bkground);

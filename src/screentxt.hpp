@@ -5,14 +5,13 @@
 #include "word.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
-using namespace sf;
 
 class TextWindow {
 private:
-    Font font;
-    Texture texture;
-    Vector2i position; // положение окна с текстом
-    Vector2i size;     // размер окна с текстом
+    sf::Font font;
+    sf::Texture texture;
+    sf::Vector2i position; // положение окна с текстом
+    sf::Vector2i size;     // размер окна с текстом
     int margin_y;
 
 public:
@@ -24,16 +23,16 @@ public:
     int count_text_string; //скольок строк помещается в  окне
 
     //все для текстуры
-    Sprite sprite;
+    sf::Sprite sprite;
     //текст внутри окна
     std::vector<std::wstring> text_str;
-    std::vector<Text> vec_text;
+    std::vector<sf::Text> vec_text;
     int font_size;
-    Color text_color;
+    sf::Color text_color;
     //текст дублер
     std::wstring dubler_str;
-    Text dubler;
-    Color dubler_color;
+    sf::Text dubler;
+    sf::Color dubler_color;
 
     //конструкторы
     TextWindow(int x, int y, TextDubler&);
@@ -57,11 +56,11 @@ public:
     void next_text_str();
     void back_text_str();
 
-    void DrawTextWindow(RenderWindow& window);
+    void DrawTextWindow(sf::RenderWindow& window);
     // setters
     void setPos(int x, int y);
     void setText(std::string filename);
 
     // getters
-    Vector2i getPosition();
+    sf::Vector2i getPosition();
 };

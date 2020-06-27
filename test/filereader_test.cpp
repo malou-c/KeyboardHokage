@@ -3,24 +3,23 @@
 
 #include <fstream>
 
-using namespace std;
-string path = "test/test_text.txt";
+std::string path = "test/test_text.txt";
 
-void cleanfile(string path)
+void cleanfile(std::string path)
 {
     //чистит файл перед тестом
-    fstream file;
-    file.open(path, ios::out | ios::trunc);
+    std::fstream file;
+    file.open(path, std::ios::out | std::ios::trunc);
     file.clear();
     file.close();
 }
 
 template <class T>
-void writefile(T msg, string path)
+void writefile(T msg, std::string path)
 {
     //чистит файл перед тестом
     fstream file;
-    file.open(path, ios::out | ios::trunc);
+    file.open(path, std::ios::out | std::ios::trunc);
     file << msg;
     file.close();
 }
@@ -28,13 +27,13 @@ void writefile(T msg, string path)
 TEST_CASE("filereader")
 {
     //записываем сообщение через функцию
-    wstring wmsg = L"test msg 1 2 3 ";
+    std::wstring wmsg = L"test msg 1 2 3 ";
     //записываем сообщение
-    string msg = "test msg 1 2 3";
+    std::string msg = "test msg 1 2 3";
     cleanfile(path);
     writefile(msg, path);
     CHECK(readfile_to_wstr(path) == wmsg);
     //проверяем неправильное сообщение
-    wstring wrong_msg = L"wrong test";
+    std::wstring wrong_msg = L"wrong test";
     CHECK(readfile_to_wstr(path) != wrong_msg);
 }

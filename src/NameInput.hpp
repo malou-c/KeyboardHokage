@@ -3,8 +3,6 @@
 #include "click.hpp"
 #include <SFML/Graphics.hpp>
 
-using namespace sf;
-
 extern int ID;
 
 class NameInput : Click {
@@ -12,21 +10,21 @@ private:
     //можно ли вводить текст
     bool input_on = false;
     //прямоугольники для спрайтов
-    IntRect rect_def;
-    IntRect rect_enable;
+    sf::IntRect rect_def;
+    sf::IntRect rect_enable;
     //имя
     std::string temp_name = "name";
-    Font font;
+    sf::Font font;
     int font_size = 25;
-    Color font_color = Color::Black;
-    Text text;
+    sf::Color font_color = sf::Color::Black;
+    sf::Text text;
 
 public:
-    Texture texture_nameplace;
-    Sprite sprite_nameplace;
+    sf::Texture texture_nameplace;
+    sf::Sprite sprite_nameplace;
 
-    Texture texture_changer;
-    Sprite sprite_changer;
+    sf::Texture texture_changer;
+    sf::Sprite sprite_changer;
 
     NameInput(int x, int y);
 

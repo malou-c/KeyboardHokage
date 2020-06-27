@@ -15,7 +15,7 @@ ModeGame::ModeGame(int x, int y)
     sprite_hard.setColor(color_enable);
 }
 
-void ModeGame::update(RenderWindow& window, Event event)
+void ModeGame::update(sf::RenderWindow& window, sf::Event event)
 {
     if (is_hardmode && isClicked(sprite_easy, window, event)) {
         is_hardmode = false;
@@ -29,7 +29,7 @@ void ModeGame::update(RenderWindow& window, Event event)
     }
 }
 
-void ModeGame::draw(RenderWindow& window)
+void ModeGame::draw(sf::RenderWindow& window)
 {
     window.draw(sprite_easy);
     window.draw(sprite_hard);

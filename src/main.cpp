@@ -15,26 +15,25 @@
 #include "text_dubler.hpp"
 #include "text_selection.hpp"
 
-using namespace sf;
 int ID = 0;                      // глобал  ID
 int height = 1000, width = 1900; // высота и ширина окна
 
 int main()
 {
-    String path;                     // путь к файлу
+    sf::String path;                 // путь к файлу
 #ifdef WINDOWS                       // если ОС Windows
     path = "images_menu\\start.png"; // такой путь
 #else                                // если не Windows
     path = "images_menu/start.png"; // такой
 #endif
     //Делаю сглаживание
-    ContextSettings settings;
+    sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
     //Инициализирую окно
-    RenderWindow window(
-            VideoMode(width, height),
+    sf::RenderWindow window(
+            sf::VideoMode(width, height),
             "KeyboardNinja",
-            Style::Default,
+            sf::Style::Default,
             settings);
     window.setVerticalSyncEnabled(true); // вертикальная синхронизация
     window.setFramerateLimit(60);
@@ -80,7 +79,7 @@ int main()
     //Пока окно открыто
     while (window.isOpen()) {
         //Обработка событий
-        Event event;
+        sf::Event event;
         while (window.pollEvent(event)) {
             //Если событие закрытия
             if (event.type == sf::Event::Closed) //если окно закрыто
@@ -98,7 +97,7 @@ int main()
             case 1:
                 //клавиатура обновляется только если текст не кончился
                 mykb.Update(event, txwin, gamemode.is_hardmode);
-                if (event.type == Event::TextEntered && !clface.isStart) {
+                if (event.type == sf::Event::TextEntered && !clface.isStart) {
                     clface.ClockStart();
                 }
                 butBackSelect.is_clicked(window, event);
@@ -129,7 +128,7 @@ int main()
             help.MoveRightButton(window, event);
         }
         // чистим окно
-        window.clear(Color::White);
+        window.clear(sf::Color::White);
 
         switch (ID) {
         case -1:

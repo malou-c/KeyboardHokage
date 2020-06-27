@@ -13,8 +13,8 @@ MenuButton::MenuButton(int x, int y, int id)
     texture.loadFromImage(image); //загружаем текстуру для фона
     background.setTexture(texture);
     //прямоугольники для спрайтов
-    rect_def = IntRect(0, 0, texture.getSize().x / 2, texture.getSize().y);
-    rect_enable = IntRect(
+    rect_def = sf::IntRect(0, 0, texture.getSize().x / 2, texture.getSize().y);
+    rect_enable = sf::IntRect(
             texture.getSize().x / 2,
             0,
             texture.getSize().x / 2,
@@ -32,8 +32,8 @@ MenuButton::MenuButton(int x, int y, std::string img_path, int id)
 
     background.setTexture(texture);
     //прямоугольники для спрайтов
-    rect_def = IntRect(0, 0, texture.getSize().x / 2, texture.getSize().y);
-    rect_enable = IntRect(
+    rect_def = sf::IntRect(0, 0, texture.getSize().x / 2, texture.getSize().y);
+    rect_enable = sf::IntRect(
             texture.getSize().x / 2,
             0,
             texture.getSize().x / 2,
@@ -48,7 +48,7 @@ int MenuButton::get_id()
     return id;
 };
 
-void MenuButton::is_clicked(RenderWindow& window, Event event)
+void MenuButton::is_clicked(sf::RenderWindow& window, sf::Event event)
 {
     if (isContain(background, window)) {
         //двигаем изображение ко второму тайлу

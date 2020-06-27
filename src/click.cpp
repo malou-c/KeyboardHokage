@@ -1,53 +1,56 @@
 #include "click.hpp"
 
-bool Click::isClicked(Sprite sprite, RenderWindow& window, Event event)
+bool Click::isClicked(
+        sf::Sprite sprite, sf::RenderWindow& window, sf::Event event)
 {
     //Если мышк внутри кнопки и была отпущена левая кнопка
     if (sf::IntRect(sprite.getGlobalBounds())
-                .contains(Mouse::getPosition(window))
+                .contains(sf::Mouse::getPosition(window))
         && event.type == event.MouseButtonPressed
-        && event.mouseButton.button == Mouse::Left) {
+        && event.mouseButton.button == sf::Mouse::Left) {
         return true;
     } else {
         return false;
     }
 }
 
-bool Click::isReleased(Event event)
+bool Click::isReleased(sf::Event event)
 {
     //Если мышк внутри кнопки и была отпущена левая кнопка
     if (event.type == event.MouseButtonReleased
-        && event.mouseButton.button == Mouse::Left) {
+        && event.mouseButton.button == sf::Mouse::Left) {
         return true;
     } else {
         return false;
     }
 }
 
-bool Click::isReleased_In(Sprite sprite, RenderWindow& window, Event event)
+bool Click::isReleased_In(
+        sf::Sprite sprite, sf::RenderWindow& window, sf::Event event)
 {
     //Если мышк внутри кнопки и была отпущена левая кнопка
     if (sf::IntRect(sprite.getGlobalBounds())
-                .contains(Mouse::getPosition(window))
+                .contains(sf::Mouse::getPosition(window))
         && event.type == event.MouseButtonReleased
-        && event.mouseButton.button == Mouse::Left) {
+        && event.mouseButton.button == sf::Mouse::Left) {
         return true;
     } else {
         return false;
     }
 }
 
-bool Click::isContain(Sprite sprite, RenderWindow& window)
+bool Click::isContain(sf::Sprite sprite, sf::RenderWindow& window)
 {
     if (sf::IntRect(sprite.getGlobalBounds())
-                .contains(Mouse::getPosition(window))) {
+                .contains(sf::Mouse::getPosition(window))) {
         return true;
     } else {
         return false;
     }
 }
 
-bool Click::isFullClick(Sprite sprite, RenderWindow& window, Event event)
+bool Click::isFullClick(
+        sf::Sprite sprite, sf::RenderWindow& window, sf::Event event)
 {
     if (!enable_but && isClicked(sprite, window, event)) {
         enable_but = true;

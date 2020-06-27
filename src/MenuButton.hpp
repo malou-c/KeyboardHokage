@@ -4,8 +4,6 @@
 #include <iostream>
 #include <string>
 
-using namespace sf;
-
 class MenuButton : Click {
 private:
     int id;
@@ -13,8 +11,8 @@ private:
     sf::Image image;       //фото для фона кнопки
     sf::Texture texture;   //текстура для фона кнопки
     sf::Sprite background; //фон для кнопки
-    IntRect rect_def;
-    IntRect rect_enable;
+    sf::IntRect rect_def;
+    sf::IntRect rect_enable;
 
 public:
     bool enable = false;
@@ -29,7 +27,7 @@ public:
     void set_borders();
 
     //Проверяет была ли нажата кнопка
-    void is_clicked(RenderWindow& window, Event event);
+    void is_clicked(sf::RenderWindow& window, sf::Event event);
 
     //рисует кнопку
     void draw(sf::RenderWindow& window);

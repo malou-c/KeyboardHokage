@@ -9,7 +9,7 @@ ClockFace::ClockFace(int x, int y, TextDubler& txtdubler)
     font.loadFromFile("fonts/CyrilicOld.ttf");
     text.setFont(font);
     text.setCharacterSize(25);
-    text.setFillColor(Color::Black);
+    text.setFillColor(sf::Color::Black);
     text.setPosition(x, y);
 }
 
@@ -48,7 +48,7 @@ void ClockFace::update_clock()
     }
 }
 
-void ClockFace::DrawClock(RenderWindow& window)
+void ClockFace::DrawClock(sf::RenderWindow& window)
 {
     std::ostringstream stringmillsec, stringsec, stringmin;
     stringmillsec << msec;

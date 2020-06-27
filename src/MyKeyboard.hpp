@@ -7,13 +7,11 @@
 #include "screentxt.hpp"
 #include "sysbutton.hpp"
 
-using namespace sf;
-
 class MyKeyboard {
 private:
     sf::Vector2i position;
-    Color color_def = Color::White;
-    Color color_enable = Color(141, 141, 141);
+    sf::Color color_def = sf::Color::White;
+    sf::Color color_enable = sf::Color(141, 141, 141);
 
 public:
     std::vector<ButtonForKB> vec_buttons;

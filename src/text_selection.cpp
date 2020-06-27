@@ -33,8 +33,8 @@ TextSelection::TextSelection(int x, int y)
                   << std::endl;
 
         // название текста
-        Text txt(name_folders[i], font, 40);
-        txt.setFillColor(Color::Black);
+        sf::Text txt(name_folders[i], font, 40);
+        txt.setFillColor(sf::Color::Black);
         txt.setPosition(
                 x + indent_sect.x,
                 y + indent_sect.y + ((i % 10) * height_sect));
@@ -57,65 +57,66 @@ TextSelection::TextSelection(int x, int y)
 }
 
 void TextSelection::update_sections(
-        TextWindow& txtwin, Event event, RenderWindow& window)
+        TextWindow& txtwin, sf::Event event, sf::RenderWindow& window)
 {
     for (size_t i = start_sect; i < count_draw_sect; i++) {
         //если не текущая секция то проверяем
         if ((int)i != curr_sect) {
             if (sf::IntRect(sections[i].sprite_sect.getGlobalBounds())
-                        .contains(Mouse::getPosition(window))) {
+                        .contains(sf::Mouse::getPosition(window))) {
                 sections[i].sprite_sect.setColor(color_contain);
                 if (event.type == event.MouseButtonPressed
-                    && event.mouseButton.button == Mouse::Left) {
+                    && event.mouseButton.button == sf::Mouse::Left) {
                     curr_sect = i; // обновляем текущую секцию
                     //меняем цвет активной секции
-                    sections[curr_sect].sprite_sect.setColor(Color(color_curr));
+                    sections[curr_sect].sprite_sect.setColor(
+                            sf::Color(color_curr));
                     //меняем параметры текста на новый
                     std::string path_txt = "texts/" + name_folders[curr_sect];
                     txtwin.setText(path_txt); // берем текст
                 }
             } else {
-                sections[i].sprite_sect.setColor(Color::White);
+                sections[i].sprite_sect.setColor(sf::Color::White);
             }
         }
     }
 }
 
-void TextSelection::but_update(Event event, RenderWindow& window)
+void TextSelection::but_update(sf::Event event, sf::RenderWindow& window)
 {
     // <<
     if (start_sect != 0) {
         if (relise_L && isClicked(but_left, window, event)) {
-            but_left.setColor(Color(10, 10, 120, 80));
+            but_left.setColor(sf::Color(10, 10, 120, 80));
             relise_L = false;
             start_sect -= count_section;
             recount_sect();
             std::cout << "CLICK L" << std::endl;
         } else if (!relise_L && isReleased(event)) {
-            but_left.setColor(Color::White);
+            but_left.setColor(sf::Color::White);
             relise_L = true;
             std::cout << "UNCLICK L" << std::endl;
         }
     } else if (but_left.getColor() != disable_color) {
-        but_left.setColor(disable_color); // выключаем L
-        but_right.setColor(Color::White); // включаем R
+        but_left.setColor(disable_color);     // выключаем L
+        but_right.setColor(sf::Color::White); // включаем R
     }
     // >>
     if (start_sect + count_section < sections.size()) {
         if (relise_R && isClicked(but_right, window, event)) {
-            but_right.setColor(Color(10, 10, 120, 80));
+            but_right.setColor(sf::Color(10, 10, 120, 80));
             relise_R = false;
             start_sect += count_section;
             recount_sect();
             std::cout << "CLICK R" << std::endl;
         } else if (!relise_R && isReleased(event)) {
-            but_right.setColor(Color::White);
+            but_right.setColor(sf::Color::White);
             relise_R = true;
             std::cout << "UNCLICK R" << std::endl;
         }
     } else if (but_right.getColor() != disable_color) {
-        but_right.setColor(disable_color); // выключаем  R
-        but_left.setColor(Color::White);   // включаем L
+        but_right.setColor(disable_color);   // выключаем  R
+        but_left.setColor(sf::Color::White); // включаем L
     }
 }
 
@@ -128,7 +129,7 @@ void TextSelection::recount_sect()
               << std::endl;
 }
 
-void TextSelection::draw(RenderWindow& window)
+void TextSelection::draw(sf::RenderWindow& window)
 {
     //задний фон
     window.draw(background);

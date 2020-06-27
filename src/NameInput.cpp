@@ -9,9 +9,9 @@ NameInput::NameInput(int x, int y)
     //кнопка изменения имени
     texture_changer.loadFromFile("images/NI_change_button.png");
     //прямоугольники для спрайтов
-    rect_def = IntRect(
+    rect_def = sf::IntRect(
             0, 0, texture_changer.getSize().x / 2, texture_changer.getSize().y);
-    rect_enable = IntRect(
+    rect_enable = sf::IntRect(
             texture_changer.getSize().x / 2,
             0,
             texture_changer.getSize().x / 2,
