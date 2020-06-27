@@ -19,7 +19,7 @@ TextSelection::TextSelection(int x, int y)
     Folder folder(path_folder);
 
     //секции
-    name_folders = folder.contains();
+    name_folders = folder.contains_txt();
     sections.resize(name_folders.size());
     int height_sect = sections[0].sprite_sect.getLocalBounds().height;
     for (size_t i = 0; i < name_folders.size(); i++) {

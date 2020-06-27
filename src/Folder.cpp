@@ -6,7 +6,7 @@ Folder::Folder(std::string path)
 };
 
 //возвращает имена фалов в дирректории без названия самой дирректории
-std::vector<std::string> Folder::contains()
+std::vector<std::string> Folder::contains_txt()
 {
     std::string file_name;
     std::vector<std::string> list;
