@@ -77,7 +77,6 @@ std::vector<PersonStats> ScoreBoardFile::load_of_file(std::string path)
     file.open(path, std::ios::binary);
 
     if (!file.is_open()) {
-        std::cout << "Файл не существует" << std::endl;
         file.open(path, std::ios::binary);
     }
 
@@ -112,7 +111,6 @@ int ScoreBoardFile::find(char key[])
         }
     }
 
-    std::cout << "Информация о данном пользователе отсутствует" << std::endl;
     return -1;
 }
 

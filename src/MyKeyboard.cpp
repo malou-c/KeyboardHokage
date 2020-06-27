@@ -137,8 +137,6 @@ void MyKeyboard::Update(sf::Event event, TextWindow& txwin, bool hardmode)
     switch (event.type) {
     // нажатие клавиши
     case sf::Event::TextEntered:
-        std::cout << "ASCII character typed: " << event.text.unicode
-                  << std::endl;
         symbol = (int)event.text.unicode;
         //если строка не кончилась
         if (!txwin.isEndString) {

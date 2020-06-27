@@ -22,15 +22,11 @@ TextSelection::TextSelection(int x, int y)
     name_folders = folder.contains();
     sections.resize(name_folders.size());
     int height_sect = sections[0].sprite_sect.getLocalBounds().height;
-    std::cout << "count file " << name_folders.size() << std::endl;
-    std::cout << "count vecor size " << sections.size() << std::endl;
     for (size_t i = 0; i < name_folders.size(); i++) {
         // позиция секций
         sections[i].sprite_sect.setPosition(
                 x + indent_sect.x,
                 y + indent_sect.y + ((i % 10) * height_sect));
-        std::cout << "SECTOR: " << i << " HAVE " << ((i % 10) * height_sect)
-                  << std::endl;
 
         // название текста
         sf::Text txt(name_folders[i], font, 40);
@@ -91,11 +87,9 @@ void TextSelection::but_update(sf::Event event, sf::RenderWindow& window)
             relise_L = false;
             start_sect -= count_section;
             recount_sect();
-            std::cout << "CLICK L" << std::endl;
         } else if (!relise_L && isReleased(event)) {
             but_left.setColor(sf::Color::White);
             relise_L = true;
-            std::cout << "UNCLICK L" << std::endl;
         }
     } else if (but_left.getColor() != disable_color) {
         but_left.setColor(disable_color);     // выключаем L
@@ -108,11 +102,9 @@ void TextSelection::but_update(sf::Event event, sf::RenderWindow& window)
             relise_R = false;
             start_sect += count_section;
             recount_sect();
-            std::cout << "CLICK R" << std::endl;
         } else if (!relise_R && isReleased(event)) {
             but_right.setColor(sf::Color::White);
             relise_R = true;
-            std::cout << "UNCLICK R" << std::endl;
         }
     } else if (but_right.getColor() != disable_color) {
         but_right.setColor(disable_color);   // выключаем  R
@@ -125,8 +117,6 @@ void TextSelection::recount_sect()
     sections.size() - start_sect >= count_section
             ? count_draw_sect = start_sect + count_section
             : count_draw_sect = sections.size();
-    std::cout << "recount " << start_sect << " " << count_draw_sect
-              << std::endl;
 }
 
 void TextSelection::draw(sf::RenderWindow& window)

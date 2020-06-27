@@ -44,7 +44,6 @@ wchar_t TextWindow::fount_sym_forTxtDub()
     int num_curr_sym = curr_sym;
     // +1 потому что нужен следующий
     int move_sym = (txtDubler->setVecSize() - (txtDubler->countWrong())) + 1;
-    std::cout << "how many wrong" << txtDubler->countWrong() << std::endl;
     if (move_sym > num_curr_sym) {
         move_sym -= (num_curr_sym + 1); //отнимаем от движения <- все символы с
                                         //текущей строки
@@ -54,18 +53,10 @@ wchar_t TextWindow::fount_sym_forTxtDub()
         if (num_str < 0) {
             return L'*';
         }
-        std::cout << "222num str " << num_str << std::endl;
-        std::cout << "move_sym str " << move_sym << std::endl;
-        std::cout << "num_curr_sym " << num_curr_sym << std::endl;
-        std::cout << "curr_sym " << curr_sym << std::endl;
         return text_str[num_str][num_curr_sym];
     }
     //сдвиг <-
     num_curr_sym -= move_sym;
-    std::cout << "num str " << num_str << std::endl;
-    std::cout << "move_sym str " << move_sym << std::endl;
-    std::cout << "num_curr_sym " << num_curr_sym << std::endl;
-    std::cout << "curr_sym " << curr_sym << std::endl;
     return text_str[num_str][num_curr_sym];
 }
 
@@ -121,8 +112,6 @@ void TextWindow::checksym_dubler(int symbol, bool hardmode)
     else if (
             symbol == (int)text_str[start_str][curr_sym]
             && (!txtDubler->isWrong() || !hardmode)) {
-        std::cout << "right" << text_str[start_str][curr_sym] << std::endl;
-        std::cout << "was: " << curr_sym << std::endl;
         add_sym_to_dubler(text_str[start_str][curr_sym]);
         curr_sym++; //сдвигаем текущий символ
         //запись в дублер
@@ -189,7 +178,6 @@ void TextWindow::DrawTextWindow(sf::RenderWindow& window)
 //считаем сколько строк поместится в окно
 void TextWindow::change_count_text_str()
 {
-    std::cout << "text str size " << text_str.size() << std::endl;
     sf::Text text_help("S", font, font_size);
     for (size_t i = 1; i <= text_str.size(); i++) {
         if ((text_help.getLocalBounds().height + margin_y) * (i + 1) + margin_y
@@ -199,8 +187,6 @@ void TextWindow::change_count_text_str()
             break;
         }
     }
-    std::cout << "text height" << text_help.getLocalBounds().height
-              << std::endl;
 }
 
 void TextWindow::next_text_str()
@@ -238,8 +224,6 @@ std::vector<std::wstring> TextWindow::convert_file_to_text(std::string filename)
             word.add(str[i]);
         } else {
             text_help.setString(text[j] + word.get_word());
-            std::cout << "wtaf " << text_help.getLocalBounds().width
-                      << std::endl;
 
             if (text_help.getLocalBounds().width
                 < sprite.getLocalBounds().width - 30) {
