@@ -5,13 +5,14 @@
 #include "section.hpp"
 #include <SFML/Graphics.hpp>
 #include <cstring>
-#include <iostream>
+#include <sstream>
 #include <vector>
 
 class TextSelection : Click {
 private:
     sf::Vector2i pos;
     sf::Font font; //шрифт
+    sf::Color color_font = sf::Color(68, 68, 68);
     //вектор из секций
     std::vector<Section> sections;
     int curr_sect = -1;

@@ -9,6 +9,7 @@ class Section {
 public:
     sf::Sprite sprite_sect;
     sf::Text name_txt;
+    sf::Text sym_txt;
     //конструктор
     Section();
 };
