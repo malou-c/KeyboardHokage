@@ -35,3 +35,11 @@ TEST_CASE("Folder::contains")
 
     std::filesystem::remove_all("test_files");
 }
+
+TEST_CASE("CountChar")
+{
+    Folder foldcc;
+    std::string filetest = "test/cctestfile.txt";
+    int char_amount = foldcc.CountChar(filetest);
+    CHECK(char_amount == 8);
+}

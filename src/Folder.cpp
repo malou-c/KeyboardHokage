@@ -23,3 +23,18 @@ std::vector<std::string> Folder::contains_txt()
     }
     return list;
 };
+
+int Folder::CountChar(std::string filename)
+{
+    int size = 0;
+    char ch;
+    std::ifstream ccfile(filename.c_str());
+    for (int i = 0; !ccfile.eof(); i++) {
+        ccfile >> ch;
+        if (ch != ' ')
+            size++;
+    }
+    ccfile.clear();
+    ccfile.close();
+    return size - 1;
+}
