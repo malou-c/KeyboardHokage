@@ -11,13 +11,7 @@
 class TextSelection : Click {
 private:
     sf::Vector2i pos;
-
-public:
-    //шрифт
-    sf::Font font;
-    // background
-    sf::Texture texture_bg;
-    sf::Sprite background;
+    sf::Font font; //шрифт
     //вектор из секций
     std::vector<Section> sections;
     int curr_sect = -1;
@@ -28,15 +22,22 @@ public:
     size_t count_section = 10; // кол-во секций
     size_t start_sect = 0;
     size_t count_draw_sect;
+    // texture
+    sf::Texture texture_but_left;
+    sf::Texture texture_but_right;
+    sf::Texture texture_bg;
+
+    sf::Vector2f but_pos;
+    sf::Color disable_color = sf::Color(255, 255, 255, 70);
+
+public:
+    // background
+    sf::Sprite background;
     //вектор из названий текстов
     std::vector<std::string> name_folders;
     //кнопки << >>
-    sf::Color disable_color = sf::Color(255, 255, 255, 70);
     bool but_relise = true;
-    sf::Vector2f but_pos;
-    sf::Texture texture_but_left;
     sf::Sprite but_left;
-    sf::Texture texture_but_right;
     sf::Sprite but_right;
 
     //конструктор
@@ -48,7 +49,6 @@ public:
     void recount_sect();
     // getts
     std::string getCurrent();
-
     // draw
     void draw(sf::RenderWindow& window);
 };

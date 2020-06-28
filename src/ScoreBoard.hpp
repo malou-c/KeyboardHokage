@@ -12,18 +12,17 @@ private:
     sf::Font font;
     int font_size = 20;
     size_t count_draw = 18;
+    //текстура фона
+    sf::Texture bckgrnd_pic;
 
 public:
     bool is_loaded = false; //загружена ли таблица рекордов
     bool is_writed = false;
     //фон для таблицы рекордов
-    sf::Texture bckgrnd_pic;
     sf::Sprite bckgrnd_sprite;
     //
     sf::Text text;
-
     std::string out_text = "";
-
     //для хранения таблицы рекордов
     std::vector<PersonStats> stats;
     //конструктор

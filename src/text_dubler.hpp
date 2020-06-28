@@ -16,16 +16,15 @@ private:
     // bkgr
     sf::Texture texture_bkground;
     sf::Sprite bkground;
+    // cps
+    std::vector<int> vec_time;
+    sf::Text cps_text;
 
 public:
     std::vector<sf::Text> vec_txt;
-    std::vector<int> vec_time;
-    sf::Text cps_text;
     int cps_max = 0;
-
     //конструктор
     TextDubler(float x, float y);
-    TextDubler();
 
     //функции
     void addsymWrong(wchar_t sym);

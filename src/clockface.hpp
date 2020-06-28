@@ -7,21 +7,22 @@
 #include <string>
 
 class ClockFace {
-public:
-    //для cps
+private:
     TextDubler* txtDubler; // ссылка на текстовый дублер
-    int time200ms = 0;
-    sf::Clock CPSmsstorage;
-
+    int switcher = 0;
+    int minsum = 1;
     sf::Font font;
     sf::Text text;
     sf::Clock msstorage;
     sf::Clock secstorage;
+    sf::Clock CPSmsstorage;
+
+public:
+    int time200ms = 0; //для cps
     int msec = 0;
     int seconds = 0;
-    int minsum = 1;
     int minutes = 0;
-    int switcher = 0;
+
     bool isStart = false;
     sf::Vector2i position;
     //конструкторы
