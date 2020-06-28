@@ -1,4 +1,4 @@
-#include "../src/file.hpp"
+#include "../src/ScoreBoardFile.hpp"
 #include "testparty/catch.hpp"
 
 #include <cstring>

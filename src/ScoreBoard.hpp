@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "file.hpp"
+#include "ScoreBoardFile.hpp"
 #include <iostream>
 
 //класс для загрузки таблицы рекордов и ее хранения
