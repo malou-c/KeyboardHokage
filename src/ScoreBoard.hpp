@@ -15,6 +15,7 @@ private:
 
 public:
     bool is_loaded = false; //загружена ли таблица рекордов
+    bool is_writed = false;
     //фон для таблицы рекордов
     sf::Texture bckgrnd_pic;
     sf::Sprite bckgrnd_sprite;

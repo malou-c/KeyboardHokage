@@ -150,9 +150,10 @@ int main()
             if (txwin.is_not_reset) {
                 txwin.game_reset(clface);
                 txwin.is_not_reset = false;
+                scorebd.is_writed = false;
             }
             // если кончился текст в окне
-            if (txwin.isEndString && clface.isStart) {
+            if (txwin.isEndString && clface.isStart && !scorebd.is_writed) {
                 clface.ClockStop();
                 txtdubler.clear();
                 //запись в таблицу рекордов
@@ -163,6 +164,7 @@ int main()
                         clface.seconds,
                         clface.minutes,
                         txtdubler.cps_max);
+                scorebd.is_writed = true;
             }
 
             // update
