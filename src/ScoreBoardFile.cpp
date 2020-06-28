@@ -1,4 +1,4 @@
-#include "file.hpp"
+#include "ScoreBoardFile.hpp"
 
 //Сортирует файл по убыванию времени
 void ScoreBoardFile::sort()
