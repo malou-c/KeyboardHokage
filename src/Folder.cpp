@@ -14,7 +14,8 @@ std::vector<std::string> Folder::contains_txt()
     for (auto& name : std::filesystem::directory_iterator(this->path)) {
         file_name = name.path().u8string().erase(0, path.size() + 1);
 
-        if (file_name[file_name.size() - 1] == 't'
+        if (CountChar("texts/" + file_name) > 0
+            && file_name[file_name.size() - 1] == 't'
             && file_name[file_name.size() - 2] == 'x'
             && file_name[file_name.size() - 3] == 't'
             && file_name[file_name.size() - 4] == '.') {
@@ -27,14 +28,10 @@ std::vector<std::string> Folder::contains_txt()
 int Folder::CountChar(std::string filename)
 {
     int size = 0;
-    char ch;
-    std::ifstream ccfile(filename.c_str());
-    for (int i = 0; !ccfile.eof(); i++) {
-        ccfile >> ch;
-        if (ch != ' ')
+    std::wstring wstr = readfile_to_wstr(filename);
+    for (auto sym : wstr) {
+        if (sym != L' ')
             size++;
     }
-    ccfile.clear();
-    ccfile.close();
-    return size - 1;
+    return size;
 }

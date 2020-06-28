@@ -38,8 +38,13 @@ TEST_CASE("Folder::contains")
 
 TEST_CASE("CountChar")
 {
-    Folder foldcc;
+    Folder foldcc("texts");
+    // проверка на русском и английском с пробелами
     std::string filetest = "test/cctestfile.txt";
     int char_amount = foldcc.CountChar(filetest);
     CHECK(char_amount == 8);
+    //проверка на пустом файле
+    filetest = "test/cctestfile2.txt";
+    char_amount = foldcc.CountChar(filetest);
+    CHECK(char_amount == 0);
 }

@@ -6,7 +6,7 @@ TextSelection::TextSelection(int x, int y)
     pos.x = x;
     pos.y = y;
     // font
-    font.loadFromFile("fonts/stdFont.ttf");
+    font.loadFromFile("fonts/3976.ttf");
     // background
     texture_bg.loadFromFile("images/TS_background.png");
     background.setTexture(texture_bg);
@@ -29,12 +29,21 @@ TextSelection::TextSelection(int x, int y)
                 y + indent_sect.y + ((i % 10) * height_sect));
 
         // название текста
-        sf::Text txt(name_folders[i], font, 40);
-        txt.setFillColor(sf::Color::Black);
+        sf::Text txt(name_folders[i], font, 36);
+        txt.setFillColor(color_font);
         txt.setPosition(
-                x + indent_sect.x,
-                y + indent_sect.y + ((i % 10) * height_sect));
+                x + indent_sect.x + 135,
+                y + indent_sect.y + 14 + ((i % count_section) * height_sect));
         sections[i].name_txt = txt;
+        //кол-во символов
+        std::ostringstream sym;
+        sym << folder.CountChar("texts/" + name_folders[i]);
+        sf::Text txt_sym(sym.str(), font, 28);
+        txt_sym.setFillColor(color_font);
+        txt_sym.setPosition(
+                x + indent_sect.x + 521,
+                y + indent_sect.y + 24 + ((i % count_section) * height_sect));
+        sections[i].sym_txt = txt_sym;
     }
     recount_sect(); //изначальный подсчет секций
     //кнопки << >>
@@ -127,6 +136,7 @@ void TextSelection::draw(sf::RenderWindow& window)
     for (size_t i = start_sect; i < count_draw_sect; i++) {
         window.draw(sections[i].sprite_sect);
         window.draw(sections[i].name_txt);
+        window.draw(sections[i].sym_txt);
     }
     //кнопки << >>
     window.draw(but_left);
