@@ -1,9 +1,6 @@
 #include "text_dubler.hpp"
 
 // constructor
-TextDubler::TextDubler()
-{
-}
 TextDubler::TextDubler(float x, float y)
 { //ставим в  позицию
     pos_text.x = x + 15;

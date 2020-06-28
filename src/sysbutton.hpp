@@ -3,13 +3,14 @@
 #include <iostream>
 
 class SysButtonForKB {
-public:
+private:
+    std::string path;
     sf::Image img;
     sf::Texture texture;
-    sf::Sprite sprite;
-    std::string path;
-    int code = -1;
 
+public:
+    sf::Sprite sprite;
+    int code = -1;
     // конструкторы
     SysButtonForKB(sf::String path);
     SysButtonForKB(sf::String path, int code);

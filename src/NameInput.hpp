@@ -7,6 +7,9 @@ extern int ID;
 
 class NameInput : Click {
 private:
+    //текстуры
+    sf::Texture texture_nameplace;
+    sf::Texture texture_changer;
     //можно ли вводить текст
     bool input_on = false;
     //прямоугольники для спрайтов
@@ -20,10 +23,7 @@ private:
     sf::Text text;
 
 public:
-    sf::Texture texture_nameplace;
     sf::Sprite sprite_nameplace;
-
-    sf::Texture texture_changer;
     sf::Sprite sprite_changer;
 
     NameInput(int x, int y);

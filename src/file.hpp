@@ -8,8 +8,10 @@
 #include "PersonStats.hpp"
 
 class ScoreBoardFile {
-public:
+private:
     std::string path = "data/lider_board.dat";
+
+public:
     void sort(); //Сортирует файл по убыванию времени
 
     //Добавялет запись о пользователе в конец файала
