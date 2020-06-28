@@ -25,7 +25,4 @@ public:
     std::vector<PersonStats> load_of_file(
             std::string path = "data/lider_board.dat"); //Загружает информацию о
                                                         //пользователях из файла
-
-    //Возвращает номер поизиции элемента в файле
-    int find(char key[]);
 };

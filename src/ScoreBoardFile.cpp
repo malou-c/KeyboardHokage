@@ -87,29 +87,3 @@ std::vector<PersonStats> ScoreBoardFile::load_of_file(std::string path)
     file.close();
     return users_stat;
 }
-
-//Возвращает номер поизиции элемента в файле
-int ScoreBoardFile::find(char key[])
-{
-    std::vector<PersonStats> users;
-    users = load_of_file();
-
-    int left = 0;
-    int right = users.size();
-    int midd;
-
-    while (left <= right) {
-        midd = (left + right) / 2;
-
-        if ((std::string)users[midd].user_name == (std::string)key) {
-            return midd;
-        }
-        if ((std::string)users[midd].user_name < (std::string)key) {
-            left = midd + 1;
-        } else {
-            right = midd - 1;
-        }
-    }
-
-    return -1;
-}
